@@ -8,13 +8,13 @@ enum Rating {
     THREE_STAR,
     FOUR_STAR,
     FIVE_STAR
-};
+}; // so basically a enum is a labeled integers ? but for making the programmer life easier they can be labeled for better readability and error handeling 
 
 struct Book {
     string name;
     int pages;
     Rating rating;
-};
+}; // structs feel like object constructors in  javascript like very close 
 
 struct Library {
     string libraryName;
@@ -25,7 +25,7 @@ struct Library {
 int main() {
     Library myLibrary;
 
-    cout << "Enter Library Name: ";
+    cout << "Enter Library Name: ";  // cout is kinda equivalent to console.log
     getline(cin, myLibrary.libraryName);
     cout << "Enter Library Address: ";
     getline(cin, myLibrary.address);
@@ -34,11 +34,11 @@ int main() {
     cout << "Book Name: ";
     getline(cin, myLibrary.book.name);
     cout << "Number of Pages: ";
-    cin >> myLibrary.book.pages;
+    cin >> myLibrary.book.pages; // while cin feels like prompt() 
     cout << "Rating (0: One Star, 1: Two Star, 2: Three Star, 3: Four Star, 4: Five Star): ";
     int ratingInput;
     cin >> ratingInput;
-    myLibrary.book.rating = static_cast<Rating>(ratingInput);
+    myLibrary.book.rating = static_cast<Rating>(ratingInput);  // to be honest i dont get this much cuz enums arent really a thing in js but its a type conversion 
 
     cout << "\nLibrary Details:" << endl;
     cout << "Name: " << myLibrary.libraryName << endl;
@@ -57,3 +57,4 @@ int main() {
 
     return 0;
 }
+
