@@ -22,3 +22,6 @@ Not sure about your setup, but on mine, here's how you can compile and run a C++
    ```
 
    This will generate an .exe file that you can run by typing:   ./fileName.exe
+
+
+   // school break 2-7 december
