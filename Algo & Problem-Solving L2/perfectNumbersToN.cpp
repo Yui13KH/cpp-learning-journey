@@ -22,9 +22,13 @@ bool checkPerfectNumber(int number) {
     return number == sum;
 }
 
-void printResult(int number) {
-    cout << number << " is "
-         << (checkPerfectNumber(number) ? "a perfect number" : "not a perfect number") << endl;
+void printPerfectNumbersToN(int number) {
+    // loop use checkPerfectNumber function , returns true print , else dont
+    for (int i = 1; i <= number; i++) {
+        if (checkPerfectNumber(i)) {
+            cout << i << endl;
+        }
+    }
 }
 
-int main() { printResult(readInput("input a number to be checked perfect of not")); }
+int main() { printPerfectNumbersToN(readInput("enter upper limit for perfect numbers")); }
