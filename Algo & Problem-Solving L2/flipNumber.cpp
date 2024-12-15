@@ -1,16 +1,37 @@
 #include <iostream>
 using namespace std;
 
-int readNumberInput(string msg) {
-    int number = 0;
+string readInput(string msg) {
+    string strNumber;
     do {
         cout << msg << endl;
-        cin >> number;
+        cin >> strNumber;
 
-    } while (number <= 0);
-    return number;
+        bool isValid = true;
+        for (char c : strNumber) {
+            if (!isdigit(c)) {
+                isValid = false;
+                break;
+            }
+        }
+
+        if (isValid) {
+            return strNumber;
+        } else {
+            cout << "Invalid input. Please enter a positive number." << endl;
+        }
+
+    } while (true);
 }
 
+string reverseDigits(string strNumber) {
+    string reversed = "";
+    for (int i = strNumber.length() - 1; i >= 0; i--) {
+        reversed += strNumber[i];
+    }
+    return reversed;
+}
+/*
 int reverseDigits(int inputNumber) {
     int reversedNumber = 0;
     int digit = 0;
@@ -21,9 +42,14 @@ int reverseDigits(int inputNumber) {
     }
     return reversedNumber;
 }
+*/
 
-void printReversedNumber(int inputNumber) {
+// look this is exactly how the instructor solved it but it wont work for huge numbers just like
+// problem 6 : reverse_digits , instead u could take a string of digits and use a decending for
+// loop and make a new string that is reversed
+
+void printReversedNumber(string inputNumber) {
     cout << "Reversed Number of " << inputNumber << " is " << reverseDigits(inputNumber) << endl;
 }
 
-int main() { printReversedNumber(readNumberInput("Input a number to reverse: ")); }
+int main() { printReversedNumber(readInput("write a number: ")); }
