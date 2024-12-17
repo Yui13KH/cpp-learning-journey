@@ -25,3 +25,21 @@ Not sure about your setup, but on mine, here's how you can compile and run a C++
 
 
    // school break 2-7 december
+
+--- 
+# Commit Workflow for Solutions
+
+From now on, I will follow a two-commit process for each problem:
+
+1. **Instructor-Style Solution**:  
+   The first commit will include the solution that I believe the instructor would use to solve the problem. This version is based on my understanding of the instructor's approach, often using math-based operations to solve the problem.
+
+2. **Improved Personal Solution**:  
+   After completing the instructor-style solution, I will improve upon it. The second commit will contain my optimized version of the solution, based on my insights and better understanding of the problem.
+
+### Example Approach
+
+For example, in previous problems (before this commit), I initially followed the instructor's approach using math-based operations. However, these methods broke down when handling very large numbers due to their limitations. To resolve this issue, I switched to a string-based solution, which has no such constraints and works well with larger inputs.
+
+This two-commit workflow allows me to explore the problem from the instructor's perspective first, then improve upon it with my own enhancements.
+
