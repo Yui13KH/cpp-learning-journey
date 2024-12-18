@@ -36,5 +36,5 @@ int main() {
 }
 
 // okay the instructor seperated the logic of palindrome check , and reversing which make sense
-// noted okay make it more modular and seperate logic 
-// this is more easy to modify 
+// noted okay make it more modular and seperate logic
+// this is more easy to modify
