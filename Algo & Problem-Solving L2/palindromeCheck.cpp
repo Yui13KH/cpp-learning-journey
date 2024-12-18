@@ -11,28 +11,30 @@ int readInput(string msg) {
     return number;
 }
 
-bool isPalindrome(int number) {
+int reverseNumber(int number) {
     int flippedNumber = 0;
-    int initialNumber = number;
     int remainder = 0;
     while (number > 0) {
         remainder = number % 10;
         number /= 10;
         flippedNumber = flippedNumber * 10 + remainder;
     }
-    return flippedNumber == initialNumber;
+    return flippedNumber;
 }
 
+bool isPalindrome(int number) { return number == reverseNumber(number); }
+
+// Function to print the result
 void printResult(int number) {
     cout << "The number " << number << " is "
-         << (isPalindrome(number) ? "a palindrome" : "not a palindrome") << "." << endl; // similar to a if else statement with 2 possibilities "ternanry operator"
+         << (isPalindrome(number) ? "a palindrome" : "not a palindrome") << "." << endl;
 }
 
 int main() {
-    int num;
-    cout << "Enter a number: ";
-    cin >> num;
-
-    printResult(num);
+    printResult(readInput("Input a number: "));
     return 0;
 }
+
+// okay the instructor seperated the logic of palindrome check , and reversing which make sense
+// noted okay make it more modular and seperate logic 
+// this is more easy to modify 
