@@ -1,21 +1,3 @@
-/*
-input : 3
-output :
-ccc
-bb
-a
-
-input : 5
-output :
-eeeee
-dddd
-ccc
-bb
-a
-
-take number ,
-*/
-
 #include <iostream>
 using namespace std;
 
@@ -30,10 +12,11 @@ int readInput(string msg) {
 
 void printInvertedLetterPattern(int number) {
     cout << "\n";
-    for (int i = 96 + number; i > 96; i--) {
+    for (int i = 64 + number; i > 64; i--) {
         for (int j = number; j > 0; j--) {
             cout << char(i);
         }
+        number--;
         cout << endl;
     }
 }
