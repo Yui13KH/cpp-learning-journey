@@ -6,7 +6,7 @@ int readInput(string msg) {
     do {
         cout << msg;
         cin >> number;
-    } while (number < 0);
+    } while (number < 1 || number > 26);  // checks for anything outside of number range
     return number;
 }
 
@@ -22,6 +22,6 @@ void printInvertedLetterPattern(int number) {
 }
 
 int main() {
-    printInvertedLetterPattern(readInput("Enter number: "));
+    printInvertedLetterPattern(readInput("Enter number between 1 and 26: "));
     return 0;
 }
