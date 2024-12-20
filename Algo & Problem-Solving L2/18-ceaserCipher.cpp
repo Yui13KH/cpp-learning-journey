@@ -49,7 +49,7 @@ int main() {
 }
 
 
-/*char((c - 'A' + key + 26) % 26 + 'A') , this line i am not gonna lie i didnt figure it out myself , the idea is that if normally u input for example Z and shift by even 1 , then it should go to A , but normally it would just go to whatever ascii is after z , this is KINDA fine , but what is not fine is that the user could input a stupid number like 1000 and it will overflow ALL characters cuz ascii limit is 256 it will give u those weird ? squares  
+/*char((c - 'A' + key + 26) % 26 + 'A') , this line i am not gonna lie i didnt figure it out myself , the idea is that if normally u input for example Z and shift by even 1 , then it should go to A , but normally it would just go to whatever ascii is after z , this is KINDA fine , but what is not fine is that the user could input a stupid number like 1000 and it will overflow ALL characters cuz ascii limit is 256 it will give u those weird �������  
 
 so what this does is 
 c - 'A'  this turns any number into a 0 based A which is 65 in ascii becomes 0 , Z becomes 25
