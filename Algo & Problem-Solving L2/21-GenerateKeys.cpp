@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 
+// ok after watching instructor's video i understand the 
+
 using namespace std;
 
 int readInput(string msg) {
