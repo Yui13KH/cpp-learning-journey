@@ -9,5 +9,5 @@ int RandomNumber(int from, int to){
 }
 
 int main(){
-    srand((unsigned)time(NULL)); // seed based on time i believe
+     // seed based on time i believe
 }
