@@ -59,9 +59,9 @@ void printCharacter(charType type) {
             break;
         default:
             throw std::invalid_argument(
-                "Invalid character type");  // basically gives a better error :3
+                "\033[31mInvalid character type\033[0m");  // uses ansi escape code to make it red 
     }
-    cout << "Random " << typeName << ": " << c << endl;
+    cout << "\033[32mRandom " << typeName << ": " << c << "\033[0m" << endl; // uses ansi to make it green
 }
 
 int main() {
@@ -71,4 +71,6 @@ int main() {
     printCharacter(SMALL_LETTER);
     printCharacter(DIGIT);
     printCharacter(SYMBOL);
+
+    return 0;
 }

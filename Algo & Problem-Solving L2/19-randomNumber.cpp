@@ -10,4 +10,7 @@ int RandomNumber(int from, int to){
 
 int main(){
      // seed based on time i believe
+     RandomNumber(1, 10);
+
+     return 0;
 }
