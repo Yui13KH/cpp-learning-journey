@@ -3,14 +3,12 @@
 
 using namespace std;
 
-int RandomNumber(int from, int to){
-    int random = rand() % (to - from + 1) + from
-    return random;
-}
+int RandomNumber(int from, int to) { int random = rand() % (to - from + 1) + from return random; }
 
-int main(){
-     // seed based on time i believe
-     RandomNumber(1, 10);
+int main() {
+    srand(unsigned(time(NULL)));
 
-     return 0;
+    RandomNumber(1, 10);
+
+    return 0;
 }
