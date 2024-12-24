@@ -24,7 +24,7 @@ void randomizeArray(int randomizedArray[], int &size) {
     }
 }
 
-int returnBiggestNumInArray(int randomizedArray[], int size) {
+int returnMaxInArray(int randomizedArray[], int size) {
     int biggest = randomizedArray[0];  // assume it is biggest
     for (int i = 0; i < size; i++) {
         if (randomizedArray[i] > biggest) {
@@ -34,7 +34,7 @@ int returnBiggestNumInArray(int randomizedArray[], int size) {
     return biggest;
 }
 
-int returnSmallestNumInArray(int randomizedArray[], int size) {
+int returnMinInArray(int randomizedArray[], int size) {
     int smallest = randomizedArray[0];  // assume it is smallest
     for (int i = 0; i < size; i++) {
         if (randomizedArray[i] < smallest) {
@@ -44,12 +44,16 @@ int returnSmallestNumInArray(int randomizedArray[], int size) {
     return smallest;
 }
 
-int returnSumOfArray (int randomizedArray[], int size) {
+int returnSumOfArray(int randomizedArray[], int size) {
     int sum = 0;
     for (int i = 0; i < size; i++) {
         sum += randomizedArray[i];
     }
     return sum;
+}
+
+float returnAverageOfArray(int randomizedArray[], int size) {
+    return (float)returnSumOfArray(randomizedArray, size) / size;
 }
 
 void printArrayElements(int randomizedArray[], int size) {
@@ -61,19 +65,28 @@ void printArrayElements(int randomizedArray[], int size) {
 }
 
 void printBiggestInArray(int randomizedArray[], int size) {
-    cout << "Biggest element in the array is: " << returnBiggestNumInArray(randomizedArray, size)
-         << endl;
+    cout << "Biggest element in the array is: " << returnMaxInArray(randomizedArray, size) << endl;
 }
 
 void printSmallestInArray(int randomizedArray[], int size) {
-    cout << "Smallest element in the array is: " << returnSmallestNumInArray(randomizedArray, size)
+    cout << "Smallest element in the array is: " << returnMinInArray(randomizedArray, size) << endl;
+}
+
+void printAverageInArray(int randomizedArray[], int size) {
+    cout << "Average element in the array is: " << returnAverageOfArray(randomizedArray, size)
          << endl;
+}
+
+void printSumInArray(int randomizedArray[], int size) {
+    cout << "Sum of elements in the array is: " << returnSumOfArray(randomizedArray, size) << endl;
 }
 
 void printAllResults(int randomizedArray[], int size) {
     printArrayElements(randomizedArray, size);
     printBiggestInArray(randomizedArray, size);
     printSmallestInArray(randomizedArray, size);
+    printAverageInArray(randomizedArray, size);
+    printSumInArray(randomizedArray, size);
 }
 
 int main() {
