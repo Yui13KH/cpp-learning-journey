@@ -69,6 +69,21 @@ float returnAverageOfArray(int randomizedArray[], int size) {
     return (float)returnSumOfArray(randomizedArray, size) / size;
 }
 
+int returnPrimesInArray(int randomizedArray[], int size) {
+    int primesArray[size];
+    int counter = 0;
+    for (int i = 0; i < size; i++) {
+        if (checkPrime(randomizedArray[i])) {
+            primesArray[counter] = randomizedArray[i];
+            counter++;
+        }
+    }
+    if (counter == 0) {
+        cout << "There are no primes in the array" << endl;
+    }
+    return primesArray[size];
+}
+
 int returnCopyofArray(int randomizedArray[], int size) {
     int copyArray[size];
     for (int i = 0; i < size; i++) {
@@ -112,15 +127,16 @@ void printCopyOfArray(int randomizedArray[], int size) {
 
 void printPrimesInArray(int randomizedArray[], int size) {
     cout << "Primes in the array are: ";
-    int counter = 0;
+    bool hasPrimes = false;
     for (int i = 0; i < size; i++) {
-        if (checkPrime(randomizedArray[i])) {
+        if (checkPrime(randomizedArray[i])) {  // any non 0 value is true in boolean , thats why
+                                               // this condition works
             cout << randomizedArray[i] << " ";
-            counter++;
+            hasPrimes = true;
         }
     }
-    if (counter == 0) {
-        cout << "There are no primes in the array" << endl;
+    if (!hasPrimes) {
+        cout << "There are no primes in the array";
     }
     cout << endl;
 }
