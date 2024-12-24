@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include <cstdlib>
 
 using namespace std;
@@ -15,6 +16,18 @@ int getNumberInRange(string message, int min, int max) {
 int RandomNumber(int from, int to) {
     int random = rand() % (to - from + 1) + from;
     return random;
+}
+
+bool checkPrime(int number) {
+    if (number < 2) return false;
+    if (number == 2) return true;       // 2 is the only even prime
+    if (number % 2 == 0) return false;  // Eliminate even numbers
+
+    int limit = sqrt(number);              // Calculate square root once
+    for (int i = 3; i <= limit; i += 2) {  // Check only odd numbers
+        if (number % i == 0) return false;
+    }
+    return true;
 }
 
 void randomizeArray(int randomizedArray[], int &size) {
@@ -52,16 +65,16 @@ int returnSumOfArray(int randomizedArray[], int size) {
     return sum;
 }
 
+float returnAverageOfArray(int randomizedArray[], int size) {
+    return (float)returnSumOfArray(randomizedArray, size) / size;
+}
+
 int returnCopyofArray(int randomizedArray[], int size) {
     int copyArray[size];
     for (int i = 0; i < size; i++) {
         copyArray[i] = randomizedArray[i];
     }
     return copyArray[size];
-}
-
-float returnAverageOfArray(int randomizedArray[], int size) {
-    return (float)returnSumOfArray(randomizedArray, size) / size;
 }
 
 void printArrayElements(int randomizedArray[], int size) {
@@ -97,6 +110,21 @@ void printCopyOfArray(int randomizedArray[], int size) {
     cout << endl;
 }
 
+void printPrimesInArray(int randomizedArray[], int size) {
+    cout << "Primes in the array are: ";
+    int counter = 0;
+    for (int i = 0; i < size; i++) {
+        if (checkPrime(randomizedArray[i])) {
+            cout << randomizedArray[i] << " ";
+            counter++;
+        }
+    }
+    if (counter == 0) {
+        cout << "There are no primes in the array" << endl;
+    }
+    cout << endl;
+}
+
 void printAllResults(int randomizedArray[], int size) {
     printArrayElements(randomizedArray, size);
     printCopyOfArray(randomizedArray, size);
@@ -104,6 +132,7 @@ void printAllResults(int randomizedArray[], int size) {
     printSmallestInArray(randomizedArray, size);
     printAverageInArray(randomizedArray, size);
     printSumInArray(randomizedArray, size);
+    printPrimesInArray(randomizedArray, size);
 }
 
 int main() {
