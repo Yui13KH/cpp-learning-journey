@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstdlib>
 
-
 using namespace std;
 
 int getNumberInRange(string message, int min, int max) {
@@ -53,14 +52,13 @@ void printResults(int firstArray[], int secondArray[], int sumArray[], int size)
     cout << "----------------------------------------" << endl;
 }
 
-
 int main() {
+    srand((unsigned)time(NULL));
     int firstArray[100], secondArray[100], size, sumArray[100];
     size = getNumberInRange("Enter Number in Range of 1 to 100: ", 1, 100);
     randomizeArray(firstArray, size);
     randomizeArray(secondArray, size);
     SumArray(firstArray, secondArray, sumArray, size);
     printResults(firstArray, secondArray, sumArray, size);
-    srand((unsigned)time(NULL));
     return 0;
 }
