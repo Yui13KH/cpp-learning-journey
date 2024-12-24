@@ -93,7 +93,7 @@ int returnCopyofArray(int randomizedArray[], int size) {
 }
 
 void printArrayElements(int randomizedArray[], int size) {
-    cout << "Elements of array is: ";
+    cout << "Elements of array are: ";
     for (int i = 0; i < size; i++) {
         cout << randomizedArray[i] << " ";
     }
@@ -109,7 +109,7 @@ void printSmallestInArray(int randomizedArray[], int size) {
 }
 
 void printAverageInArray(int randomizedArray[], int size) {
-    cout << "Average element in the array is: " << returnAverageOfArray(randomizedArray, size)
+    cout << "Average of elements in the array is: " << returnAverageOfArray(randomizedArray, size)
          << endl;
 }
 
@@ -127,21 +127,27 @@ void printCopyOfArray(int randomizedArray[], int size) {
 
 void printPrimesInArray(int randomizedArray[], int size) {
     cout << "Primes in the array are: ";
+
     bool hasPrimes = false;
     for (int i = 0; i < size; i++) {
-        if (checkPrime(randomizedArray[i])) {  // any non 0 value is true in boolean , thats why
-                                               // this condition works
+        if (checkPrime(
+                randomizedArray[i])) {  // Any non-0 value is true in boolean, hence this works.
             cout << randomizedArray[i] << " ";
             hasPrimes = true;
         }
     }
+
     if (!hasPrimes) {
         cout << "There are no primes in the array";
     }
+
     cout << endl;
 }
 
 void printAllResults(int randomizedArray[], int size) {
+    cout << endl;
+    cout << "Results:" << endl;
+    cout << "---------------------------" << endl;
     printArrayElements(randomizedArray, size);
     printCopyOfArray(randomizedArray, size);
     printBiggestInArray(randomizedArray, size);
@@ -149,6 +155,8 @@ void printAllResults(int randomizedArray[], int size) {
     printAverageInArray(randomizedArray, size);
     printSumInArray(randomizedArray, size);
     printPrimesInArray(randomizedArray, size);
+    cout << "---------------------------" << endl;
+    cout << endl;
 }
 
 int main() {
