@@ -52,6 +52,14 @@ int returnSumOfArray(int randomizedArray[], int size) {
     return sum;
 }
 
+int returnCopyofArray(int randomizedArray[], int size) {
+    int copyArray[size];
+    for (int i = 0; i < size; i++) {
+        copyArray[i] = randomizedArray[i];
+    }
+    return copyArray[size];
+}
+
 float returnAverageOfArray(int randomizedArray[], int size) {
     return (float)returnSumOfArray(randomizedArray, size) / size;
 }
@@ -81,8 +89,17 @@ void printSumInArray(int randomizedArray[], int size) {
     cout << "Sum of elements in the array is: " << returnSumOfArray(randomizedArray, size) << endl;
 }
 
+void printCopyOfArray(int randomizedArray[], int size) {
+    cout << "Copy of array is: ";
+    for (int i = 0; i < size; i++) {
+        cout << randomizedArray[i] << " ";
+    }
+    cout << endl;
+}
+
 void printAllResults(int randomizedArray[], int size) {
     printArrayElements(randomizedArray, size);
+    printCopyOfArray(randomizedArray, size);
     printBiggestInArray(randomizedArray, size);
     printSmallestInArray(randomizedArray, size);
     printAverageInArray(randomizedArray, size);
