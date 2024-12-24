@@ -84,12 +84,10 @@ int returnPrimesInArray(int randomizedArray[], int size) {
     return primesArray[size];
 }
 
-int returnCopyofArray(int randomizedArray[], int size) {
-    int copyArray[size];
+void returnCopyofArray(int randomizedArray[], int size, int copyArray[]) {
     for (int i = 0; i < size; i++) {
         copyArray[i] = randomizedArray[i];
     }
-    return copyArray[size];
 }
 
 void printArrayElements(int randomizedArray[], int size) {
@@ -161,7 +159,7 @@ void printAllResults(int randomizedArray[], int size) {
 
 int main() {
     srand((unsigned)time(NULL));
-    int randomizedArray[100], size;
+    int randomizedArray[100], copiedArray[100], size;
     randomizeArray(randomizedArray, size);
     printAllResults(randomizedArray, size);
     return 0;
