@@ -1,57 +1,60 @@
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
-int getNumberInRange(string message, int min, int max) {
+int getNumberInRange(const string& prompt, int min, int max) {
     int number;
     do {
-        cout << message;
+        cout << prompt << " (" << min << " to " << max << "): ";
         cin >> number;
     } while (number < min || number > max);
     return number;
 }
 
-int RandomNumber(int from, int to) {
-    int random = rand() % (to - from + 1) + from;
-    return random;
+int generateRandomNumber(int min, int max) { return rand() % (max - min + 1) + min; }
+
+void swapElements(int& a, int& b) {
+    int temp = a;
+    a = b;
+    b = temp;
 }
 
-void fillArrayFrom1ToN(int originalArray[], int &size) {
-    size = getNumberInRange("Input Nmber from 1 to 100: ", 1, 100);
-    for (int i = 0; i <= size; i++) {
-        originalArray[i] = i + 1;
-    }
-}
-
-void shuffleArray(int originalArray[], int shuffledArray[], int size) {
+void fillArraySequential(int array[], int size) {
     for (int i = 0; i < size; i++) {
-        int number;
-
-        do {
-            number = RandomNumber(0, size - 1);
-        } while (shuffledArray[number] != 0);
-
-        shuffledArray[number] = originalArray[i];
+        array[i] = i + 1;
     }
 }
 
-void printArrayElement(int array[], int size) {
-    cout << "Array Elements are: ";
+void shuffleArray(int array[], int size) {
+    for (int i = 0; i < size; i++) {
+        int randomIndex = generateRandomNumber(0, size - 1);
+        swapElements(array[i], array[randomIndex]);
+    }
+}
+
+void printArray(const int array[], int size, const string& message) {
+    cout << message;
     for (int i = 0; i < size; i++) {
         cout << array[i] << " ";
-    };
+    }
     cout << endl;
 }
 
 int main() {
     srand((unsigned)time(NULL));
-    int originalArray[100];
-    int shuffeledArray[100] = {0};
-    int size = 0;
-    fillArrayFrom1ToN(originalArray, size);
-    printArrayElement(originalArray, size);
-    shuffleArray(originalArray, shuffeledArray, size);
-    printArrayElement(shuffeledArray, size);
+
+    int size = getNumberInRange("Enter the size of the array", 1, 100);
+
+    int array[size];
+    fillArraySequential(array, size);
+
+    printArray(array, size, "Original Array: ");
+
+    shuffleArray(array, size);
+
+    printArray(array, size, "Shuffled Array: ");
+
     return 0;
 }
