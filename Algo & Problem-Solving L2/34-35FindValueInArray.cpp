@@ -1,9 +1,6 @@
 #include <iostream>
 #include <cstdlib>
 
-// using namespace std;  i am not using using namespace anymore cause it may cause confusion and its
-// not very good
-
 int readNumberInRange(std::string msg, int min, int max) {
     int number;
     do {
@@ -21,9 +18,9 @@ void RandomizeArray(int array[], int arrayLength) {
     }
 }
 
-void printArrayElements(int arrayOfKeys[], int arrayLenght) {
-    std::cout << "Elements of array are" << std::endl;
-    for (int i = 0; i < arrayLenght; i++) {
+void printArrayElements(int arrayOfKeys[], int arrayLength) {
+    std::cout << "Elements of array are: ";
+    for (int i = 0; i < arrayLength; i++) {
         std::cout << arrayOfKeys[i] << " ";
     }
     std::cout << std::endl;
@@ -38,6 +35,11 @@ int searchInArray(const int array[], int size, int target) {
     return -1;
 }
 
+
+bool isValueFound(const int array[], int size, int target) {
+    return searchInArray(array, size, target) != -1; 
+}
+
 void printFoundValue(const int array[], int size, int target) {
     int index = searchInArray(array, size, target);
     if (index != -1) {
@@ -48,14 +50,23 @@ void printFoundValue(const int array[], int size, int target) {
     }
 }
 
+void printValueFound(const int array[], int arraylength, int target) {
+    if (isValueFound(array, arraylength, target)) {
+        std::cout << "The number " << target << " is in the array!" << std::endl;
+    } else {
+        std::cout << "The number " << target << " is NOT in the array." << std::endl;
+    }
+}
+
 int main() {
     srand((unsigned)time(NULL));
     int array[100];
-    int arrayLenght = readNumberInRange("Enter a number between 1-100: ", 1, 100);
-    RandomizeArray(array, arrayLenght);
-    printArrayElements(array, arrayLenght);
+    int arrayLength = readNumberInRange("Enter a number between 1-100: ", 1, 100);
+    RandomizeArray(array, arrayLength);
+    printArrayElements(array, arrayLength);
     int target = readNumberInRange("Enter Number To Search for between 1-100: ", 1, 100);
-    searchInArray(array, arrayLenght, target);
-    printFoundValue(array, arrayLenght, target);
+    printValueFound(array, arrayLength, target);
+    printFoundValue(array, arrayLength, target);
+
     return 0;
 }
