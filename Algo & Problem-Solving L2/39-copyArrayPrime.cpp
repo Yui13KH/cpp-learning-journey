@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <cmath>
 
 int RandomNumberInRange(int min, int max) { return rand() % (max - min + 1) + min; }
 
@@ -36,16 +37,25 @@ void PopulateArrayWithRandomNumbers(int array[100], int& arrayLength, int userSp
     }
 }
 
-void CopyOddNumbersFromUserInput(int array1[100], int array1Length, int array2[100],
-                                 int& array2Length) {
+bool checkPrime(int number) {
+    if (number < 2) return false;
+    if (number == 2) return true;       // 2 is the only even prime
+    if (number % 2 == 0) return false;  // Eliminate even numbers
+
+    int limit = sqrt(number);              // Calculate square root once
+    for (int i = 3; i <= limit; i += 2) {  // Check only odd numbers
+        if (number % i == 0) return false;
+    }
+    return true;
+}
+
+void CopyPrimes(int array1[100], int array1Length, int array2[100], int& array2Length) {
     array2Length = 0;  // Reset the second array length
-    int i = 0;
-    do {
-        if (array1[i] % 2 != 0) {
+    for (int i = 0; i < array1Length; i++) {
+        if (checkPrime(array1[i])) {
             AddElementToArray(array1[i], array2, array2Length);
         }
-        i++;
-    } while (i < array1Length);
+    }
 }
 
 void printArray(const std::string& message, const int array[], int arrayLength) {
@@ -64,20 +74,14 @@ int main() {
     int array1Length = 0;
     int array2Length = 0;
 
-    std::cout << "Enter the length of the array: ";
-    int userInput = ReadValidNumber();
+    PopulateArrayWithRandomNumbers(array1, array1Length, ReadValidNumber());
 
-    PopulateArrayWithRandomNumbers(array1, array1Length, userInput);
+    CopyPrimes(array1, array1Length, array2, array2Length);
 
-    CopyOddNumbersFromUserInput(array1, array1Length, array2, array2Length);
+    std::cout << "Original numbers length: " << array1Length << std::endl;
+    printArray("Original numbers: ", array1, array1Length);
 
-    printArray("The length of the original array is: " + std::to_string(array1Length) +
-                   "\nElements of array1: ",
-               array1, array1Length);
-
-    printArray("The length of the copied array is: " + std::to_string(array2Length) +
-                   "\nElements of array2: ",
-               array2, array2Length);
-
+    std::cout << "Prime numbers length: " << array2Length << std::endl;
+    printArray("Prime numbers: ", array2, array2Length);
     return 0;
 }
