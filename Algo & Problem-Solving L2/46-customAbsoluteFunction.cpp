@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 int ReadValidNumber() {
     int number = 0;
