@@ -134,3 +134,11 @@ int main() {
     PlayGame();
     return 0;
 }
+
+/* Main ideas for writing clean and maintainable code:
+
+ 1. Break logic into the simplest functions for clarity and modularity.
+ 2. Use structs/classes to group related information for better organization.
+ 3. Use enums for fixed choices/constants to improve readability and safety.
+ 4. Design reusable functions that allow easy addition of features without breaking existing code.
+*/
