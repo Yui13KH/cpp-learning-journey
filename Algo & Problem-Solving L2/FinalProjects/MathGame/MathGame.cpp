@@ -18,48 +18,41 @@ struct Results {
 // Helper Functions
 int RandomNumberInRange(int min, int max) { return rand() % (max - min + 1) + min; }
 
+std::string dashes(int count) {
+    std::string dashes = "";
+    for (int i = 0; i < count; i++) {
+        dashes += "-";
+    }
+    return dashes;
+}
+
 std::string difficultyToString(Difficulty difficulty) {
     switch (difficulty) {
-        case EASY:
-            return "EASY";
-        case MEDIUM:
-            return "MEDIUM";
-        case HARD:
-            return "HARD";
-        case EXTREME:
-            return "EXTREME";
-        default:
-            return "UNKNOWN";
+        case EASY: return "EASY";
+        case MEDIUM: return "MEDIUM";
+        case HARD: return "HARD";
+        case EXTREME: return "EXTREME";
+        default: return "UNKNOWN";
     }
 }
 
 std::string operatorToString(Operator op) {
     switch (op) {
-        case ADDITION:
-            return "+";
-        case SUBTRACTION:
-            return "-";
-        case MULTIPLICATION:
-            return "*";
-        case DIVISION:
-            return "/";
-        case MIXED:
-            return "MIXED";
+        case ADDITION: return "+";
+        case SUBTRACTION: return "-";
+        case MULTIPLICATION: return "*";
+        case DIVISION: return "/";
+        case MIXED: return "MIXED";
+        default: return "UNKNOWN";
     }
-    return "UNKNOWN";
 }
 
 char decideLetterGrade(int percentage) {
-    if (percentage > 90)
-        return 'A';
-    else if (percentage > 80)
-        return 'B';
-    else if (percentage > 70)
-        return 'C';
-    else if (percentage > 60)
-        return 'D';
-    else
-        return 'F';
+    if (percentage > 90) return 'A';
+    if (percentage > 80) return 'B';
+    if (percentage > 70) return 'C';
+    if (percentage > 60) return 'D';
+    return 'F';
 }
 
 int readValidNumberInRange(const std::string &message, int min, int max) {
@@ -70,80 +63,56 @@ int readValidNumberInRange(const std::string &message, int min, int max) {
         if (!std::cin.fail() && number >= min && number <= max) break;
         std::cin.clear();
         std::cin.ignore(1000, '\n');
-        std::cout << "Invalid input. Please enter a number between " << min << " and " << max
-                  << ".\n";
+        std::cout << "Invalid input. Please enter a number between " << min << " and " << max << ".\n";
     }
     std::cin.ignore(1000, '\n');
     return number;
 }
 
 void printResults(const Results &results) {
+    std::cout << dashes(15);
     std::cout << "\nResults:\n";
     std::cout << "Question Count: " << results.questionCount << "\n";
     std::cout << "Percentage of Success: " << results.percentageOfSuccess << "%\n";
     std::cout << "Letter Grade: " << results.letterGrade << "\n";
     std::cout << "Difficulty: " << difficultyToString(results.difficulty) << "\n";
     std::cout << "Operator: " << operatorToString(results.operatorType) << "\n";
+    std::cout << dashes(15) << "\n";
 }
 
 // Difficulty-Specific Functions
 int getQuestionCountForDifficulty(Difficulty difficulty) {
     switch (difficulty) {
-        case EASY:
-            return 5;
-        case MEDIUM:
-            return 10;
-        case HARD:
-            return 15;
-        case EXTREME:
-            return 20;
-        default:
-            return 5;
+        case EASY: return 5;
+        case MEDIUM: return 10;
+        case HARD: return 15;
+        case EXTREME: return 20;
+        default: return 5;
     }
 }
 
 void getRangeForDifficulty(Difficulty difficulty, int &min, int &max) {
     switch (difficulty) {
-        case EASY:
-            min = 1;
-            max = 10;
-            break;
-        case MEDIUM:
-            min = 10;
-            max = 100;
-            break;
-        case HARD:
-            min = 100;
-            max = 1000;
-            break;
-        case EXTREME:
-            min = 1000;
-            max = 10000;
-            break;
-        default:
-            min = 1;
-            max = 10;
-            break;
+        case EASY: min = 1; max = 10; break;
+        case MEDIUM: min = 10; max = 100; break;
+        case HARD: min = 100; max = 1000; break;
+        case EXTREME: min = 1000; max = 10000; break;
+        default: min = 1; max = 10; break;
     }
 }
 
 // Core Functions
 int calculateAnswer(int num1, int num2, Operator op) {
     switch (op) {
-        case ADDITION:
-            return num1 + num2;
-        case SUBTRACTION:
-            return num1 - num2;
-        case MULTIPLICATION:
-            return num1 * num2;
-        case DIVISION:
-            return num2 != 0 ? num1 / num2 : 0;  // Handle division by zero
-        default:
-            return 0;
+        case ADDITION: return num1 + num2;
+        case SUBTRACTION: return num1 - num2;
+        case MULTIPLICATION: return num1 * num2;
+        case DIVISION: return num2 != 0 ? num1 / num2 : 0;  // Handle division by zero
+        default: return 0;
     }
 }
 
-bool askQuestion(Difficulty difficulty, Operator operatorType) {
+bool askQuestion(Difficulty difficulty, Operator operatorType, int questionNumber) {
     int min, max;
     getRangeForDifficulty(difficulty, min, max);
 
@@ -158,9 +127,14 @@ bool askQuestion(Difficulty difficulty, Operator operatorType) {
     int correctAnswer = calculateAnswer(num1, num2, currentOperator);
     std::string operatorSymbol = operatorToString(currentOperator);
 
-    std::cout << num1 << " " << operatorSymbol << " " << num2 << " = ";
+    std::cout << "Question " << questionNumber << std::endl;
+    std::cout << num1 << std::endl;
+    std::cout << num2 << " " << operatorSymbol << std::endl;
+    std::cout << "---------------------\n";
+
     int userAnswer;
     std::cin >> userAnswer;
+    std::cout << std::endl;
 
     return userAnswer == correctAnswer;
 }
@@ -170,7 +144,7 @@ void conductQuiz(Difficulty difficulty, Operator operatorType, Results &results)
     int correctAnswers = 0;
 
     for (int i = 0; i < results.questionCount; i++) {
-        if (askQuestion(difficulty, operatorType)) {
+        if (askQuestion(difficulty, operatorType, i + 1)) {
             correctAnswers++;
         }
     }
@@ -179,6 +153,17 @@ void conductQuiz(Difficulty difficulty, Operator operatorType, Results &results)
     results.letterGrade = decideLetterGrade(results.percentageOfSuccess);
     results.difficulty = difficulty;
     results.operatorType = operatorType;
+}
+
+void playAgain(Difficulty difficulty, Operator operatorType, Results results) {
+    char playAgainInput;
+    do {
+        conductQuiz(difficulty, operatorType, results);
+        printResults(results);
+
+        std::cout << "Do you want to play again? (Y/N): ";
+        std::cin >> playAgainInput;
+    } while (playAgainInput == 'Y' || playAgainInput == 'y');
 }
 
 // Main Function
@@ -194,8 +179,8 @@ int main() {
         1, 5);
 
     Results results;
-    conductQuiz(difficulty, operatorType, results);
-    printResults(results);
+
+    playAgain(difficulty, operatorType, results);
 
     return 0;
 }
