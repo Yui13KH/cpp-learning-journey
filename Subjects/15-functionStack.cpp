@@ -1,13 +1,13 @@
 #include <iostream>
 using namespace std;
 
-void funcC() {
+void testTwo() {
     cout << "In funcC()" << endl;
 }
 
 void funcB() {
     cout << "In funcB()" << endl;
-    funcC(); // funcC is called here
+    testTwo(); // funcC is called here
 }
 
 void funcA() {
