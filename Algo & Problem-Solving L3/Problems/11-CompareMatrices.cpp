@@ -36,14 +36,20 @@ Matrix generateRandomMatrix(int rows, int cols) {
     return matrix;
 }
 
-int SumMatrix(const Matrix& matrix, int rows, int cols) {
-    int sum = 0;
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            sum += matrix[i][j];
+bool matricesAreEqual(const Matrix& matrix1, const Matrix& matrix2, const int& rows,
+                      const int& columns) {
+    bool areEqual = true;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            if (matrix1[i][j] == matrix2[i][j]) {
+                return areEqual;
+            } else {
+                areEqual = false;
+                return areEqual;
+            }
         }
     }
-    return sum;
+    return areEqual;
 }
 
 void PrintMatrix(const Matrix& matrix, int rows, int cols) {
@@ -57,15 +63,29 @@ void PrintMatrix(const Matrix& matrix, int rows, int cols) {
 
 int main() {
     srand(unsigned(time(NULL)));
-    int rows = getValidPositiveInt("Enter the number of rows: ");
-    int cols = getValidPositiveInt("Enter the number of columns: ");
+    // int columns = getValidPositiveInt("Input Column Size: ");
+    // int rows = getValidPositiveInt("Input Row Size: ");
 
-    Matrix matrix = generateRandomMatrix(rows, cols);
+    int columns = 3;
+    int rows = 3;
 
-    PrintMatrix(matrix, rows, cols);
+    // Matrix matrix1 = generateRandomMatrix(rows, columns);
+    // Matrix matrix2 = generateRandomMatrix(rows, columns);
+    // its impossible to generate 2 matrices that are equal
 
-    int sum = SumMatrix(matrix, rows, cols);
-    std::cout << "Sum of the matrix: " << sum << std::endl;
+    Matrix matrix1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    Matrix matrix2 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    // for testing 
+
+    PrintMatrix(matrix1, rows, columns);
+    std::cout << "\n" << "------" << "\n";
+    PrintMatrix(matrix2, rows, columns);
+
+    if (matricesAreEqual(matrix1, matrix2, rows, columns)) {
+        std::cout << "\n" << "Matrices are equal" << "\n";
+    } else {
+        std::cout << "\n" << "Matrices are not equal" << "\n";
+    }
 
     return 0;
 }
