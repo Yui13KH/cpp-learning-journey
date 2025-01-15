@@ -39,6 +39,14 @@ Matrix generateRandomMatrix(int rows, int cols) {
 bool matricesAreEqual(const Matrix& matrix1, const Matrix& matrix2, const int& rows,
                       const int& columns) {
     bool areEqual = true;
+    // also in linear algebra they check for columns and rows to be equal but for simplicity i am
+    // not going to pass cols and rows for each matrix
+
+    /*
+    the check would be as simple as this
+    if (matrix1Cols == matrix2Cols && matrix1Rows == matrix2Rows)
+    but again for simplicity i am not going to do that
+    */
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
             if (matrix1[i][j] == matrix2[i][j]) {
@@ -75,7 +83,7 @@ int main() {
 
     Matrix matrix1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
     Matrix matrix2 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-    // for testing 
+    // for testing
 
     PrintMatrix(matrix1, rows, columns);
     std::cout << "\n" << "------" << "\n";
