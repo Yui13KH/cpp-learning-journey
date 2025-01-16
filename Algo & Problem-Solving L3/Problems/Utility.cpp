@@ -6,11 +6,11 @@ namespace utility {
 int RandomNumberInRange(int min, int max) { return rand() % (max - min + 1) + min; }
 
 // Function to generate a random matrix of size rows x cols
-Matrix generateRandomMatrix(int rows, int cols) {
+Matrix generateRandomMatrix(int rows, int cols,int min ,int max) {
     Matrix matrix(rows, std::vector<int>(cols));
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
-            matrix[i][j] = RandomNumberInRange(1, 100);
+            matrix[i][j] = RandomNumberInRange(min, max);
         }
     }
     return matrix;
