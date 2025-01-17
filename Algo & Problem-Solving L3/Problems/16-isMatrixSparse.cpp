@@ -22,8 +22,10 @@ Count countOccurrencesInMatrix(const Matrix& matrixData, int matrixColumns, int 
 void printIsParse(Count results) {
     if (results.zeros > results.nonZeros) {
         std::cout << "Matrix is sparse." << std::endl;
-    } else {
+    } else if (results.nonZeros > results.zeros){
         std::cout << "Matrix is NOT sparse" << std::endl;
+    } else {
+        std::cout << "zeros and non-zeros are equal" << std::endl; // for even arrays edge case
     }
 }
 
