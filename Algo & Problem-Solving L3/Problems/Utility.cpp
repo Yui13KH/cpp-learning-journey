@@ -44,4 +44,17 @@ int getValidPositiveInt(const std::string& prompt) {
     }
 }
 
+// Function to prompt user for a valid string input
+std::string getValidString(const std::string& prompt) {
+    std::string input;
+    while (true) {
+        std::cout << prompt;
+        std::getline(std::cin, input);
+        if (!input.empty()) {
+            return input;
+        }
+        std::cout << "Please enter a valid string: ";
+    }
+}
+
 }  // namespace utility
