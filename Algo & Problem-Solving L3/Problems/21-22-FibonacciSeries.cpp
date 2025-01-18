@@ -11,6 +11,20 @@ void printFibonacciSeries(int size) {
     }
 }
 
+/*
+void printFibonacciSeriesRecursion(int size, int a = 0, int b = 1) {
+    if (size == 0) {
+        return;
+    }
+
+    std::cout << a << " ";
+    int next = a + b;
+    printFibonacciSeriesRecursion(size - 1, b, next);
+}
+recursive version
+*/
+
+
 int main() {
     int fibonacciSize = utility::getValidPositiveInt("Enter the size of the Fibonacci series: ");
 
