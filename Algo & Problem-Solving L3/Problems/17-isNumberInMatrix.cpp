@@ -31,7 +31,7 @@ int main() {
 
     Matrix matrix = utility::generateRandomMatrix(matrixRows, matrixColumns, 1,100);
 
-    utility::PrintMatrix(matrix, matrixRows, matrixColumns);
+    utility::PrintMatrix(matrix);
 
     PrintIsNumberInMAtrix(targetNumber, matrix, matrixRows, matrixColumns);
 

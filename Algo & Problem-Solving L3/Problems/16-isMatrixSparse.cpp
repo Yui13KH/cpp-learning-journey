@@ -36,7 +36,7 @@ int main() {
 
     Matrix matrix = utility::generateRandomMatrix(matrixRows, matrixColumns, 0, 1);
 
-    utility::PrintMatrix(matrix, matrixRows, matrixColumns);
+    utility::PrintMatrix(matrix);
     Count results = countOccurrencesInMatrix(matrix, matrixColumns, matrixRows);
 
     printIsParse(results);

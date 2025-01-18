@@ -16,7 +16,7 @@ namespace utility {
 // Function declarations
 int RandomNumberInRange(int min, int max);
 Matrix generateRandomMatrix(int rows, int cols, int min, int max);
-void PrintMatrix(const Matrix& matrix, int rows, int cols);
+void PrintMatrix(const Matrix& matrix);
 int getValidPositiveInt(const std::string& prompt);
 
 }  // namespace utility

@@ -42,9 +42,9 @@ int main() {
     Matrix matrix1 = utility::generateRandomMatrix(matrixRows, matrixColumns, 1, 100);
     Matrix matrix2 = utility::generateRandomMatrix(matrixRows, matrixColumns, 1, 100);
 
-    utility::PrintMatrix(matrix1, matrixRows, matrixColumns);
+    utility::PrintMatrix(matrix1);
     std::cout << "\n" << "------" << "\n";
-    utility::PrintMatrix(matrix2, matrixRows, matrixColumns);
+    utility::PrintMatrix(matrix2);
 
     printIntersection(matrix1, matrix2, matrixRows, matrixColumns);
 

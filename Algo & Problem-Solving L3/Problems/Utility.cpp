@@ -6,7 +6,7 @@ namespace utility {
 int RandomNumberInRange(int min, int max) { return rand() % (max - min + 1) + min; }
 
 // Function to generate a random matrix of size rows x cols
-Matrix generateRandomMatrix(int rows, int cols,int min ,int max) {
+Matrix generateRandomMatrix(int rows, int cols, int min, int max) {
     Matrix matrix(rows, std::vector<int>(cols));
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
@@ -17,9 +17,9 @@ Matrix generateRandomMatrix(int rows, int cols,int min ,int max) {
 }
 
 // Function to print the matrix in a formatted manner
-void PrintMatrix(const Matrix& matrix, int rows, int cols) {
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
+void PrintMatrix(const Matrix& matrix) {
+    for (int i = 0; i < matrix.size(); ++i) {
+        for (int j = 0; j < matrix[i].size(); ++j) {
             std::cout << std::setw(3) << matrix[i][j] << " ";
         }
         std::cout << std::endl;

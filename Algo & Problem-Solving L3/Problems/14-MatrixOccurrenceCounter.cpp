@@ -19,7 +19,7 @@ int main() {
 
     Matrix matrixData = {{1, 2, 3}, {3, 2, 3}, {1, 2, 3}};
 
-    utility::PrintMatrix(matrixData, matrixRows, matrixColumns);
+    utility::PrintMatrix(matrixData);
 
     std::cout << "Number of occurrences: " << countOccurrencesInMatrix(targetNumber, matrixData, matrixColumns, matrixRows) << std::endl;
 

@@ -22,7 +22,7 @@ int main() {
 
     Matrix matrix = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
 
-    utility::PrintMatrix(matrix, rows, cols);
+    utility::PrintMatrix(matrix);
 
     if (isIdentityMatrix(matrix, rows, cols)) {
         std::cout << "The matrix is an identity matrix." << std::endl;
