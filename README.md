@@ -43,3 +43,11 @@ For example, in previous problems (before this commit), I initially followed the
 
 This two-commit workflow allows me to explore the problem from the instructor's perspective first, then improve upon it with my own enhancements.
 
+
+### A note about skipping problems
+the instructor sometimes adds what i humbly believe are repetitive problems that are too easy , sometimes being litearlly 1 line change on a previous code that was already working , so i will skip those problems and focus on the more challenging ones
+
+example : capatilize words in a sentence , next problem , decapitalize words in a sentence , capatilize all words in a sentence , decapatilize all words in a sentence 
+
+so making a file for each problem is a waste of time
+
