@@ -32,4 +32,4 @@ int main() {
     return 0;
 }
 
-
+//compile: g++ 37-splitAndCountTokens.cpp Utility.cpp -o name

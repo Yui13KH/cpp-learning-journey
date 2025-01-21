@@ -32,7 +32,7 @@ int main() {
 
     Matrix matrix = utility::generateRandomMatrix(matrixRows, matrixColumns, 1, 100);
 
-    utility::PrintMatrix(matrix, matrixRows, matrixColumns);
+    utility::PrintMatrix(matrix);
 
     std::vector<int> flattenedMatrix = flattenMatrix(matrix);
 
