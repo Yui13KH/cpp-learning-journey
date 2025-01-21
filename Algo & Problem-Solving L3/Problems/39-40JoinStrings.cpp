@@ -43,4 +43,4 @@ int main() {
     return 0;
 }
 
-// compile: g++ 38-TrimString.cpp Utility.cpp -o name
+// compile: g++ 39-40JoinStrings.cpp Utility.cpp -o name
