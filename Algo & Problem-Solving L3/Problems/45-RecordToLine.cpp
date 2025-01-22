@@ -30,9 +30,13 @@ std::string JoinString(const std::vector<std::string> &input, const std::string 
 }
 
 std::string JoinClientData(const strClient &client, const std::string &delimiter) {
-    std::vector<std::string> clientData = {client.accountNumber, client.pinCode, client.fullName,
-                                           client.phoneNumber,
-                                           std::to_string(client.accountBalance)};
+    std::vector<std::string> clientData = {
+        client.accountNumber, 
+        client.pinCode, 
+        client.fullName,
+        client.phoneNumber,
+        std::to_string(client.accountBalance)
+    };
 
     return JoinString(clientData, delimiter);
 }

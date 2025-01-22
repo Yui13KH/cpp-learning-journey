@@ -1,11 +1,11 @@
 #include "Utility.h"
 
-void splitTokens(std::string& input, std::vector<std::string>& tokens, char delimiter = ' ') {
+void splitTokens(std::string& input, std::vector<std::string>& tokens, std::string delimiter = " ") {
     size_t position = 0;
 
     while ((position = input.find(delimiter)) != std::string::npos) {
-        tokens.push_back(input.substr(0, position));
-        input.erase(0, position + 1);
+        tokens.push_back(input.substr(0,position));
+        input.erase(0, position + delimiter.length());
     }
 
     if (!input.empty()) {
