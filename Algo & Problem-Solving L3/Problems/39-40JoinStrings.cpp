@@ -2,32 +2,27 @@
 #include <string>
 #include <iostream>
 
-std::string JoinString(std::vector<std::string> input, std::string delimiter) {
-    std::string joinedString = "";
-
-    for (int i = 0; i < input.size(); i++) {
-        if (i == 0) {
-            joinedString += input[i];
-        } else if (i < input.size() - 1) {
-            joinedString += delimiter + input[i];
-        } else {
-            joinedString += input[i];
+std::string JoinString(const std::vector<std::string> &input, const std::string &delimiter) {
+    std::string joinedString;
+    for (size_t i = 0; i < input.size(); i++) {
+        joinedString += input[i];
+        if (i != input.size() - 1) {
+            joinedString += delimiter;
         }
     }
-    std::cout << "Vector joined string:" << std::endl;
+    std::cout << "vector joined: ";
     return joinedString;
 }
 
-std::string JoinString(std::string input[], int size, std::string delimiter) {
-    std::string joinedString = "";
-
+std::string JoinString(const std::string input[], int size, const std::string &delimiter) {
+    std::string joinedString;
     for (int i = 0; i < size; i++) {
         joinedString += input[i];
         if (i != size - 1) {
             joinedString += delimiter;
         }
     }
-    std::cout << "Array joined string:" << std::endl;
+    std::cout << "String joined: ";
     return joinedString;
 }
 
