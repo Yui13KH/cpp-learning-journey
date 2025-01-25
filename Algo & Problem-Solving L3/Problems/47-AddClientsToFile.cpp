@@ -1,6 +1,5 @@
 #include "Utility.h"
 #include <fstream>
-#include <filesystem>
 
 struct strClient {
     std::string accountNumber;
@@ -39,13 +38,15 @@ std::string JoinClientData(const strClient &client, const std::string &delimiter
 }
 
 void createFile(const std::string &filename) {
-    // Check if the file already exists
-    if (std::filesystem::exists(filename)) {
+    // Check if the file can be opened (it exists)
+    std::ifstream checkFile(filename);
+    if (checkFile.is_open()) {
         std::cout << "File already exists: " << filename << std::endl;
+        checkFile.close();
         return;
     }
 
-    // Create the file if it doesn't exist
+    // If the file doesn't exist, create it
     std::ofstream outputFile(filename);
     if (!outputFile.is_open()) {
         std::cerr << "Error creating file: " << filename << std::endl;
@@ -67,12 +68,23 @@ void fillFile(std::string fileName, std::string cliendData) {
     }
 }
 
+void AddClientToFile(strClient client, std::string fileName) {
+    char UserInput = '0';
+    do {
+        ReadClient(client);
+        std::string clientInfo = JoinClientData(client, "/##/");
+        fillFile(fileName, clientInfo);
+        std::cout << "Do you want to add another client? (Y/N): ";
+        std::cin >> UserInput;
+    } while (UserInput == 'Y' || UserInput == 'y');
+}
+
 int main() {
     strClient client;
 
-    ReadClient(client);
-    createFile("test");
-    fillFile("test", JoinClientData(client, "/##/"));
+    std::string fileName = utility::getValidString("Enter file name: ");
+    createFile(fileName);
+    AddClientToFile(client, fileName);
 
     return 0;
 }
