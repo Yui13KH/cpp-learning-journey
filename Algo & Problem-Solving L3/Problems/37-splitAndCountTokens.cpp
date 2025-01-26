@@ -1,16 +1,24 @@
 #include "Utility.h"
 
-void splitTokens(std::string& input, std::vector<std::string>& tokens, std::string delimiter = " ") {
-    size_t position = 0;
+std::vector<std::string> splitTokens(std::string line, std::string delimiter) {
+    std::vector<std::string> vString;
+    short position = 0;
+    std::string word;
 
-    while ((position = input.find(delimiter)) != std::string::npos) {
-        tokens.push_back(input.substr(0,position));
-        input.erase(0, position + delimiter.length());
+    while ((position = line.find(delimiter)) != std::string::npos) {
+        word = line.substr(0, position);
+        if (word != "") {
+            vString.push_back(word);
+        }
+
+        line.erase(0, position + delimiter.length());
     }
 
-    if (!input.empty()) {
-        tokens.push_back(input);
+    if (line != "") {
+        vString.push_back(line);
     }
+
+    return vString;
 }
 
 void printTokens(const std::vector<std::string>& tokens) {
@@ -23,13 +31,14 @@ void printTokens(const std::vector<std::string>& tokens) {
 
 int main() {
     std::string input = utility::getValidString("Enter a string: ");
-    std::vector<std::string> tokens;
+    std::string delimiter = utility::getValidString("Enter a delimiter: ");
 
-    splitTokens(input, tokens);
+    std::vector<std::string> tokens = splitTokens(input, delimiter);
+    
 
     printTokens(tokens);
 
     return 0;
 }
 
-//compile: g++ 37-splitAndCountTokens.cpp Utility.cpp -o name
+// compile: g++ 37-splitAndCountTokens.cpp Utility.cpp -o name

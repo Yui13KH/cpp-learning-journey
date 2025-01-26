@@ -9,13 +9,17 @@ struct strClient {
     int accountBalance;
 };
 
-void ReadClient(strClient &client) {
+strClient ReadClient() { // using a function of type struct better then void
+    strClient client;
+
     std::cout << "\nClient Information" << std::endl;
     client.accountNumber = utility::getValidString("Enter Account Number: ");
     client.pinCode = utility::getValidString("Enter PIN Code: ");
     client.fullName = utility::getValidString("Enter Full Name: ");
     client.phoneNumber = utility::getValidString("Enter Phone Number: ");
     client.accountBalance = utility::getValidPositiveInt("Enter Account Balance: ");
+
+    return client;
 }
 
 std::string JoinString(const std::vector<std::string> &input, const std::string &delimiter) {
@@ -29,7 +33,7 @@ std::string JoinString(const std::vector<std::string> &input, const std::string 
     return joinedString;
 }
 
-std::string JoinClientData(const strClient &client, const std::string &delimiter) {
+std::string ClientLine(const strClient &client, const std::string &delimiter) {
     std::vector<std::string> clientData = {client.accountNumber, client.pinCode, client.fullName,
                                            client.phoneNumber,
                                            std::to_string(client.accountBalance)};
@@ -37,54 +41,37 @@ std::string JoinClientData(const strClient &client, const std::string &delimiter
     return JoinString(clientData, delimiter);
 }
 
-void createFile(const std::string &filename) {
-    // Check if the file can be opened (it exists)
-    std::ifstream checkFile(filename);
-    if (checkFile.is_open()) {
-        std::cout << "File already exists: " << filename << std::endl;
-        checkFile.close();
-        return;
+void AddClientLineToFile(std::string FileName, std::string ClientLine) {
+    std::fstream ClientFile;
+    ClientFile.open(FileName, std::ios::out | std::ios::app);
+    if (ClientFile.is_open()) {
+        ClientFile << ClientLine << std::endl;
+        ClientFile.close();
     }
+} // appends the new line into the file
 
-    // If the file doesn't exist, create it
-    std::ofstream outputFile(filename);
-    if (!outputFile.is_open()) {
-        std::cerr << "Error creating file: " << filename << std::endl;
-    } else {
-        std::cout << "File created successfully: " << filename << std::endl;
-        outputFile.close();
-    }
-}
+void AddNewClient(std::string filename, std::string delimiter) {
+    strClient client;
+    client = ReadClient();
+    AddClientLineToFile(filename, ClientLine(client, delimiter));
+} // using nested functions for each of them to do something else
 
-void fillFile(std::string fileName, std::string cliendData) {
-    std::ofstream file(fileName, std::ios::app);
-
-    if (file.is_open()) {
-        file << cliendData << "\n";
-        file.close();
-        std::cout << "Client added secussefuly" << std::endl;
-    } else {
-        std::cerr << "Error coud not open file " << fileName << std::endl;
-    }
-}
-
-void AddClientToFile(strClient client, std::string fileName) {
-    char UserInput = '0';
+void AddClients(std::string filename, std::string delimiter) {
+    char option = 'Y';
     do {
-        ReadClient(client);
-        std::string clientInfo = JoinClientData(client, "/##/");
-        fillFile(fileName, clientInfo);
-        std::cout << "Do you want to add another client? (Y/N): ";
-        std::cin >> UserInput;
-    } while (UserInput == 'Y' || UserInput == 'y');
-}
+        std::cout << "Adding New Client:\n\n";
+        AddNewClient(filename, delimiter);
+        std::cout << "\nClient Added Successfully, do you want to add more clients ? Y / N ? ";
+        std::cin >> option;
+    } while (toupper(option) == 'Y');
+} // keeps adding clients if user wants
 
 int main() {
-    strClient client;
 
-    std::string fileName = utility::getValidString("Enter file name: ");
-    createFile(fileName);
-    AddClientToFile(client, fileName);
+    std::string filename = utility::getValidString("Enter File Name: ");
+    std::string delimiter = utility::getValidString("Enter delimiter: ");
+
+    AddClients(filename, delimiter);
 
     return 0;
 }
