@@ -9,85 +9,96 @@ struct strClient {
     int accountBalance = 0;
 };
 
-std::string findLineByAccount(const std::string& filename, const std::string& accountNumber,
-                              const std::string& delimiter) {
-    std::ifstream file(filename);
-    if (!file.is_open()) return "";
+const std::string ClientsFileName = "Clients.txt"; // changable but for consistency and testing
 
-    std::string line;
-    while (std::getline(file, line)) { // reads the file line by line
-        if (line.find(accountNumber + delimiter) == 0) { 
-            return line;
+std::vector<std::string> SplitString(std::string input, std::string delimiter) {
+    std::vector<std::string> vString;
+
+    short position = 0;
+    std::string token;
+
+    while ((position = input.find(delimiter)) != std::string::npos) {
+        token = input.substr(0, position);  // store word temporarily
+        if (token != "") {
+            vString.push_back(token);
+        }
+
+        input.erase(0, position + delimiter.length());
+    }
+
+    if (input != "") {
+        vString.push_back(token);  // last word
+    }
+
+    return vString;
+}
+
+strClient ConvertLineToRecord(std::string line, std::string delimiter = "#//#") {
+    strClient Client;
+    std::vector<std::string> vClientData;
+
+    vClientData = SplitString(line, delimiter);
+
+    Client.accountNumber = vClientData[0];
+    Client.pinCode = vClientData[1];
+    Client.fullName = vClientData[2];
+    Client.phoneNumber = vClientData[3];
+    Client.accountBalance = std::stoi(vClientData[4]);
+
+    return Client;
+}
+
+std::vector<strClient> LoadCleintsDataFromFile(std::string FileName) {
+    std::vector<strClient> vClients;
+    std::fstream MyFile;
+    MyFile.open(FileName, std::ios::in);  // read Mode
+    if (MyFile.is_open()) {
+        std::string Line;
+        strClient Client;
+        while (getline(MyFile, Line)) {
+            Client = ConvertLineToRecord(Line);
+            vClients.push_back(Client);
+        }
+        MyFile.close();
+    }
+    return vClients;
+}
+
+void PrintClientCard(const strClient& Client) {
+    std::cout << "\nThe following are the client details:\n";
+    std::cout << std::left; 
+    std::cout << std::setw(16) << "\nAccount Number" << ": " << Client.accountNumber;
+    std::cout << std::setw(16) << "\nPin Code" << ": " << Client.pinCode;
+    std::cout << std::setw(16) << "\nName" << ": " << Client.fullName;
+    std::cout << std::setw(16) << "\nPhone" << ": " << Client.phoneNumber;
+    std::cout << std::setw(16) << "\nAccount Balance" << ": " << Client.accountBalance << std::endl;
+}
+
+bool FindClientByAccountNumber(std::string AccountNumber, strClient& Client) {
+    std::vector<strClient> vClients = LoadCleintsDataFromFile(ClientsFileName);
+    for (strClient C : vClients) {
+        if (C.accountNumber == AccountNumber) {
+            Client = C;
+            return true;
         }
     }
-
-    return "";
+    return false;
 }
 
-void parseToStruct(std::string& input, strClient& client, const std::string& delimiter = "/##/") {
-    size_t position = 0;
-
-    if ((position = input.find(delimiter)) != std::string::npos) {
-        client.accountNumber = input.substr(0, position);
-        input.erase(0, position + delimiter.length());
-    }
-
-    if ((position = input.find(delimiter)) != std::string::npos) {
-        client.pinCode = input.substr(0, position);
-        input.erase(0, position + delimiter.length());
-    }
-
-    if ((position = input.find(delimiter)) != std::string::npos) {
-        client.fullName = input.substr(0, position);
-        input.erase(0, position + delimiter.length());
-    }
-
-    if ((position = input.find(delimiter)) != std::string::npos) {
-        client.phoneNumber = input.substr(0, position);
-        input.erase(0, position + delimiter.length());
-    }
-
-    if (!input.empty()) {
-        client.accountBalance = std::stoi(input);
-    }
-}
-
-void printClientInfo(const strClient& client) {
-    const int width = 15;
-    std::cout << std::string(65, '=') << "\n";
-    std::cout << std::setw(width) << std::left << "Field"
-              << " | " << std::setw(width * 2) << "Value" << "\n";
-    std::cout << std::string(65, '-') << "\n";
-    std::cout << std::setw(width) << std::left << "Account Number"
-              << " | " << std::setw(width * 2) << client.accountNumber << "\n";
-    std::cout << std::setw(width) << std::left << "PIN Code"
-              << " | " << std::setw(width * 2) << client.pinCode << "\n";
-    std::cout << std::setw(width) << std::left << "Full Name"
-              << " | " << std::setw(width * 2) << client.fullName << "\n";
-    std::cout << std::setw(width) << std::left << "Phone Number"
-              << " | " << std::setw(width * 2) << client.phoneNumber << "\n";
-    std::cout << std::setw(width) << std::left << "Account Balance"
-              << " | " << std::setw(width * 2) << client.accountBalance << "\n";
-    std::cout << std::string(65, '=') << "\n";
-}
-
-void handleFoundLine(std::string& line) {
-    if (!line.empty()) {
-        strClient client;
-        parseToStruct(line, client);
-        printClientInfo(client);
-    } else {
-        std::cout << "Account number not found!" << std::endl;
-    }
+std::string ReadClientAccountNumber() {
+    std::string AccountNumber = "";
+    AccountNumber = utility::getValidString("Enter Account Number: ");
+    return AccountNumber;
 }
 
 int main() {
-    std::string filename = utility::getValidString("Enter file name: ");
-    std::string accountNumber = utility::getValidString("Enter account number");
-
-    std::string line = findLineByAccount(filename, accountNumber, "/##/");
-
-    handleFoundLine(line);
+    strClient Client;
+    std::string AccountNumber = ReadClientAccountNumber();
+    if (FindClientByAccountNumber(AccountNumber, Client)) {
+        PrintClientCard(Client);
+    } else {
+        std::cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
+    }
 
     return 0;
 }
