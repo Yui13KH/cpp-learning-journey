@@ -1,65 +1,3 @@
-// i have no idea how to order this but lets do the normal stuff
-
-/*
-1 - Show All Clients
-2 - Add New Client
-3 - Delete Client
-4 - Update Client
-5 - Find Client and Print its values
-6 - Transactions (deposit , withdraw , all balances , menu)
-
-1 - for the first thing u need {
-    - read accounts from .txt files as a vector of strings
-    - parse them to a vector of structs
-    - print the details of those vector of structs into terminal
-    - print all of their details in console
-}
-
-2 - {
-    - read accounts from .txt files as a vector of strings
-    - read client details from user
-    - parse the struct into line
-    - push line into vector of strings
-    - overwrite file
-}
-
-3 - {
-    deleting an account i a bit more annoying
-    - cut string first part to delimiter , to extract the account number ,
-
-    - check account number with inputted number for deletion
-    - it match , confirm deletion ? , delete
-    - if not match , account number isnt in file
-    - deletion works by copying the original vector of strings to a new one except the account
-number u want to delete
-}
-
-4 - {
-    pretty much like deletion but instead of deleting
-    u find account number ,
-    extract the entire file ,
-    parse to struct ,
-    using the struct re-assign its values , except its account number
-    - parse to line
-    - rewrite the original struct
-    - overwrite the file
-}
-
-5 - {
-    using the account number finding logic
-    , find account
-    , take its valuse as line
-    , parse to struct
-    , print them
-}
-
-6 - {
-    using the account number logic , access account
-    parse to struct ,
-    re-assign account balance value depending on option
-}
- */
-
 #include "BankUtils.h"
 
 struct strClient {
@@ -70,6 +8,9 @@ struct strClient {
     int accountBalance = 0;
 };
 
+namespace BankUtils {
+
+// Utility Functions
 std::string getValidString(const std::string& prompt) {
     std::string input;
     while (true) {
@@ -121,7 +62,8 @@ std::vector<std::string> SplitString(std::string input, std::string delimiter) {
     return vString;
 }
 
-strClient ConvertLineToRecord(std::string line, std::string delimiter = "#//#") {
+
+strClient ConvertLineToRecord(std::string line, std::string delimiter) {
     strClient Client;
     std::vector<std::string> vClientData;
 
@@ -171,3 +113,47 @@ void ReadClient(strClient& client) {
     client.accountBalance = getValidPositiveInt("Enter Account Balance: ");
     std::cout << "\nClient Info Collected" << std::endl;
 }
+
+void PrintClients(const std::string& filename) {
+    std::ifstream file(filename);  // Open the file
+    if (!file.is_open()) {
+        std::cerr << "Error opening file: " << filename << std::endl;
+        return;
+    }
+
+    std::string line;
+
+    // Print the table header
+    std::cout << std::left  // Left-align the columns
+              << "| " << std::setw(15) << "Account Number"
+              << "| " << std::setw(15) << "Pin Code"
+              << "| " << std::setw(25) << "Full Name"
+              << "| " << std::setw(20) << "Phone Number"
+              << "| " << std::setw(15) << "Account Balance"
+              << " |" << std::endl;
+
+    std::cout << std::setfill('-')  // Use '-' to create a separator line
+              << "| " << std::setw(15) << ""
+              << "| " << std::setw(15) << ""
+              << "| " << std::setw(25) << ""
+              << "| " << std::setw(20) << ""
+              << "| " << std::setw(15) << ""
+              << " |" << std::endl;
+    std::cout << std::setfill(' ');  // Reset the fill character to space
+
+    // Read the file line by line and parse each line
+    while (std::getline(file, line)) {
+        strClient client = ConvertLineToRecord(line);  // Parse the line into the struct
+
+        // Print the client data in the table
+        std::cout << "| " << std::setw(15) << std::left << client.accountNumber << "| "
+                  << std::setw(15) << std::left << client.pinCode << "| " << std::setw(25)
+                  << std::left << client.fullName << "| " << std::setw(20) << std::left
+                  << client.phoneNumber << "| " << std::setw(15) << std::left
+                  << client.accountBalance << " |" << std::endl;
+    }
+
+    file.close();
+}
+
+}  // namespace BankUtils
