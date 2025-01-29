@@ -10,6 +10,9 @@ struct strClient {
 
 namespace BankUtils {
 
+bool FindClientByAccountNumber(std::string AccountNumber, strClient& Client,
+                               const std::string& FileName);
+
 // Utility Functions
 std::string getValidString(const std::string& prompt) {
     std::string input;
@@ -109,13 +112,19 @@ strClient ReadClient() {  // using a function of type struct better then void
     strClient client;
 
     std::cout << "\nClient Information" << std::endl;
-    client.accountNumber = getValidPositiveInt("Enter Account Number: ");
+    client.accountNumber = getValidString("Enter Account Number: ");
     client.pinCode = getValidPositiveInt("Enter PIN Code: ");
     client.fullName = getValidString("Enter Full Name: ");
     client.phoneNumber = getValidPositiveInt("Enter Phone Number: ");
     client.accountBalance = getValidPositiveInt("Enter Account Balance: ");
 
     return client;
+}
+
+std::string ReadClientAccountNumber() {
+    std::string AccountNumber = "";
+    AccountNumber = getValidString("Enter Account Number: ");
+    return AccountNumber;
 }
 
 void PrintClients(const std::string& filename) {
@@ -159,6 +168,7 @@ void PrintClients(const std::string& filename) {
 
     file.close();
 }
+
 std::string JoinString(const std::vector<std::string>& input, const std::string& delimiter) {
     std::string joinedString;
     for (size_t i = 0; i < input.size(); i++) {
@@ -171,8 +181,8 @@ std::string JoinString(const std::vector<std::string>& input, const std::string&
 }
 
 std::string ClientLine(const strClient& client, const std::string& delimiter) {
-    std::vector<std::string> clientData = {client.accountNumber, std::to_string(client.pinCode), client.fullName,
-                                           std::to_string(client.phoneNumber),
+    std::vector<std::string> clientData = {client.accountNumber, std::to_string(client.pinCode),
+                                           client.fullName, std::to_string(client.phoneNumber),
                                            std::to_string(client.accountBalance)};
 
     return JoinString(clientData, delimiter);
@@ -187,11 +197,60 @@ void AddClientLineToFile(std::string FileName, std::string ClientLine) {
     }
 }  // appends the new line into the file
 
-void AddNewClient(std::string filename, std::string delimiter) {
-    strClient client;
-    client = ReadClient();
-    AddClientLineToFile(filename, ClientLine(client, delimiter));
+void AddNewClient(const std::string& filename, const std::string& delimiter) {
+    std::string accountNumber = ReadClientAccountNumber(); // Function to read only the account number
+
+    strClient dummyClient; // Dummy client object for FindClientByAccountNumber
+    if (FindClientByAccountNumber(accountNumber, dummyClient, filename)) {
+        std::cout << "\nClient with Account Number (" << accountNumber
+                  << ") Already Exists!\n";
+    } else {
+        strClient client = ReadClient(); // Read the rest of the client data
+        AddClientLineToFile(filename, ClientLine(client, delimiter));
+    }
 }
+
+void DeleteClientFromVector(std::vector<strClient>& vClients,
+                            const std::string& targetAccountNumber) {
+    std::vector<strClient> vUpdatedClients;
+
+    for (const auto& client : vClients) {
+        if (client.accountNumber != targetAccountNumber) {
+            vUpdatedClients.push_back(client);
+        }
+    }
+
+    vClients = vUpdatedClients;
+}
+
+void SaveClientsToFile(const std::vector<strClient>& vClients, const std::string& FileName,
+                       const std::string& delimiter = "#//#") {
+    std::fstream MyFile;
+    MyFile.open(FileName, std::ios::out);  // Open in write mode (overwrite)
+
+    if (MyFile.is_open()) {
+        for (const auto& client : vClients) {
+            std::string line = ClientLine(client, delimiter);
+            MyFile << line << std::endl;
+        }
+        MyFile.close();
+    } else {
+        std::cerr << "Error: Unable to open file for writing.\n";
+    }
+}
+
+bool FindClientByAccountNumber(std::string AccountNumber, strClient& Client,
+                               const std::string& FileName) {
+    std::vector<strClient> vClients = LoadCleintsDataFromFile(FileName);
+    for (const strClient& C : vClients) {
+        if (C.accountNumber == AccountNumber) {
+            Client = C;
+            return true;
+        }
+    }
+    return false;  // No match found
+}
+
 // main functions
 
 void showAllClients(const std::string& filename) { PrintClients(filename); }
@@ -204,6 +263,29 @@ void AddClients(std::string filename, std::string delimiter) {
         std::cout << "\nClient Added Successfully, do you want to add more clients ? Y / N ? ";
         std::cin >> option;
     } while (toupper(option) == 'Y');
+}
+
+void DeleteClient(const std::string& FileName) {
+    strClient Client;
+    std::string targetAccountNumber = getValidString("Account Number To Delete: ");
+    if (FindClientByAccountNumber(targetAccountNumber, Client, FileName)) {
+        std::vector<strClient> vClients = LoadCleintsDataFromFile(FileName);
+        DeleteClientFromVector(vClients, targetAccountNumber);
+        SaveClientsToFile(vClients, FileName);
+    } else {
+        std::cout << "\nClient with Account Number (" << targetAccountNumber
+                  << ") is Not Found! \n";
+    }
+}
+
+void FindClient(std::string Filename) {
+    strClient Client;
+    std::string AccountNumber = ReadClientAccountNumber();
+    if (FindClientByAccountNumber(AccountNumber, Client, Filename)) {
+        PrintClientCard(Client);
+    } else {
+        std::cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found! \n";
+    }
 }
 
 }  // namespace BankUtils

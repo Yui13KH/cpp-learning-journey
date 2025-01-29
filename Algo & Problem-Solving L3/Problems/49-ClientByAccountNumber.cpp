@@ -9,7 +9,7 @@ struct strClient {
     int accountBalance = 0;
 };
 
-const std::string ClientsFileName = "Clients.txt"; // changable but for consistency and testing
+const std::string ClientsFileName = "Clients.txt";  // changable but for consistency and testing
 
 std::vector<std::string> SplitString(std::string input, std::string delimiter) {
     std::vector<std::string> vString;
@@ -66,7 +66,7 @@ std::vector<strClient> LoadCleintsDataFromFile(std::string FileName) {
 
 void PrintClientCard(const strClient& Client) {
     std::cout << "\nThe following are the client details:\n";
-    std::cout << std::left; 
+    std::cout << std::left;
     std::cout << std::setw(16) << "\nAccount Number" << ": " << Client.accountNumber;
     std::cout << std::setw(16) << "\nPin Code" << ": " << Client.pinCode;
     std::cout << std::setw(16) << "\nName" << ": " << Client.fullName;
@@ -91,7 +91,7 @@ std::string ReadClientAccountNumber() {
     return AccountNumber;
 }
 
-int main() {
+void FindClient() {
     strClient Client;
     std::string AccountNumber = ReadClientAccountNumber();
     if (FindClientByAccountNumber(AccountNumber, Client)) {
@@ -99,8 +99,8 @@ int main() {
     } else {
         std::cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
     }
-
-    return 0;
 }
+
+int main() { return 0; }
 
 // compile: g++ 49-ClientByAccountNumber.cpp Utility.cpp -o 49-ClientByAccountNumber

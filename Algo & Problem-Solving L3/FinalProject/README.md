@@ -5,13 +5,13 @@
   - Parse to vector of structs.
   - Print struct details to the console.
 
-- [ ] **Add New Client**
+- [x] **Add New Client**
   - Read accounts from `.txt` as vector of strings.
   - Input new client details and parse to a struct.
   - Convert struct to string and append to vector.
   - Overwrite `.txt` file with updated vector.
 
-- [ ] **Delete Client**
+- [x] **Delete Client**
   - Extract account number from each line.
   - Match with input for deletion.
   - Confirm and remove matching account.
@@ -23,7 +23,7 @@
   - Convert back to string and update vector.
   - Overwrite `.txt` file.
 
-- [ ] **Find Client**
+- [x] **Find Client**
   - Search by account number.
   - Parse matching line to struct.
   - Print struct details.
