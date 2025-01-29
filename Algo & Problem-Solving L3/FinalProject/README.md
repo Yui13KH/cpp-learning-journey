@@ -17,7 +17,7 @@
   - Confirm and remove matching account.
   - Write updated vector to `.txt`.
 
-- [ ] **Update Client**
+- [x] **Update Client**
   - Find account by number and parse to struct.
   - Modify struct values (except account number).
   - Convert back to string and update vector.

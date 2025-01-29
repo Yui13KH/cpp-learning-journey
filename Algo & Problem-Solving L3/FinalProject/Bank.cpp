@@ -6,7 +6,6 @@ using namespace BankUtils;  // i aint rewriting this everytime
 const std::string ClientsFileName = "Clients.txt";
 
 int main() {
-    AddClients(ClientsFileName);
     return 0;
 }
 

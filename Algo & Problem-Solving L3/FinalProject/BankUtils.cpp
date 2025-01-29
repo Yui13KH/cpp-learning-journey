@@ -121,6 +121,18 @@ strClient ReadClient() {  // using a function of type struct better then void
     return client;
 }
 
+strClient UpdateClientInfo(const strClient& existingClient) {
+    strClient client = existingClient;  // Copy the existing client to keep the account number
+
+    std::cout << "\nUpdating Client Information" << std::endl;
+    client.pinCode = getValidPositiveInt("Enter PIN Code: ");
+    client.fullName = getValidString("Enter Full Name: ");
+    client.phoneNumber = getValidPositiveInt("Enter Phone Number: ");
+    client.accountBalance = getValidPositiveInt("Enter Account Balance: ");
+
+    return client;
+}
+
 std::string ReadClientAccountNumber() {
     std::string AccountNumber = "";
     AccountNumber = getValidString("Enter Account Number: ");
@@ -198,14 +210,14 @@ void AddClientLineToFile(std::string FileName, std::string ClientLine) {
 }  // appends the new line into the file
 
 void AddNewClient(const std::string& filename, const std::string& delimiter) {
-    std::string accountNumber = ReadClientAccountNumber(); // Function to read only the account number
+    std::string accountNumber =
+        ReadClientAccountNumber();  // Function to read only the account number
 
-    strClient dummyClient; // Dummy client object for FindClientByAccountNumber
+    strClient dummyClient;  // Dummy client object for FindClientByAccountNumber
     if (FindClientByAccountNumber(accountNumber, dummyClient, filename)) {
-        std::cout << "\nClient with Account Number (" << accountNumber
-                  << ") Already Exists!\n";
+        std::cout << "\nClient with Account Number (" << accountNumber << ") Already Exists!\n";
     } else {
-        strClient client = ReadClient(); // Read the rest of the client data
+        strClient client = ReadClient();  // Read the rest of the client data
         AddClientLineToFile(filename, ClientLine(client, delimiter));
     }
 }
@@ -251,6 +263,28 @@ bool FindClientByAccountNumber(std::string AccountNumber, strClient& Client,
     return false;  // No match found
 }
 
+void UpdateClientInVector(std::vector<strClient>& Clients, const std::string& targetClient) {
+    bool found = false;
+
+    for (auto& client : Clients) {
+        if (client.accountNumber == targetClient) {
+            client = UpdateClientInfo(client);  // Pass existing client to preserve account number
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        std::cout << "Client Doesn't Exist." << std::endl;
+    }
+}
+
+void updateClient(const std::string& FileName, const std::string& targetClient) {
+    std::vector<strClient> AllClients = LoadCleintsDataFromFile(FileName);
+    UpdateClientInVector(AllClients, targetClient);
+    SaveClientsToFile(AllClients, FileName);
+}
+
 // main functions
 
 void showAllClients(const std::string& filename) { PrintClients(filename); }
@@ -288,4 +322,8 @@ void FindClient(std::string Filename) {
     }
 }
 
+void handleClientUpdate(std::string FileName) {
+    std::string targetClient = getValidString("Account Number to Update: ");
+    updateClient(FileName, targetClient);
+}
 }  // namespace BankUtils

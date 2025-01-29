@@ -18,6 +18,7 @@ void showAllClients(const std::string& filename);
 void AddClients(std::string filename, std::string delimiter = DELIMITER);
 void DeleteClient(const std::string& FileName);
 void FindClient(std::string Filename);
+void handleClientUpdate(std::string FileName);
 
 }  // namespace BankUtils
 
