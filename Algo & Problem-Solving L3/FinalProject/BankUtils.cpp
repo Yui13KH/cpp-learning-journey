@@ -2,9 +2,9 @@
 
 struct strClient {
     std::string accountNumber;
-    std::string pinCode;
+    int pinCode = 0;
     std::string fullName;
-    std::string phoneNumber;
+    int phoneNumber = 0;
     int accountBalance = 0;
 };
 
@@ -62,17 +62,16 @@ std::vector<std::string> SplitString(std::string input, std::string delimiter) {
     return vString;
 }
 
-
-strClient ConvertLineToRecord(std::string line, std::string delimiter) {
+strClient ConvertLineToRecord(std::string line, std::string delimiter = DELIMITER) {
     strClient Client;
     std::vector<std::string> vClientData;
 
     vClientData = SplitString(line, delimiter);
 
-    Client.accountNumber = vClientData[0];
-    Client.pinCode = vClientData[1];
+    Client.accountNumber = (vClientData[0]);
+    Client.pinCode = std::stoi(vClientData[1]);
     Client.fullName = vClientData[2];
-    Client.phoneNumber = vClientData[3];
+    Client.phoneNumber = std::stoi(vClientData[3]);
     Client.accountBalance = std::stoi(vClientData[4]);
 
     return Client;
@@ -86,13 +85,15 @@ std::vector<strClient> LoadCleintsDataFromFile(std::string FileName) {
         std::string Line;
         strClient Client;
         while (getline(MyFile, Line)) {
-            Client = ConvertLineToRecord(Line);
+            Client = ConvertLineToRecord(Line, DELIMITER);
             vClients.push_back(Client);
         }
         MyFile.close();
     }
     return vClients;
 }
+
+// client functions
 
 void PrintClientCard(const strClient& Client) {
     std::cout << "\nThe following are the client details:\n";
@@ -104,14 +105,17 @@ void PrintClientCard(const strClient& Client) {
     std::cout << std::setw(16) << "\nAccount Balance" << ": " << Client.accountBalance << std::endl;
 }
 
-void ReadClient(strClient& client) {
+strClient ReadClient() {  // using a function of type struct better then void
+    strClient client;
+
     std::cout << "\nClient Information" << std::endl;
-    client.accountNumber = getValidString("Enter Account Number: ");
-    client.pinCode = getValidString("Enter PIN Code: ");
+    client.accountNumber = getValidPositiveInt("Enter Account Number: ");
+    client.pinCode = getValidPositiveInt("Enter PIN Code: ");
     client.fullName = getValidString("Enter Full Name: ");
-    client.phoneNumber = getValidString("Enter Phone Number: ");
+    client.phoneNumber = getValidPositiveInt("Enter Phone Number: ");
     client.accountBalance = getValidPositiveInt("Enter Account Balance: ");
-    std::cout << "\nClient Info Collected" << std::endl;
+
+    return client;
 }
 
 void PrintClients(const std::string& filename) {
@@ -143,7 +147,7 @@ void PrintClients(const std::string& filename) {
 
     // Read the file line by line and parse each line
     while (std::getline(file, line)) {
-        strClient client = ConvertLineToRecord(line);  // Parse the line into the struct
+        strClient client = ConvertLineToRecord(line, DELIMITER);  // Parse the line into the struct
 
         // Print the client data in the table
         std::cout << "| " << std::setw(15) << std::left << client.accountNumber << "| "
@@ -154,6 +158,52 @@ void PrintClients(const std::string& filename) {
     }
 
     file.close();
+}
+std::string JoinString(const std::vector<std::string>& input, const std::string& delimiter) {
+    std::string joinedString;
+    for (size_t i = 0; i < input.size(); i++) {
+        joinedString += input[i];
+        if (i != input.size() - 1) {
+            joinedString += delimiter;
+        }
+    }
+    return joinedString;
+}
+
+std::string ClientLine(const strClient& client, const std::string& delimiter) {
+    std::vector<std::string> clientData = {client.accountNumber, std::to_string(client.pinCode), client.fullName,
+                                           std::to_string(client.phoneNumber),
+                                           std::to_string(client.accountBalance)};
+
+    return JoinString(clientData, delimiter);
+}
+
+void AddClientLineToFile(std::string FileName, std::string ClientLine) {
+    std::fstream ClientFile;
+    ClientFile.open(FileName, std::ios::out | std::ios::app);
+    if (ClientFile.is_open()) {
+        ClientFile << ClientLine << std::endl;
+        ClientFile.close();
+    }
+}  // appends the new line into the file
+
+void AddNewClient(std::string filename, std::string delimiter) {
+    strClient client;
+    client = ReadClient();
+    AddClientLineToFile(filename, ClientLine(client, delimiter));
+}
+// main functions
+
+void showAllClients(const std::string& filename) { PrintClients(filename); }
+
+void AddClients(std::string filename, std::string delimiter) {
+    char option = 'Y';
+    do {
+        std::cout << "Adding New Client:\n\n";
+        AddNewClient(filename, delimiter);
+        std::cout << "\nClient Added Successfully, do you want to add more clients ? Y / N ? ";
+        std::cin >> option;
+    } while (toupper(option) == 'Y');
 }
 
 }  // namespace BankUtils

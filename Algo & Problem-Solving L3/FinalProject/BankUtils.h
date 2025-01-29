@@ -6,36 +6,18 @@
 #include <iostream>
 #include <iomanip>
 
+inline std::string DELIMITER = "#//#"; // makes it accesible in the BankUtils.cpp
+// had multiple definitions error
+
 // Define a namespace for the banking system
 namespace BankUtils {
 
-// Define a delimiter for file operations
-const std::string DELIMITER = "#//#";
+// main functions
 
-// Client structure to store client details
-struct strClient {
-    std::string accountNumber;
-    std::string pinCode;
-    std::string fullName;
-    std::string phoneNumber;
-    int accountBalance = 0;
-};
-
-// Function Declarations
-
-// Utility Functions
-std::string getValidString(const std::string& prompt);
-int getValidPositiveInt(const std::string& prompt);
-std::vector<std::string> SplitString(std::string input, std::string delimiter = DELIMITER);
-
-// File Operations
-strClient ConvertLineToRecord(std::string line, std::string delimiter = DELIMITER);
-std::vector<strClient> LoadClientsDataFromFile(std::string FileName);
-void SaveClientsDataToFile(std::string FileName, const std::vector<strClient>& vClients);
-
-// Client Operations
-void PrintClientCard(const strClient& Client);
-void PrintClients(const std::string& filename);
-void ReadClient(strClient& client);
+void showAllClients(const std::string& filename); 
+void AddClients(std::string filename, std::string delimiter = DELIMITER);
 
 }  // namespace BankUtils
+
+// well appearently i only need to define the ones i am calling in the main file
+// the other function declerations can be kept in their Bank Utils file

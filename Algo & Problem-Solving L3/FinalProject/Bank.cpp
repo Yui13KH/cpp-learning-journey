@@ -5,11 +5,9 @@ using namespace BankUtils;  // i aint rewriting this everytime
 
 const std::string ClientsFileName = "Clients.txt";
 
-void showAllClients(std::string filename) { PrintClients(filename); }
-
 int main() {
-    showAllClients(ClientsFileName); // testing for now
-
+    showAllClients(ClientsFileName);  
+    AddClients(ClientsFileName);
     return 0;
 }
 
