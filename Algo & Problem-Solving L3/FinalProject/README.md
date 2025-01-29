@@ -28,7 +28,7 @@
   - Parse matching line to struct.
   - Print struct details.
 
-- [ ] **Transactions**
+- [x] **Transactions**
   - Access account by number and parse to struct.
   - Update balance based on selected operation (deposit/withdraw).
   - Update vector and overwrite `.txt`.

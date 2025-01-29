@@ -1,12 +1,13 @@
-// well assume the txt file is always Clients.txt
 #include "BankUtils.h"
 
-using namespace BankUtils;  // i aint rewriting this everytime
+using namespace BankUtils;
+// Function prototypes (assuming they exist elsewhere)
 
-const std::string ClientsFileName = "Clients.txt";
+const std::string ClientsFileName = "Clients.txt";  // Example filename
 
 int main() {
+    bankManagementSystem(ClientsFileName);
     return 0;
 }
 
-// compile command : g++ Bank.cpp BankUtils.cpp -o BankSystem
+// command to compile : g++ Bank.cpp BankUtils.cpp -o BankSystem
