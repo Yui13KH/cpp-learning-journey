@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build C++ Project in Problems",
+            "type": "shell",
+            "command": "g++",
+             "args": [
+                 "${file}",
+                "${workspaceFolder}/Problems/Utility.cpp",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+                    ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}
