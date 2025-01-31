@@ -12,13 +12,18 @@ inline std::string DELIMITER = "#//#";  // makes it accesible in the BankUtils.c
 // Define a namespace for the banking system
 namespace BankUtils {
 
+int getValidPositiveInt(const std::string& prompt);
+
 // main functions
 
+void bankManagementSystem(std::string FileName);
 void showAllClients(const std::string& filename);
 void AddClients(std::string filename, std::string delimiter = DELIMITER);
 void DeleteClient(const std::string& FileName);
 void FindClient(std::string Filename);
 void handleClientUpdate(std::string FileName);
+void Transactions(std::string FileName);
+
 
 }  // namespace BankUtils
 

@@ -1,11 +1,21 @@
 #include "BankUtils.h"
-
+#include <functional>
 struct strClient {
     std::string accountNumber;
     int pinCode = 0;
     std::string fullName;
     int phoneNumber = 0;
     int accountBalance = 0;
+};
+
+enum Choices {
+    ADD_CLIENT = 1,
+    DELETE_CLIENT,
+    UPDATE_CLIENT,
+    FIND_CLIENT,
+    SHOW_ALL_CLIENTS,
+    TRANSACTIONS,
+    EXIT
 };
 
 namespace BankUtils {
@@ -23,6 +33,8 @@ std::string getValidString(const std::string& prompt) {
             return input;
         }
         std::cout << "Please enter a valid string: ";
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
     }
 }
 
@@ -43,7 +55,7 @@ int getValidPositiveInt(const std::string& prompt) {
     }
 }
 
-std::vector<std::string> SplitString(std::string input, std::string delimiter) {
+std::vector<std::string> SplitString(std::string input, std::string delimiter = DELIMITER) {
     std::vector<std::string> vString;
 
     short position = 0;
@@ -59,7 +71,7 @@ std::vector<std::string> SplitString(std::string input, std::string delimiter) {
     }
 
     if (input != "") {
-        vString.push_back(token);  // last word
+        vString.push_back(input);  // last word
     }
 
     return vString;
@@ -133,6 +145,25 @@ strClient UpdateClientInfo(const strClient& existingClient) {
     return client;
 }
 
+strClient DepositClientInfo(const strClient& existingClient) {
+    strClient client = existingClient;  // Copy the existing client to keep the account number
+    std::cout << "\nDepositing Client Information" << std::endl;
+    client.accountBalance += getValidPositiveInt("Enter Amount to Deposit: ");
+    return client;
+}
+
+strClient WithdrawClientInfo(const strClient& existingClient) {
+    strClient client = existingClient;  // Copy the existing client to keep the account number
+    std::cout << "\nWithdrawing Client Information" << std::endl;
+    int amount = getValidPositiveInt("Enter Amount to Withdraw: ");
+    if (amount > client.accountBalance) {
+        std::cerr << "Insufficient funds!" << std::endl;
+    } else {
+        client.accountBalance -= amount;
+    }
+    return client;
+}
+
 std::string ReadClientAccountNumber() {
     std::string AccountNumber = "";
     AccountNumber = getValidString("Enter Account Number: ");
@@ -179,6 +210,47 @@ void PrintClients(const std::string& filename) {
     }
 
     file.close();
+}
+
+void PrintClientsSummary(const std::string& filename) {
+    std::ifstream file(filename);  // Open the file
+    if (!file.is_open()) {
+        std::cerr << "Error opening file: " << filename << std::endl;
+        return;
+    }
+
+    std::string line;
+    double totalBalance = 0;  // Variable to store the total balance
+
+    // Print the table header
+    std::cout << std::left << "| " << std::setw(15) << "Account Number"
+              << "| " << std::setw(25) << "Full Name"
+              << "| " << std::setw(15) << "Account Balance"
+              << " |" << std::endl;
+
+    std::cout << std::setfill('-') << "| " << std::setw(15) << ""
+              << "| " << std::setw(25) << ""
+              << "| " << std::setw(15) << ""
+              << " |" << std::endl;
+    std::cout << std::setfill(' ');  // Reset the fill character to space
+
+    // Read the file line by line and parse each line
+    while (std::getline(file, line)) {
+        strClient client = ConvertLineToRecord(line, DELIMITER);  // Parse the line into the struct
+        totalBalance += client.accountBalance;                    // Add to total balance
+
+        // Print the client data in the table
+        std::cout << "| " << std::setw(15) << std::left << client.accountNumber << "| "
+                  << std::setw(25) << std::left << client.fullName << "| " << std::setw(15)
+                  << std::left << client.accountBalance << " |" << std::endl;
+    }
+
+    file.close();
+
+    // Print total balance
+    std::cout << std::setfill('-') << std::setw(60) << "-" << std::setfill(' ') << std::endl;
+    std::cout << "| " << std::setw(42) << "Total Balance:"
+              << "| " << std::setw(15) << totalBalance << " |" << std::endl;
 }
 
 std::string JoinString(const std::vector<std::string>& input, const std::string& delimiter) {
@@ -263,12 +335,13 @@ bool FindClientByAccountNumber(std::string AccountNumber, strClient& Client,
     return false;  // No match found
 }
 
-void UpdateClientInVector(std::vector<strClient>& Clients, const std::string& targetClient) {
+void UpdateClientInVector(std::vector<strClient>& Clients, const std::string& targetClient,
+                          std::function<strClient(const strClient&)> transactionFunc) {
     bool found = false;
 
     for (auto& client : Clients) {
         if (client.accountNumber == targetClient) {
-            client = UpdateClientInfo(client);  // Pass existing client to preserve account number
+            client = transactionFunc(client);  // Apply the transaction function
             found = true;
             break;
         }
@@ -281,21 +354,81 @@ void UpdateClientInVector(std::vector<strClient>& Clients, const std::string& ta
 
 void updateClient(const std::string& FileName, const std::string& targetClient) {
     std::vector<strClient> AllClients = LoadCleintsDataFromFile(FileName);
-    UpdateClientInVector(AllClients, targetClient);
+    UpdateClientInVector(AllClients, targetClient, UpdateClientInfo);
     SaveClientsToFile(AllClients, FileName);
 }
 
+void showTransactionsMenu() {
+    std::cout << "==============================\n";
+    std::cout << "      Transactions Menu       \n";
+    std::cout << "==============================\n";
+    std::cout << "1. Withdraw\n";
+    std::cout << "2. Deposit\n";
+    std::cout << "3. Total Balances\n";
+    std::cout << "4. Exit\n";
+    std::cout << "==============================\n";
+    std::cout << "Please select an option: ";
+}
+
 // main functions
+
+void bankManagementSystem(std::string ClientsFileName) {
+    while (true) {
+        system("cls");  // Clears the console screen
+        std::cout << "Welcome to the Bank Management System\n";
+        std::cout << "----------------------------------------\n";
+        std::cout << "1. Add Client\n";
+        std::cout << "2. Delete Client\n";
+        std::cout << "3. Update Client\n";
+        std::cout << "4. Find Client\n";
+        std::cout << "5. Show All Clients\n";
+        std::cout << "6. Transactions\n";
+        std::cout << "7. Exit\n";
+        std::cout << "----------------------------------------\n";
+
+        int choice = getValidPositiveInt("Enter your choice: ");
+
+        switch (choice) {
+            case ADD_CLIENT:
+                AddClients(ClientsFileName, "#//#");
+                break;
+            case DELETE_CLIENT:
+                DeleteClient(ClientsFileName);
+                break;
+            case UPDATE_CLIENT:
+                handleClientUpdate(ClientsFileName);
+                break;
+            case FIND_CLIENT:
+                FindClient(ClientsFileName);
+                break;
+            case SHOW_ALL_CLIENTS:
+                showAllClients(ClientsFileName);
+                break;
+            case TRANSACTIONS:
+                Transactions(ClientsFileName);
+                break;
+            case EXIT:
+                std::cout << "Exiting the application. Goodbye!\n";
+                exit(0);  // Terminate the program
+            default:
+                std::cout << "Invalid choice. Please try again.\n";
+        }
+
+        system("pause");  // Wait for user input before clearing the screen
+    }
+}
 
 void showAllClients(const std::string& filename) { PrintClients(filename); }
 
 void AddClients(std::string filename, std::string delimiter) {
     char option = 'Y';
     do {
+        std::cin.clear();
         std::cout << "Adding New Client:\n\n";
         AddNewClient(filename, delimiter);
         std::cout << "\nClient Added Successfully, do you want to add more clients ? Y / N ? ";
         std::cin >> option;
+        std::cin.ignore(1000, '\n');
     } while (toupper(option) == 'Y');
 }
 
@@ -326,4 +459,36 @@ void handleClientUpdate(std::string FileName) {
     std::string targetClient = getValidString("Account Number to Update: ");
     updateClient(FileName, targetClient);
 }
+
+void Transactions(std::string FileName) {
+    while (true) {
+        showTransactionsMenu();
+
+        int option;
+        std::cin >> option;
+        std::cin.ignore(1000, '\n');
+
+        if (option == 4) return;  // Exit Transactions menu and return to bankManagementSystem
+
+        std::vector<strClient> AllClients = LoadCleintsDataFromFile(FileName);
+
+        if (option == 1 || option == 2) {
+            std::string targetClient = getValidString("Enter Account Number to Update: ");
+
+            if (option == 1) {
+                UpdateClientInVector(AllClients, targetClient, DepositClientInfo);
+            } else if (option == 2) {
+                UpdateClientInVector(AllClients, targetClient, WithdrawClientInfo);
+            }
+        } else if (option == 3) {
+            PrintClientsSummary(FileName);
+        } else {
+            std::cout << "Invalid option, please try again.\n";
+            continue;  // Restart the loop without reloading the file
+        }
+
+        SaveClientsToFile(AllClients, FileName);
+    }
+}
+
 }  // namespace BankUtils
