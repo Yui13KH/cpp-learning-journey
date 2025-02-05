@@ -98,15 +98,94 @@ int readYear(const std::string& prompt) {
 strDate readStructure(const std::string& prompt) {
     strDate date;
 
-    date.year = readYear(prompt);
+    std::cout << prompt << std::endl;
+
+    date.year = readYear("Enter year: ");
     date.month = readMonth("Enter month (1-12): ");
     date.day = readDay("Enter day: ", date.year, date.month);
 
     return date;
 }
 
-// If you have additional functions like readShort, you could implement them similarly,
-// or simply use readInt if a smaller type is not necessary.
-}  // namespace Utility
+void printDate(const strDate& date) {
+    std::cout << date.year << "/" << date.month << "/" << date.day;
+}
 
-// namespace utility
+bool isLastDayInMonth(int year, short month, short day) {
+    if (day == Utility::getDaysInMonth(year, month)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool isLastMonthInYear(int year, short month, short day) {
+    if (month == 12) {
+        return true;
+    }
+    return false;
+}
+
+DateComparison compareDates(const strDate& date1, const strDate& date2) {
+    if (date1.year != date2.year) return (date1.year < date2.year) ? EARLIER : LATER;
+    if (date1.month != date2.month) return (date1.month < date2.month) ? EARLIER : LATER;
+    if (date1.day != date2.day) return (date1.day < date2.day) ? EARLIER : LATER;
+    return SAME;
+}
+
+strDate incrementDate(strDate& date) {
+    if (!Utility::isLastDayInMonth(date.year, date.month, date.day)) {
+        date.day++;
+        return date;
+    }
+
+    date.day = 1;
+    if (!Utility::isLastMonthInYear(date.year, date.month, date.day)) {
+        date.month++;
+        return date;
+    }
+
+    date.month = 1;
+    date.year++;
+    return date;
+}
+
+int DifferenceInToDatesInDays(const strDate& startDate, const strDate& endDate,
+                              bool includeLastDay) {
+    int diff = 0;
+
+    // If startDate is later than endDate, swap them and mark the result as negative.
+    bool isNegative = false;
+    strDate sDate = startDate;
+    strDate eDate = endDate;
+
+    if (compareDates(sDate, eDate) == LATER) {
+        std::swap(sDate, eDate);
+        isNegative = true;
+    }
+
+    // Count days by incrementing the earlier date until it matches the later date.
+    while (compareDates(sDate, eDate) != SAME) {
+        sDate = incrementDate(sDate);
+        diff++;
+    }
+
+    // Adjust for including/excluding the last day.
+    if (!includeLastDay && diff > 0) {
+        diff--;
+    }
+
+    return isNegative ? -diff : diff;
+}
+
+strDate getTodaysDate() {
+    strDate date;
+    time_t now = time(0);
+    tm* ltm = localtime(&now);
+    date.year = ltm->tm_year + 1900;
+    date.month = ltm->tm_mon + 1;
+    date.day = ltm->tm_mday;
+    return date;
+}
+
+}  // namespace Utility

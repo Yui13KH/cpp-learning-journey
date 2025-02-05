@@ -6,6 +6,7 @@
 #include <limits>
 #include <sstream>
 
+enum DateComparison { EARLIER = 1, SAME, LATER };
 struct strDate {
     int year;
     short month;
@@ -30,5 +31,13 @@ short readDay(const std::string& prompt, int year, short month);
 short readMonth(const std::string& prompt = "Enter month (1-12): ");
 int readYear(const std::string& prompt = "Enter year (> 0): ");
 strDate readStructure(const std::string& prompt);
+void printDate(const strDate& date);
+bool isLastMonthInYear(int year, short month, short day);
+bool isLastDayInMonth(int year, short month, short day);
+DateComparison compareDates(const strDate& date1, const strDate& date2);
+strDate incrementDate(strDate& date);
+int DifferenceInToDatesInDays(const strDate& startDate, const strDate& endDate, bool includeLastDay = true);
+
+strDate getTodaysDate(); 
 
 }  // namespace Utility
