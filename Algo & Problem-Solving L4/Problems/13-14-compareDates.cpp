@@ -1,3 +1,4 @@
+#include "Utility.h"
 #include <iostream>
 #include <string>
 #include <functional>
@@ -10,11 +11,9 @@ struct sDate {
     short day;
 };
 
-bool isLeapYear(short year) { return (year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0)); }
-
-short daysInMonth(short year, short month) {
+short daysInMonth(int year, short month) {
     static const short monthDays[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    return (month == 2 && isLeapYear(year)) ? 29 : monthDays[month];
+    return (month == 2 && Utility::isLeapYear(year)) ? 29 : monthDays[month];
 }
 
 int readInt(const std::string& prompt, std::function<bool(int)> validator) {
@@ -31,35 +30,22 @@ int readInt(const std::string& prompt, std::function<bool(int)> validator) {
     }
     return input;
 }
-
-bool validYear(short y) { return y > 0; }
-bool validMonth(short m) { return m >= 1 && m <= 12; }
-
-short ReadDay(const std::string& prompt, short year, short month) {
-    return readInt(prompt,
-                   [year, month](int d) { return d >= 1 && d <= daysInMonth(year, month); });
-}
-
 sDate ReadFullDate() {
     sDate Date;
 
     Date.year = readInt("Enter Year (e.g., 2025): ", [](int y) { return y > 0; });
     Date.month = readInt("Enter Month (1-12): ", [](int m) { return m >= 1 && m <= 12; });
-    Date.day = ReadDay("Enter Day: ", Date.year, Date.month);
+    Date.day = Utility::readDay("Enter Day: ", Date.year, Date.month);
 
     return Date;
 }
 
 DateComparison compareDates(const sDate& date1, const sDate& date2) {
-    if (date1.year != date2.year)
-        return (date1.year < date2.year) ? EARLIER : LATER;
-    if (date1.month != date2.month)
-        return (date1.month < date2.month) ? EARLIER : LATER;
-    if (date1.day != date2.day)
-        return (date1.day < date2.day) ? EARLIER : LATER;
+    if (date1.year != date2.year) return (date1.year < date2.year) ? EARLIER : LATER;
+    if (date1.month != date2.month) return (date1.month < date2.month) ? EARLIER : LATER;
+    if (date1.day != date2.day) return (date1.day < date2.day) ? EARLIER : LATER;
     return SAME;
 }
-
 
 void printDate(const sDate& date) {
     std::cout << date.year << "/" << date.month << "/" << date.day;

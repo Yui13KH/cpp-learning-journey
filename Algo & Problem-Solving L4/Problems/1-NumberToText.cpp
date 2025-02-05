@@ -66,7 +66,7 @@ std::string numberToWords(long long number) {  //  max is ~9 quintilion anyway
 }
 
 int main() {
-    long long number = utility::getValidPositiveInt("Enter a number: ");
+    long long number = Utility::getValidPositiveInt("Enter a number: ");
     std::cout << numberToWords(number) << std::endl;
     return 0;
 }
