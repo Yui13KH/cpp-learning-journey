@@ -95,6 +95,16 @@ int readYear(const std::string& prompt) {
     return readInt(prompt, [](int year) { return year > 0; });
 }
 
+strDate readStructure(const std::string& prompt) {
+    strDate date;
+
+    date.year = readYear(prompt);
+    date.month = readMonth("Enter month (1-12): ");
+    date.day = readDay("Enter day: ", date.year, date.month);
+
+    return date;
+}
+
 // If you have additional functions like readShort, you could implement them similarly,
 // or simply use readInt if a smaller type is not necessary.
 }  // namespace Utility

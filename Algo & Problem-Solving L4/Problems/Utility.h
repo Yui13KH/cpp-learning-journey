@@ -6,6 +6,12 @@
 #include <limits>
 #include <sstream>
 
+struct strDate {
+    int year;
+    short month;
+    short day;
+};
+
 // Declare the utility namespace
 namespace Utility {
 
@@ -23,5 +29,6 @@ int getDayOfTheWeek(int year, int month, int day);
 short readDay(const std::string& prompt, int year, short month);
 short readMonth(const std::string& prompt = "Enter month (1-12): ");
 int readYear(const std::string& prompt = "Enter year (> 0): ");
+strDate readStructure(const std::string& prompt);
 
 }  // namespace Utility
