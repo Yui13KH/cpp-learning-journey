@@ -212,4 +212,16 @@ void pause() {
     std::cin.get();
 }
 
+bool isWeekend(const strDate& date) {
+    int dow = Utility::getDayOfTheWeek(date.year, date.month, date.day);
+    // weekend in us i believe are saturday (6) and sunday (0)
+    return (dow == 5 || dow == 6);
+}
+
+bool isBusinessDay(const strDate& date) { return !isWeekend(date); }
+
+std::string getDayName(const strDate& date) {
+    return nameOfTheDay[getDayOfTheWeek(date.year, date.month, date.day)];
+}
+
 }  // namespace Utility

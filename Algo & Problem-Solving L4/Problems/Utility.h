@@ -13,6 +13,13 @@ struct strDate {
     short day;
 };
 
+inline const std::string nameOfTheDay[7] = {"Sunday",   "Monday", "Tuesday", "Wednesday",
+                                            "Thursday", "Friday", "Saturday"};
+
+const std::string monthNames[] = {"January",   "February", "March",    "April",
+                                  "May",       "June",     "July",     "August",
+                                  "September", "October",  "November", "December"};
+
 // Declare the utility namespace
 namespace Utility {
 
@@ -37,8 +44,12 @@ bool isLastDayInMonth(int year, short month, short day);
 DateComparison compareDates(const strDate& date1, const strDate& date2);
 strDate incrementDate(strDate& date);
 strDate decrementDate(strDate& date);
-int DifferenceInToDatesInDays(const strDate& startDate, const strDate& endDate, bool includeLastDay = true);
-strDate getTodaysDate(); 
+int DifferenceInToDatesInDays(const strDate& startDate, const strDate& endDate,
+                              bool includeLastDay = true);
+strDate getTodaysDate();
 void pause();
+bool isWeekend(const strDate& date);
+bool isBusinessDay(const strDate& date);
+std::string getDayName(const strDate& date);
 
 }  // namespace Utility
