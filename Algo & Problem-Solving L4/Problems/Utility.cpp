@@ -150,6 +150,24 @@ strDate incrementDate(strDate& date) {
     return date;
 }
 
+strDate decrementDate(strDate& date) {
+    if (date.day > 1) {
+        date.day--;
+        return date;
+    }
+
+    if (date.month > 1) {
+        date.month--;
+        date.day = Utility::getDaysInMonth(date.year, date.month);
+        return date;
+    }
+
+    date.year--;
+    date.month = 12;
+    date.day = Utility::getDaysInMonth(date.year, date.month);
+    return date;
+}
+
 int DifferenceInToDatesInDays(const strDate& startDate, const strDate& endDate,
                               bool includeLastDay) {
     int diff = 0;
@@ -186,6 +204,12 @@ strDate getTodaysDate() {
     date.month = ltm->tm_mon + 1;
     date.day = ltm->tm_mday;
     return date;
+}
+
+void pause() {
+    std::cout << "Press Enter to continue...";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cin.get();
 }
 
 }  // namespace Utility

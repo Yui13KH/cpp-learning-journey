@@ -36,8 +36,9 @@ bool isLastMonthInYear(int year, short month, short day);
 bool isLastDayInMonth(int year, short month, short day);
 DateComparison compareDates(const strDate& date1, const strDate& date2);
 strDate incrementDate(strDate& date);
+strDate decrementDate(strDate& date);
 int DifferenceInToDatesInDays(const strDate& startDate, const strDate& endDate, bool includeLastDay = true);
-
 strDate getTodaysDate(); 
+void pause();
 
 }  // namespace Utility
