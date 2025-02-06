@@ -19,8 +19,9 @@ int getValidPositiveInt(const std::string& prompt) {
         std::cout << "Please enter a valid positive integer: ";
     }
 }
+// to be honest kinda dead but i used it a lot so removing would break a lot of files , use ReadInt
+// instead
 
-// Function to prompt user for a valid string input
 std::string getValidString(const std::string& prompt) {
     std::string input;
     while (true) {
@@ -105,6 +106,27 @@ strDate readStructure(const std::string& prompt) {
     date.day = readDay("Enter day: ", date.year, date.month);
 
     return date;
+}
+
+strPeriod readPeriod(const std::string& prompt) {
+    strPeriod period;
+
+    std::cout << prompt << std::endl;
+
+    while (true) {
+        period.start = readStructure("Enter start date: ");
+        std::cout << std::endl;
+        period.end = readStructure("Enter end date: ");
+        std::cout << std::endl;
+
+        if (compareDates(period.start, period.end) == EARLIER) {
+            break;
+        }
+        std::cout << "Invalid period! End date must be the same or later than the start date. Try "
+                     "again.\n";
+    }
+
+    return period;
 }
 
 void printDate(const strDate& date) {

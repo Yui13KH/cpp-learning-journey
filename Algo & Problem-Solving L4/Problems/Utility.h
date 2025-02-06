@@ -13,6 +13,11 @@ struct strDate {
     short day;
 };
 
+struct strPeriod {
+    strDate start;
+    strDate end;
+};
+
 inline const std::string nameOfTheDay[7] = {"Sunday",   "Monday", "Tuesday", "Wednesday",
                                             "Thursday", "Friday", "Saturday"};
 
@@ -38,6 +43,7 @@ short readDay(const std::string& prompt, int year, short month);
 short readMonth(const std::string& prompt = "Enter month (1-12): ");
 int readYear(const std::string& prompt = "Enter year (> 0): ");
 strDate readStructure(const std::string& prompt);
+strPeriod readPeriod(const std::string& prompt);
 void printDate(const strDate& date);
 bool isLastMonthInYear(int year, short month, short day);
 bool isLastDayInMonth(int year, short month, short day);
