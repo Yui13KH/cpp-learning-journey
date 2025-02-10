@@ -1,44 +1,43 @@
-// a class is a user-defined data type that could have both variables and methods ( functions )
-// inside of it , its like a structure
 #include <iostream>
+#include <string>
 
-// A class is like a blueprint for creating objects. It groups related data and functions together.
-class clsManga {
-   private:
-    // These variables are private, meaning they cannot be accessed directly from outside the class.
-    std::string title; // these are data members of the class because they hold data :D
-    std::string author;
-    short chapters;
-    bool completed;
+class Person {
+private:
+    std::string _firstName;
+    std::string _lastName;
+    std::string _profession;
+    int _age;
 
-   public:
-    // This function assigns values to the private variables.
-    void setMangaInfo(std::string t, std::string a, short c, bool comp) { // and something like this is called a function member because well , its a function 
-        title = t;
-        author = a;
-        chapters = c;
-        completed = comp;
-    }
+public:
+    // Setters
+    void setFirstName(const std::string& firstName) { _firstName = firstName; }
+    void setLastName(const std::string& lastName) { _lastName = lastName; }
+    void setProfession(const std::string& profession) { _profession = profession; }
+    void setAge(int age) { _age = age; }
 
-    // This function displays the stored information about the manga.
-    void printMangaInfo() {
-        std::cout << title << " by " << author << " has " << chapters << " chapters. "
-                  << (completed ? "It is completed." : "It is ongoing.") << std::endl;
+    // Getters
+    std::string getFirstName() const { return _firstName; }
+    std::string getLastName() const { return _lastName; }
+    std::string getProfession() const { return _profession; }
+    int getAge() const { return _age; }
+
+    // Print Information
+    void printInfo() const {
+        std::cout << "Name: " << _firstName << " " << _lastName << std::endl;
+        std::cout << "Profession: " << _profession << std::endl;
+        std::cout << "Age: " << _age << std::endl;
     }
 };
 
 int main() {
-    // We create an object (an instance) of the class. Think of it as an actual manga entry.
+    Person person;
+    person.setFirstName("John");
+    person.setLastName("Doe");
+    person.setProfession("Software Engineer");
+    person.setAge(30);
 
-    // Creating manga object for "Erased"
-    clsManga Erased;
-    Erased.setMangaInfo("Erased", "Kei Sanbe", 44, true);
-    Erased.printMangaInfo();
-
-    // Creating another manga object for "That Time I Got Reincarnated as a Slime"
-    clsManga Slime;
-    Slime.setMangaInfo("That Time I Got Reincarnated as a Slime", "Fuse", 100, false);  // Ongoing
-    Slime.printMangaInfo();
+    person.printInfo(); // Display person information
 
     return 0;
 }
+
