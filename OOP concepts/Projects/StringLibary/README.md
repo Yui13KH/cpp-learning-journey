@@ -25,4 +25,4 @@ Make sure to be in the directory of the StringLibrary project alone, not the ent
 2. Run the following command to compile the project:
 
 ```bash
-g++ -o StringLibrary StringLibrary.cpp
+g++ StringLibrary.cpp -o StringLibrary
