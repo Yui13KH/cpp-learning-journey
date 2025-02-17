@@ -1,10 +1,13 @@
 #include "../Libaries/clsUtility.h"
+#include "../Libaries/clsDate.h"
+#include "../Libaries/clsString.h"
 
 int main() {
-    clsUtil::Srand();
-    int random = clsUtil::RandomNumber(1, 100);
+    clsUtility::Srand();
+    int random = clsUtility::RandomNumber(1, 100);
 
     std::cout << random << std::endl;
+
 
     return 0;
 }

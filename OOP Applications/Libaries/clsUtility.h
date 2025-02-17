@@ -1,8 +1,9 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "clsDate.h"
 
-class clsUtil {
+class clsUtility {
    public:
     enum enCharType {
         SamallLetter = 1,
@@ -139,6 +140,8 @@ class clsUtil {
         A = B;
         B = Temp;
     }
+
+    static void Swap(clsDate& A, clsDate& B) { clsDate::SwapDates(A, B); }
 
     static void ShuffleArray(int arr[100], int arrLength) {
         for (int i = 0; i < arrLength; i++) {
