@@ -20,6 +20,7 @@ class clsPerson {
     // getters
     std::string FirstName() { return _FirstName; }
     std::string LastName() { return _LastName; }
+    std::string FullName() {return (_FirstName + " " + _LastName);}
     std::string Email() { return _Email; }
     std::string Phone() { return _Phone; }
 

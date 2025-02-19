@@ -1,13 +1,11 @@
-#include "../Libaries/clsUtility.h"
-#include "../Libaries/clsDate.h"
-#include "../Libaries/clsString.h"
+#include <iostream>
+#include "../Libaries/clsPerson.h"
+#include "../Libaries/clsBankClient.h"
 
 int main() {
-    clsUtility::Srand();
-    int random = clsUtility::RandomNumber(1, 100);
+    clsBankClient Client1 = clsBankClient::Find("A101");
 
-    std::cout << random << std::endl;
-
+    Client1.Print();
 
     return 0;
 }
