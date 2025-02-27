@@ -511,7 +511,7 @@ class clsDate {
         return Date;
     }
 
-    clsDate IncreaseDateByOneMillennium() { IncreaseDateByOneMillennium(*this); }
+    clsDate IncreaseDateByOneMillennium() { return IncreaseDateByOneMillennium(*this); }
 
     static clsDate DecreaseDateByOneDay(clsDate Date) {
         if (Date.GetDay() == 1) {

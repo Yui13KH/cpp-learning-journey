@@ -20,13 +20,13 @@ class clsPerson {
     // getters
     std::string FirstName() { return _FirstName; }
     std::string LastName() { return _LastName; }
-    std::string FullName() {return (_FirstName + " " + _LastName);}
+    std::string FullName() { return (_FirstName + " " + _LastName); }
     std::string Email() { return _Email; }
     std::string Phone() { return _Phone; }
 
     // setters
-    void FirstName(std::string FirstName) { _FirstName = FirstName; }
-    void LastName(std::string LastName) { _LastName = LastName; }
-    void Email(std::string Email) { _Email = Email; }
-    void Phone(std::string Phone) { _Phone = Phone; }
+    void SetFirstName(const std::string& FirstName) { _FirstName = FirstName; }
+    void SetLastName(const std::string& LastName) { _LastName = LastName; }
+    void SetEmail(const std::string& Email) { _Email = Email; }
+    void SetPhone(const std::string& Phone) { _Phone = Phone; }
 };

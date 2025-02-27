@@ -25,6 +25,82 @@ class clsBankClient : public clsPerson {
                              vClientData[3], vClientData[4], vClientData[5], stod(vClientData[6]));
     }
 
+    static std::string _ConverClientObjectToLine(clsBankClient Client,
+                                                 std::string Seperator = "#//#") {
+        string stClientRecord = "";
+        stClientRecord += Client.FirstName() + Seperator;
+        stClientRecord += Client.LastName() + Seperator;
+        stClientRecord += Client.Email() + Seperator;
+        stClientRecord += Client.Phone() + Seperator;
+        stClientRecord += Client.AccountNumber() + Seperator;
+        stClientRecord += Client.GetPinCode() + Seperator;
+        stClientRecord += to_string(Client.GetAccountBalance());
+
+        return stClientRecord;
+    }
+
+    static std::vector<clsBankClient> _LoadClientsDataFromFile() {
+        std::vector<clsBankClient> vClients;
+
+        fstream MyFile;
+        MyFile.open("../Clients.txt", ios::in);  // read Mode
+
+        if (MyFile.is_open()) {
+            std::string Line;
+
+            while (getline(MyFile, Line)) {
+                clsBankClient Client = _ConvertLineToClientObject(Line);
+
+                vClients.push_back(Client);
+            }
+
+            MyFile.close();
+        }
+
+        return vClients;
+    }
+
+    static void _SaveCleintsDataToFile(std::vector<clsBankClient> vClients) {
+        fstream MyFile;
+        MyFile.open("../Clients.txt", ios::out);  // overwrite
+
+        string DataLine;
+
+        if (MyFile.is_open()) {
+            for (clsBankClient C : vClients) {
+                DataLine = _ConverClientObjectToLine(C);
+                MyFile << DataLine << endl;
+            }
+
+            MyFile.close();
+        }
+    }
+
+    void _Update() {
+        std::vector<clsBankClient> _vClients;
+        _vClients = _LoadClientsDataFromFile();
+
+        for (clsBankClient& C : _vClients) {
+            if (C.AccountNumber() == AccountNumber()) {
+                C = *this;
+                break;
+            }
+        }
+
+        _SaveCleintsDataToFile(_vClients);
+    }
+
+    void _AddDataLineToFile(std::string stDataLine) {
+        fstream MyFile;
+        MyFile.open("../Clients.txt", ios::out | ios::app);
+
+        if (MyFile.is_open()) {
+            MyFile << stDataLine << endl;
+
+            MyFile.close();
+        }
+    }
+
     static clsBankClient _GetEmptyClientObject() {
         return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
@@ -109,6 +185,25 @@ class clsBankClient : public clsPerson {
             MyFile.close();
         }
         return _GetEmptyClientObject();
+    }
+
+    enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFailedUnknownMode = 2 };
+
+    enSaveResults Save() {
+        switch (_Mode) {
+            case enMode::EmptyMode: {
+                return enSaveResults::svFaildEmptyObject;
+            }
+
+            case enMode::UpdateMode: {
+                _Update();
+
+                return enSaveResults::svSucceeded;
+
+                break;
+            }
+        }
+        return enSaveResults::svFailedUnknownMode;
     }
 
     static bool IsClientExist(std::string AccountNumber) {
