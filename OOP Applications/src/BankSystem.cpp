@@ -58,53 +58,72 @@ void UpdateClient() {
     }
 }
 
-void AddNewClient()
-{
+void AddNewClient() {
     string AccountNumber = "";
 
     std::cout << "\nPlease Enter Account Number: ";
     AccountNumber = clsInputValidate::ReadString();
-    while (clsBankClient::IsClientExist(AccountNumber))
-    {
+    while (clsBankClient::IsClientExist(AccountNumber)) {
         std::cout << "\nAccount Number Is Already Used, Choose another one: ";
         AccountNumber = clsInputValidate::ReadString();
     }
 
     clsBankClient NewClient = clsBankClient::GetAddNewClientObject(AccountNumber);
 
-
     ReadClientInfo(NewClient);
 
     clsBankClient::enSaveResults SaveResult;
-    
+
     SaveResult = NewClient.Save();
 
-    switch (SaveResult)
-    {
-    case  clsBankClient::enSaveResults::svSucceeded:
-    {
-        std::cout << "\nAccount Addeded Successfully :-)\n";
-        NewClient.Print();
-        break;
+    switch (SaveResult) {
+        case clsBankClient::enSaveResults::svSucceeded: {
+            std::cout << "\nAccount Addeded Successfully :-)\n";
+            NewClient.Print();
+            break;
+        }
+        case clsBankClient::enSaveResults::svFaildEmptyObject: {
+            std::cout << "\nError account was not saved because it's Empty";
+            break;
+        }
+        case clsBankClient::enSaveResults::svFaildAccountNumberExists: {
+            std::cout << "\nError account was not saved because account number is used!\n";
+            break;
+        }
     }
-    case clsBankClient::enSaveResults::svFaildEmptyObject:
-    {
-        std::cout << "\nError account was not saved because it's Empty";
-        break;
+}
 
-    }
-    case clsBankClient::enSaveResults::svFaildAccountNumberExists:
-    {
-        std::cout << "\nError account was not saved because account number is used!\n";
-        break;
+void DeleteClient() {
+    std::string AccountNumber = "";
 
+    std::cout << "\nPlease Enter Account Number: ";
+    AccountNumber = clsInputValidate::ReadString();
+    while (!clsBankClient::IsClientExist(AccountNumber)) {
+        std::cout << "\nAccountNumber is not found, choose another one: ";
+        AccountNumber = clsInputValidate::ReadString();
     }
+
+    clsBankClient Client1 = clsBankClient::Find(AccountNumber);
+    Client1.Print();
+
+    std::cout << "\nAre you sure you want to delete this client y/n? : ";
+
+    char Answer = 'n';
+
+    std::cin >> Answer;
+
+    if (Answer == 'y' || Answer == 'Y') {
+        if (Client1.Delete()) {
+            std::cout << "\nClient Deleted Successfully\n";
+
+            Client1.Print();
+        } else {
+            std::cout << "\nError Client Was not Deleted\n";
+        }
     }
 }
 
 int main() {
-    
-    AddNewClient();
 
     return 0;
 }
