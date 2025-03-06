@@ -1,11 +1,2 @@
 Mio#//#Akiyama#//#test.email#//#987658326#//#A101#//#45785#//#100.526001
-Takeshi#//#Yamamoto#//#takeshi123@gmail.com#//#987654321#//#B202#//#5678#//#1200.500000
-Sakura#//#Tanaka#//#sakura_t@hotmail.com#//#456789123#//#C303#//#2468#//#750.750000
-Haruto#//#Kobayashi#//#haruto.koba@yahoo.com#//#321654987#//#D404#//#3200.25#//#750.750000
-Akari#//#Fujimoto#//#akari_fujimoto@outlook.com#//#789123456#//#E505#//#1850.00#//#750.750000
-Ren#//#Takahashi#//#ren.taka@mail.com#//#852963741#//#F606#//#999.99#//#750.750000
-Mika#//#Sato#//#mikasato23@gmail.com#//#147258369#//#G707#//#4500.10#//#750.750000
-Ryo#//#Shimizu#//#ryoshimizu77@live.com#//#369852147#//#H808#//#600.30#//#750.750000
-Naomi#//#Ishikawa#//#naomi_i@hotmail.com#//#951753852#//#I909#//#120.45#//#750.750000
-Hikaru#//#Matsumoto#//#hikaru_mat@gmail.com#//#258147369#//#J1010#//#2750.65#//#750.750000
-Emi#//#Nakamura#//#emi.nakamura@yahoo.com#//#753159852#//#K111#//#305.00#//#750.750000
+Kato#//#Hirasawa#//#Kato.email#//#123456789#//#A#//#7760#//#7760.000000

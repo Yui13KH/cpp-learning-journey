@@ -9,7 +9,7 @@
 
 class clsBankClient : public clsPerson {
    private:
-    enum enMode { EmptyMode = 0, UpdateMode = 1 };
+    enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
     enMode _Mode;
 
     std::string _AccountNumber;
@@ -18,16 +18,36 @@ class clsBankClient : public clsPerson {
 
     static clsBankClient _ConvertLineToClientObject(std::string Line,
                                                     std::string Seperator = "#//#") {
-        std::vector<std::string> vClientData;
-        vClientData = clsString::Split(Line, Seperator);
+        // Check if Line is empty
+        if (Line.empty()) {
+            std::cerr << "Error: Line is empty." << std::endl;
+            // Handle error gracefully, maybe return an empty object or throw an exception
+            throw std::invalid_argument("Line cannot be empty");
+        }
 
-        return clsBankClient(enMode::UpdateMode, vClientData[0], vClientData[1], vClientData[2],
-                             vClientData[3], vClientData[4], vClientData[5], stod(vClientData[6]));
+        std::vector<std::string> vClientData = clsString::Split(Line, Seperator);
+
+        // Check if vClientData has enough elements (7 elements)
+        if (vClientData.size() < 7) {
+            std::cerr << "Error: Insufficient data in Line." << std::endl;
+            // Handle the error (maybe return a default object, throw an exception, etc.)
+            throw std::invalid_argument("Insufficient data in Line");
+        }
+
+        // Now, we can safely convert to a clsBankClient object
+        try {
+            return clsBankClient(enMode::UpdateMode, vClientData[0], vClientData[1], vClientData[2],
+                                 vClientData[3], vClientData[4], vClientData[5],
+                                 stod(vClientData[6]));
+        } catch (const std::invalid_argument& e) {
+            std::cerr << "Error: Invalid data when converting to double: " << e.what() << std::endl;
+            throw;
+        }
     }
 
-    static std::string _ConverClientObjectToLine(clsBankClient Client,
+    static std::string _ConvertClientObjecToLine(clsBankClient Client,
                                                  std::string Seperator = "#//#") {
-        string stClientRecord = "";
+        std::string stClientRecord = "";
         stClientRecord += Client.FirstName() + Seperator;
         stClientRecord += Client.LastName() + Seperator;
         stClientRecord += Client.Email() + Seperator;
@@ -68,7 +88,7 @@ class clsBankClient : public clsPerson {
 
         if (MyFile.is_open()) {
             for (clsBankClient C : vClients) {
-                DataLine = _ConverClientObjectToLine(C);
+                DataLine = _ConvertClientObjecToLine(C);
                 MyFile << DataLine << endl;
             }
 
@@ -90,12 +110,15 @@ class clsBankClient : public clsPerson {
         _SaveCleintsDataToFile(_vClients);
     }
 
+    void _AddNew() { _AddDataLineToFile(_ConvertClientObjecToLine(*this)); }
+
     void _AddDataLineToFile(std::string stDataLine) {
         fstream MyFile;
         MyFile.open("../Clients.txt", ios::out | ios::app);
 
         if (MyFile.is_open()) {
-            MyFile << stDataLine << endl;
+            
+            MyFile << stDataLine << std::endl;
 
             MyFile.close();
         }
@@ -187,7 +210,7 @@ class clsBankClient : public clsPerson {
         return _GetEmptyClientObject();
     }
 
-    enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFailedUnknownMode = 2 };
+    enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFaildAccountNumberExists = 2 };
 
     enSaveResults Save() {
         switch (_Mode) {
@@ -202,13 +225,31 @@ class clsBankClient : public clsPerson {
 
                 break;
             }
+            case enMode::AddNewMode: {
+                // This will add new record to file or database
+                if (clsBankClient::IsClientExist(_AccountNumber)) {
+                    return enSaveResults::svFaildAccountNumberExists;
+                } else {
+                    _AddNew();
+
+                    // We need to set the mode to update after add new
+                    _Mode = enMode::UpdateMode;
+                    return enSaveResults::svSucceeded;
+                }
+
+                break;
+            }
         }
-        return enSaveResults::svFailedUnknownMode;
+        return enSaveResults::svFaildAccountNumberExists;
     }
 
     static bool IsClientExist(std::string AccountNumber) {
         clsBankClient Client1 = clsBankClient::Find(AccountNumber);
 
         return (!Client1.IsEmpty());
+    }
+
+    static clsBankClient GetAddNewClientObject(string AccountNumber) {
+        return clsBankClient(enMode::AddNewMode, "", "", "", "", AccountNumber, "", 0);
     }
 };
