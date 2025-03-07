@@ -2,6 +2,7 @@
 #include <iostream>
 #include "clsScreen.h"
 #include "clsInputValidate.h"
+#include "clsUtility.h"
 #include <iomanip>
 
 using namespace std;
@@ -29,7 +30,7 @@ class clsMainScreen : protected clsScreen {
     static void _GoBackToMainMenue() {
         cout << setw(37) << left << "" << "\n\tPress any key to go back to Main Menue...\n";
 
-        system("pause>0");
+        clsUtility::pauseExecution();
         ShowMainMenu();
     }
 
@@ -54,47 +55,47 @@ class clsMainScreen : protected clsScreen {
     static void _PerfromMainMenueOption(enMainMenueOptions MainMenueOption) {
         switch (MainMenueOption) {
             case enMainMenueOptions::eListClients: {
-                system("cls");
+                clsUtility::clearScreen();
                 _ShowAllClientsScreen();
                 _GoBackToMainMenue();
                 break;
             }
             case enMainMenueOptions::eAddNewClient:
-                system("cls");
+                clsUtility::clearScreen();
                 _ShowAddNewClientsScreen();
                 _GoBackToMainMenue();
                 break;
 
             case enMainMenueOptions::eDeleteClient:
-                system("cls");
+                clsUtility::clearScreen();
                 _ShowDeleteClientScreen();
                 _GoBackToMainMenue();
                 break;
 
             case enMainMenueOptions::eUpdateClient:
-                system("cls");
+                clsUtility::clearScreen();
                 _ShowUpdateClientScreen();
                 _GoBackToMainMenue();
                 break;
 
             case enMainMenueOptions::eFindClient:
-                system("cls");
+                clsUtility::clearScreen();
                 _ShowFindClientScreen();
                 _GoBackToMainMenue();
                 break;
 
             case enMainMenueOptions::eShowTransactionsMenue:
-                system("cls");
+                clsUtility::clearScreen();
                 _ShowTransactionsMenue();
                 break;
 
             case enMainMenueOptions::eManageUsers:
-                system("cls");
+                clsUtility::clearScreen();
                 _ShowManageUsersMenue();
                 break;
 
             case enMainMenueOptions::eExit:
-                system("cls");
+                clsUtility::clearScreen();
                 _ShowEndScreen();
                 // Login();
 
@@ -104,7 +105,7 @@ class clsMainScreen : protected clsScreen {
 
    public:
     static void ShowMainMenu() {
-        system("cls");
+        clsUtility::clearScreen();
         _DrawScreenHeader("\t\tMain Screen");
 
         cout << setw(37) << left << "" << "===========================================\n";
