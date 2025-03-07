@@ -4,23 +4,29 @@
 
 void PrintClientRecordLine(clsBankClient& Client) {
     std::cout << "| " << std::left << std::setw(15) << Client.AccountNumber() << " | "
-              << std::setw(20) << Client.FullName() << " | " << std::setw(25) << Client.Email()
-              << " | " << std::setw(15) << Client.Phone() << " | " << std::setw(10)
-              << Client.GetPinCode() << " | " << std::setw(12) << Client.GetAccountBalance()
-              << " |\n";
+              << std::setw(20) << Client.FullName() << " | " << std::setw(35) << Client.Email()
+              << " | " << std::setw(20) << Client.Phone() << " | " << std::setw(10)
+              << Client.GetPinCode() << " | " << std::setw(12) << std::fixed << std::setprecision(3)
+              << Client.GetAccountBalance() << " |\n";
+}
+
+void PrintClientRecordBalanceLine(clsBankClient& Client) {
+    std::cout << "| " << std::left << std::setw(15) << Client.AccountNumber() << " | "
+              << std::setw(20) << Client.FullName() << " | " << std::setw(12) << std::fixed
+              << std::setprecision(3) << Client.GetAccountBalance() << " |\n";
 }
 
 void PrintTableHeader() {
     std::cout << "\n\t\t\t\t\tClient List\n";
-    std::cout << clsUtility::RepeatChar('-', 116) << "\n";
+    std::cout << clsUtility::RepeatChar('-', 130) << "\n";
     std::cout << "| " << std::left << std::setw(15) << "Account Number"
               << " | " << std::setw(20) << "Client Name"
-              << " | " << std::setw(25) << "Email"
-              << " | " << std::setw(15) << "Phone"
+              << " | " << std::setw(35) << "Email"
+              << " | " << std::setw(20) << "Phone"
               << " | " << std::setw(10) << "Pin Code"
               << " | " << std::setw(12) << "Balance"
               << " |\n";
-    std::cout << clsUtility::RepeatChar('-', 116) << "\n";
+    std::cout << clsUtility::RepeatChar('-', 130) << "\n";
 }
 
 void ReadClientInfo(clsBankClient& Client) {
@@ -159,8 +165,39 @@ void ShowClientList() {
     std::cout << clsUtility::RepeatChar('-', 116) << "\n";
 }
 
+void ShowTotalBalances() {
+    std::vector<clsBankClient> vClients = clsBankClient::GetClientList();
+
+    std::cout << "\n\t\t\t\t\t Balances List (" << vClients.size() << " Clients)\n\n";
+    std::cout << clsUtility::RepeatChar('-', 57) << "\n";
+
+    std::cout << "| " << std::left << std::setw(15) << "Account Number";
+    std::cout << " | " << std::setw(20) << "Client Name";
+    std::cout << " | " << std::setw(12) << "Balance";
+    std::cout << " |\n";
+
+    std::cout << clsUtility::RepeatChar('-', 57) << "\n";
+
+    double TotalBalance = clsBankClient::GetTotalBalances();
+
+    if (vClients.size() == 0) {
+        std::cout << "\n\t\t\t\t\tNo Clients Avilable In the System!";
+    } else {
+        for (clsBankClient Client : vClients) {
+            PrintClientRecordBalanceLine(Client);
+        }
+    }
+
+    std::cout << clsUtility::RepeatChar('-', 57) << "\n";
+    std::cout << "| " << std::left << std::setw(39) << "Total Balance" << " | " << TotalBalance
+              << " |\n";
+
+    std::cout << clsUtility::NumberToText(TotalBalance) << "\n";
+}
+
 int main() {
-    ShowClientList();
+    
+    ShowTotalBalances();
 
     return 0;
 }

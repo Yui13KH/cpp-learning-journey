@@ -181,4 +181,53 @@ class clsUtility {
     }
 
     static std::string RepeatChar(char ch, int count) { return std::string(count, ch); }
+
+    static string NumberToText(int Number) {
+        if (Number == 0) {
+            return "Zero";
+        }
+
+        // Arrays for different ranges of numbers
+        const string oneToNineteen[] = {"",        "One",     "Two",       "Three",    "Four",
+                                        "Five",    "Six",     "Seven",     "Eight",    "Nine",
+                                        "Ten",     "Eleven",  "Twelve",    "Thirteen", "Fourteen",
+                                        "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+        const string tens[] = {"",      "",      "Twenty",  "Thirty", "Forty",
+                               "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+        const string thousands[] = {"", "Thousand", "Million", "Billion", "Trillion"};
+
+        // Helper function to convert numbers from 1 to 999
+        auto convertThreeDigits = [&](int num) {
+            string result = "";
+            if (num >= 100) {
+                result += oneToNineteen[num / 100] + " Hundred ";
+                num %= 100;
+            }
+            if (num >= 20) {
+                result += tens[num / 10] + " ";
+                num %= 10;
+            }
+            if (num > 0) {
+                result += oneToNineteen[num] + " ";
+            }
+            return result;
+        };
+
+        string result = "";
+        int index = 0;
+
+        // Process each group of 3 digits (thousands, millions, etc.)
+        while (Number > 0) {
+            if (Number % 1000 != 0) {
+                result = convertThreeDigits(Number % 1000) + thousands[index] + " " + result;
+            }
+            Number /= 1000;
+            index++;
+        }
+
+        // Trim any extra spaces
+        result = result.substr(0, result.size() - 1);  // Remove trailing space
+
+        return result;
+    }
 };

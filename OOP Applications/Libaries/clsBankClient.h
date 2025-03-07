@@ -277,4 +277,16 @@ class clsBankClient : public clsPerson {
     }
 
     static std::vector<clsBankClient> GetClientList() { return _LoadClientsDataFromFile(); }
+
+    static double GetTotalBalances() {
+        std::vector<clsBankClient> vClients = GetClientList();
+
+        double TotalBalances = 0;
+
+        for (clsBankClient Client : vClients) {
+            TotalBalances += Client.GetAccountBalance();
+        }
+
+        return TotalBalances;
+    }
 };
