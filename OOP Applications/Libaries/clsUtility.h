@@ -230,4 +230,21 @@ class clsUtility {
 
         return result;
     }
+
+    static void pauseExecution() {
+#ifdef _WIN32
+        system("pause");  // Windows-specific pause command
+#else
+        std::cout << "Press Enter to continue...";
+        std::cin.get();  // Cross-platform way to pause (Linux/Unix/macOS)
+#endif
+    }
+
+    static void clearScreen() {
+#ifdef _WIN32
+        system("cls");  // Windows-specific command to clear the screen
+#else
+        system("clear");  // Linux/Unix/macOS-specific command to clear the screen
+#endif
+    }
 };
