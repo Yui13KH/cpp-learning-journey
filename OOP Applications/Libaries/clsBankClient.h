@@ -6,6 +6,7 @@
 #include <fstream>
 #include "../Libaries/clsString.h"
 #include "../Libaries/clsPerson.h"
+#include "../Libaries/clsUtility.h"
 
 class clsBankClient : public clsPerson {
    private:
@@ -157,7 +158,7 @@ class clsBankClient : public clsPerson {
 
     void Print() {
         std::cout << "\nClient Card:";
-        std::cout << "\n----------------------------------\n";
+        std::cout << "\n" << clsUtility::RepeatChar('-', 34) << "\n";
 
         std::cout << std::left;  // Align text to the left
         std::cout << std::setw(15) << "First Name" << " : " << FirstName() << "\n";
@@ -169,7 +170,7 @@ class clsBankClient : public clsPerson {
         std::cout << std::setw(15) << "Password" << " : " << _PinCode << "\n";
         std::cout << std::setw(15) << "Balance" << " : " << _AccountBalance << "\n";
 
-        std::cout << "----------------------------------\n";
+        std::cout << clsUtility::RepeatChar('-', 34) << "\n";
     }
 
     static clsBankClient Find(std::string AccountNumber) {
@@ -274,4 +275,6 @@ class clsBankClient : public clsPerson {
     static clsBankClient GetAddNewClientObject(string AccountNumber) {
         return clsBankClient(enMode::AddNewMode, "", "", "", "", AccountNumber, "", 0);
     }
+
+    static std::vector<clsBankClient> GetClientList() { return _LoadClientsDataFromFile(); }
 };

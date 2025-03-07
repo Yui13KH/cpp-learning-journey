@@ -179,4 +179,6 @@ class clsUtility {
         }
         return Text;
     }
+
+    static std::string RepeatChar(char ch, int count) { return std::string(count, ch); }
 };

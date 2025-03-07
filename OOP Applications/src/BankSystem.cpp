@@ -2,6 +2,27 @@
 #include "../Libaries/clsInputValidate.h"
 #include "../Libaries/clsBankClient.h"
 
+void PrintClientRecordLine(clsBankClient& Client) {
+    std::cout << "| " << std::left << std::setw(15) << Client.AccountNumber() << " | "
+              << std::setw(20) << Client.FullName() << " | " << std::setw(25) << Client.Email()
+              << " | " << std::setw(15) << Client.Phone() << " | " << std::setw(10)
+              << Client.GetPinCode() << " | " << std::setw(12) << Client.GetAccountBalance()
+              << " |\n";
+}
+
+void PrintTableHeader() {
+    std::cout << "\n\t\t\t\t\tClient List\n";
+    std::cout << clsUtility::RepeatChar('-', 116) << "\n";
+    std::cout << "| " << std::left << std::setw(15) << "Account Number"
+              << " | " << std::setw(20) << "Client Name"
+              << " | " << std::setw(25) << "Email"
+              << " | " << std::setw(15) << "Phone"
+              << " | " << std::setw(10) << "Pin Code"
+              << " | " << std::setw(12) << "Balance"
+              << " |\n";
+    std::cout << clsUtility::RepeatChar('-', 116) << "\n";
+}
+
 void ReadClientInfo(clsBankClient& Client) {
     cout << "\nEnter FirstName: ";
     Client.SetFirstName(clsInputValidate::ReadString());
@@ -123,7 +144,23 @@ void DeleteClient() {
     }
 }
 
+void ShowClientList() {
+    std::vector<clsBankClient> vClients = clsBankClient::GetClientList();
+
+    PrintTableHeader();
+
+    if (vClients.size() == 0) {
+        std::cout << "\t\t\tNo Clients Avilable In the System!";
+    } else {
+        for (clsBankClient Client : vClients) {
+            PrintClientRecordLine(Client);
+        }
+    }
+    std::cout << clsUtility::RepeatChar('-', 116) << "\n";
+}
+
 int main() {
+    ShowClientList();
 
     return 0;
 }
