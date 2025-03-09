@@ -1,4 +1,12 @@
 #pragma once
+<<<<<<< HEAD
+=======
+#include <iostream>
+#include "clsScreen.h"
+#include "clsInputValidate.h"
+#include "clsUtility.h"
+#include <iomanip>
+>>>>>>> 0d433454879226aec01744bd95e73bbc5893b832
 
 #include "clsUtility.h"
 #include "clsInputValidate.h"
