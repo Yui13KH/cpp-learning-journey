@@ -3,6 +3,10 @@
 #include "clsScreen.h"
 #include "clsInputValidate.h"
 #include "clsUtility.h"
+
+#include "clsDepositScreen.h"
+#include "clsWithdrawScreen.h"
+#include "clsTotalBalancesScreen.h"
 #include <iomanip>
 
 class clsTransactionsScreen : protected clsScreen {
@@ -21,11 +25,11 @@ class clsTransactionsScreen : protected clsScreen {
         return Choice;
     }
 
-    static void _ShowDepositScreen() { std::cout << "\n Deposit Screen will be here.\n"; }
+    static void _ShowDepositScreen() { clsDepositScreen::ShowDepositScreen(); }
 
-    static void _ShowWithdrawScreen() { std::cout << "\n Withdraw Screen will be here.\n"; }
+    static void _ShowWithdrawScreen() { clsWithdrawScreen::ShowWithdrawScreen(); }
 
-    static void _ShowTotalBalancesScreen() { std::cout << "\n Balances Screen will be here.\n"; }
+    static void _ShowTotalBalancesScreen() { clsTotalBalancesScreen::ShowTotalBalances(); }
 
     static void _GoBackToTransactionsMenue() {
         std::cout << "\n\nPress any key to go back to Transactions Menue...";

@@ -1,4 +1,4 @@
-Mio#//#Akiyama#//#test.email#//#987658326#//#A101#//#45785#//#1000000.500000
+Mio#//#Akiyama#//#test.email#//#987658326#//#A101#//#45785#//#99999.500000
 Kato#//#Hirasawa#//#Kato.email#//#123456789#//#A#//#7760#//#7760.000000
 Izuku#//#Midoriya#//#izuku.midoriya@example.com#//#+81 90 1234 5678#//#A101#//#1250#//#450.123444
 Rintarou#//#Okabe#//#rintarou.okabe@labmail.jp#//# +81 80 2345 6789#//#B202#//#7200#//#350.987640
