@@ -148,7 +148,7 @@ void DeleteClient() {
     }
 }
 
-void ShowClientList() {
+void ShowClientsList() {
     std::vector<clsBankClient> vClients = clsBankClient::GetClientList();
 
     PrintTableHeader();

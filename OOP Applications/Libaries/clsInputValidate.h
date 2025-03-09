@@ -5,6 +5,7 @@
 #include "clsString.h"
 #include "clsDate.h"
 
+using namespace std;
 class clsInputValidate {
    public:
     static bool IsNumberBetween(short Number, short From, short To) {

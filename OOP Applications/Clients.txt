@@ -1,30 +1,27 @@
-Mio#//#Akiyama#//#test.email#//#987658326#//#A101#//#45785#//#1000000.526001
+Mio#//#Akiyama#//#test.email#//#987658326#//#A101#//#45785#//#1000000.500000
 Kato#//#Hirasawa#//#Kato.email#//#123456789#//#A#//#7760#//#7760.000000
-Izuku#//#Midoriya#//#izuku.midoriya@example.com#//#+81 90 1234 5678#//#A101#//#1250#//#450.123456
-Rintarou#//#Okabe#//#rintarou.okabe@labmail.jp#//# +81 80 2345 6789#//#B202#//#7200#//#350.987654
-Haruhi#//#Fujioka#//#haruhi.fujioka@ouranacademy.edu#//# +81 70 3456 7890#//#C303#//#5400#//#470.654321
-Eren#//#Yeager#//#eren.yeager@paradise-mail.com#//# +49 171 2345678#//#D404#//#5600#//#500.321987
-Saitama#//#Genos#//#saitama.genos@heroassociation.org#//# +1 202 555 1234#//#E505#//#6600#//#620.567890
-Luffy#//#Monkey#//#luffy.monkey@piratenetwork.com#//# +55 11 98765 4321#//#F606#//#7300#//#460.789123
-Shinji#//#Ikari#//#shinji.ikari@eva-unit.com#//# +1 213 555 7890#//#G707#//#8000#//#480.654321
-Naruto#//#Uzumaki#//#naruto.uzumaki@konoha-mail.jp#//# +1 212 555 6789#//#H808#//#8500#//#530.234567
-Kenshin#//#Himura#//#kenshin.himura@rurouni.com#//# +81 80 8765 4321#//#I909#//#6000#//#480.123789
-Saber#//#Artoria#//#saber.artoria@camelotmail.com#//# +44 20 7946 0958#//#J101#//#7500#//#550.785234
-Kageyama#//#Tobio#//#kageyama.tobio@haikyuu.org#//# +81 90 4567 8901#//#K202#//#8000#//#600.987654
-Mikasa#//#Ackerman#//#mikasa.ackerman@surveycorps.com#//# +49 170 1122334#//#L303#//#7500#//#670.123456
-Lelouch#//#ViBritannia#//#lelouch.v@code-geass.org#//# +44 79 8012 3456#//#M404#//#8300#//#540.876543
-Kira#//#Yamato#//#kira.yamato@deathnote.com#//# +1 415 555 9876#//#N505#//#6800#//#590.234567
-Hinata#//#Shouyou#//#hinata.shouyou@haikyuunetwork.jp#//# +81 90 2345 6789#//#O606#//#8200#//#600.987654
-Sakura#//#Haruno#//#sakura.haruno@konoha-ninjas.com#//# +1 213 555 1234#//#P707#//#9500#//#520.654321
-Yusuke#//#Urameshi#//#yusuke.urameshi@spiritworld.com#//# +81 70 8765 4321#//#Q808#//#7400#//#580.123789
-Gintoki#//#Sakata#//#gintoki.sakata@shinpachinetwork.com#//# +81 90 2345 6789#//#R909#//#6200#//#560.789123
-Akira#//#Fudo#//#akira.fudo@tokyovampires.com#//# +81 80 1234 5678#//#S101#//#5500#//#480.987654
-Rei#//#Ayanami#//#rei.ayanami@nerve.org#//# +49 171 2345678#//#T202#//#6000#//#670.876543
-Kyo#//#Soma#//#kyo.soma@fruitsbasket.org#//# +1 312 555 2345#//#U303#//#7100#//#620.345678
-Yuki#//#Nagato#//#yuki.nagato@haruhispace.com#//# +81 90 6789 0123#//#V404#//#8200#//#590.567890
-Maka#//#Albarn#//#maka.albarn@shibusen.com#//# +44 7911 123456#//#W505#//#8800#//#630.234567
-Kamina#//#Tenga#//#kamina.tenga@diggers.org#//# +81 80 2345 6789#//#X606#//#9500#//#610.123456
-Shiro#//#Yoshiko#//#shiro.yoshiko@whitebear.com#//# +1 415 555 4321#//#Y707#//#8200#//#630.654321
-Sora#//#Kiryuu#//#sora.kiryuu@cosmosmail.com#//# +81 70 1234 5678#//#Z808#//#7800#//#640.876543
-Mugen#//#Sama#//#mugen.sama@samurai.com#//# +81 90 5678 1234#//#A909#//#7300#//#650.123789
-Tatsuya#//#Shiba#//#tatsuya.shiba@magicmail.com#//# +81 80 4567 8901#//#B101#//#8800#//#690.234567
+Izuku#//#Midoriya#//#izuku.midoriya@example.com#//#+81 90 1234 5678#//#A101#//#1250#//#450.123444
+Rintarou#//#Okabe#//#rintarou.okabe@labmail.jp#//# +81 80 2345 6789#//#B202#//#7200#//#350.987640
+Haruhi#//#Fujioka#//#haruhi.fujioka@ouranacademy.edu#//# +81 70 3456 7890#//#C303#//#5400#//#470.654327
+Eren#//#Yeager#//#eren.yeager@paradise-mail.com#//# +49 171 2345678#//#D404#//#5600#//#500.321991
+Saitama#//#Genos#//#saitama.genos@heroassociation.org#//# +1 202 555 1234#//#E505#//#6600#//#620.567871
+Luffy#//#Monkey#//#luffy.monkey@piratenetwork.com#//# +55 11 98765 4321#//#F606#//#7300#//#460.789124
+Shinji#//#Ikari#//#shinji.ikari@eva-unit.com#//# +1 213 555 7890#//#G707#//#8000#//#480.654327
+Naruto#//#Uzumaki#//#naruto.uzumaki@konoha-mail.jp#//# +1 212 555 6789#//#H808#//#8500#//#530.234558
+Kenshin#//#Himura#//#kenshin.himura@rurouni.com#//# +81 80 8765 4321#//#I909#//#6000#//#480.123779
+Saber#//#Artoria#//#saber.artoria@camelotmail.com#//# +44 20 7946 0958#//#J101#//#7500#//#550.785217
+Kageyama#//#Tobio#//#kageyama.tobio@haikyuu.org#//# +81 90 4567 8901#//#K202#//#8000#//#600.987671
+Mikasa#//#Ackerman#//#mikasa.ackerman@surveycorps.com#//# +49 170 1122334#//#L303#//#7500#//#670.123474
+Lelouch#//#ViBritannia#//#lelouch.v@code-geass.org#//# +44 79 8012 3456#//#M404#//#8300#//#540.876526
+Hinata#//#Shouyou#//#hinata.shouyou@haikyuunetwork.jp#//# +81 90 2345 6789#//#O606#//#8200#//#600.987671
+Sakura#//#Haruno#//#sakura.haruno@konoha-ninjas.com#//# +1 213 555 1234#//#P707#//#9500#//#520.654297
+Yusuke#//#Urameshi#//#yusuke.urameshi@spiritworld.com#//# +81 70 8765 4321#//#Q808#//#7400#//#580.123779
+Gintoki#//#Sakata#//#gintoki.sakata@shinpachinetwork.com#//# +81 90 2345 6789#//#R909#//#6200#//#560.789124
+Akira#//#Fudo#//#akira.fudo@tokyovampires.com#//# +81 80 1234 5678#//#S101#//#5500#//#480.987640
+Rei#//#Ayanami#//#rei.ayanami@nerve.org#//# +49 171 2345678#//#T202#//#6000#//#670.876526
+Maka#//#Albarn#//#maka.albarn@shibusen.com#//# +44 7911 123456#//#W505#//#8800#//#630.234558
+Kamina#//#Tenga#//#kamina.tenga@diggers.org#//# +81 80 2345 6789#//#X606#//#9500#//#610.123474
+Shiro#//#Yoshiko#//#shiro.yoshiko@whitebear.com#//# +1 415 555 4321#//#Y707#//#8200#//#630.654297
+Sora#//#Kiryuu#//#sora.kiryuu@cosmosmail.com#//# +81 70 1234 5678#//#Z808#//#7800#//#640.876526
+Mugen#//#Sama#//#mugen.sama@samurai.com#//# +81 90 5678 1234#//#A909#//#7300#//#650.123779
+Tatsuya#//#Shiba#//#tatsuya.shiba@magicmail.com#//# +81 80 4567 8901#//#B101#//#8800#//#690.234558

@@ -1,11 +1,16 @@
 #pragma once
-#include <iostream>
-#include "clsScreen.h"
-#include "clsInputValidate.h"
-#include "clsUtility.h"
-#include <iomanip>
 
-using namespace std;
+#include "clsUtility.h"
+#include "clsInputValidate.h"
+#include "clsScreen.h"
+#include "clsClientListScreen.h"
+#include "clsAddNewClientScreen.h"
+#include "clsDeleteClientScreen.h"
+#include "clsUpdateClientScreen.h"
+#include "clsFindClientScreen.h"
+#include "clsShowTransactionScreen.h"
+#include <iostream>
+#include <iomanip>
 
 class clsMainScreen : protected clsScreen {
    private:
@@ -36,17 +41,17 @@ class clsMainScreen : protected clsScreen {
 
     // placeholders for now
 
-    static void _ShowAllClientsScreen() { cout << "\nClient List Screen Will be here...\n"; }
+    static void _ShowAllClientsScreen() { clsClientListScreen::ShowClientsList(); }
 
-    static void _ShowAddNewClientsScreen() { cout << "\nAdd New Client Screen Will be here...\n"; }
+    static void _ShowAddNewClientsScreen() { clsAddNewClientScreen::ShowAddNewClientScreen(); }
 
-    static void _ShowDeleteClientScreen() { cout << "\nDelete Client Screen Will be here...\n"; }
+    static void _ShowDeleteClientScreen() { clsDeleteClientScreen::ShowDeleteClientScreen(); }
 
-    static void _ShowUpdateClientScreen() { cout << "\nUpdate Client Screen Will be here...\n"; }
+    static void _ShowUpdateClientScreen() { clsUpdateClientScreen::ShowUpdateClientScreen(); }
 
-    static void _ShowFindClientScreen() { cout << "\nFind Client Screen Will be here...\n"; }
+    static void _ShowFindClientScreen() { clsFindClientScreen::ShowFindClientScreen(); }
 
-    static void _ShowTransactionsMenue() { cout << "\nTransactions Menue Will be here...\n"; }
+    static void _ShowTransactionsMenue() { clsTransactionsScreen::ShowTransactionsMenue(); }
 
     static void _ShowManageUsersMenue() { cout << "\nUsers Menue Will be here...\n"; }
 
@@ -87,6 +92,7 @@ class clsMainScreen : protected clsScreen {
             case enMainMenueOptions::eShowTransactionsMenue:
                 clsUtility::clearScreen();
                 _ShowTransactionsMenue();
+                _GoBackToMainMenue();
                 break;
 
             case enMainMenueOptions::eManageUsers:

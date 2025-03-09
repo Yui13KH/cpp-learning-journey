@@ -56,7 +56,7 @@ class clsBankClient : public clsPerson {
         stClientRecord += Client.Phone() + Seperator;
         stClientRecord += Client.AccountNumber() + Seperator;
         stClientRecord += Client.GetPinCode() + Seperator;
-        stClientRecord += to_string(Client.GetAccountBalance());
+        stClientRecord += std::to_string(Client.GetAccountBalance());
 
         return stClientRecord;
     }
@@ -64,8 +64,8 @@ class clsBankClient : public clsPerson {
     static std::vector<clsBankClient> _LoadClientsDataFromFile() {
         std::vector<clsBankClient> vClients;
 
-        fstream MyFile;
-        MyFile.open("../Clients.txt", ios::in);  // read Mode
+        std::fstream MyFile;
+        MyFile.open("../Clients.txt", std::ios::in);  // read Mode
 
         if (MyFile.is_open()) {
             std::string Line;
@@ -83,16 +83,16 @@ class clsBankClient : public clsPerson {
     }
 
     static void _SaveCleintsDataToFile(std::vector<clsBankClient> vClients) {
-        fstream MyFile;
-        MyFile.open("../Clients.txt", ios::out);  // overwrite
+        std::fstream MyFile;
+        MyFile.open("../Clients.txt", std::ios::out);  // overwrite
 
-        string DataLine;
+        std::string DataLine;
 
         if (MyFile.is_open()) {
             for (clsBankClient C : vClients) {
                 if (C.MarkedForDeleted() == false) {
                     DataLine = _ConvertClientObjecToLine(C);
-                    MyFile << DataLine << endl;
+                    MyFile << DataLine << std::endl;
                 }
             }
 
@@ -117,8 +117,8 @@ class clsBankClient : public clsPerson {
     void _AddNew() { _AddDataLineToFile(_ConvertClientObjecToLine(*this)); }
 
     void _AddDataLineToFile(std::string stDataLine) {
-        fstream MyFile;
-        MyFile.open("../Clients.txt", ios::out | ios::app);
+        std::fstream MyFile;
+        MyFile.open("../Clients.txt", std::ios::out | std::ios::app);
 
         if (MyFile.is_open()) {
             MyFile << stDataLine << std::endl;
@@ -176,8 +176,8 @@ class clsBankClient : public clsPerson {
     static clsBankClient Find(std::string AccountNumber) {
         std::vector<clsBankClient> vClients;
 
-        fstream MyFile;
-        MyFile.open("../Clients.txt", ios::in);
+        std::fstream MyFile;
+        MyFile.open("../Clients.txt", std::ios::in);
 
         if (MyFile.is_open()) {
             std::string Line;
@@ -197,8 +197,8 @@ class clsBankClient : public clsPerson {
     static clsBankClient Find(std::string AccountNumber, std::string PinCode) {
         std::vector<clsBankClient> vClients;
 
-        fstream MyFile;
-        MyFile.open("../Clients.txt", ios::in);
+        std::fstream MyFile;
+        MyFile.open("../Clients.txt", std::ios::in);
 
         if (MyFile.is_open()) {
             std::string Line;
@@ -272,7 +272,7 @@ class clsBankClient : public clsPerson {
         return true;
     }
 
-    static clsBankClient GetAddNewClientObject(string AccountNumber) {
+    static clsBankClient GetAddNewClientObject(std::string AccountNumber) {
         return clsBankClient(enMode::AddNewMode, "", "", "", "", AccountNumber, "", 0);
     }
 

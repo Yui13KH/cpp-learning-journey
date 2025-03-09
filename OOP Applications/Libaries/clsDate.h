@@ -5,8 +5,6 @@
 #include <string>
 #include "clsString.h"
 
-using namespace std;
-
 class clsDate {
    private:
     short _Day = 1;
