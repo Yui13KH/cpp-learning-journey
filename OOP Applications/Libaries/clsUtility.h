@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <limits>
 #include "clsDate.h"
 
 class clsUtility {
@@ -236,7 +237,9 @@ class clsUtility {
         system("pause");  // Windows-specific pause command
 #else
         std::cout << "Press Enter to continue...";
-        std::cin.get();  // Cross-platform way to pause (Linux/Unix/macOS)
+        std::cout.flush();  // Ensure the message is displayed before input
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+        std::cin.get();  // Properly waits for Enter
 #endif
     }
 

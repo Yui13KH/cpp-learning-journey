@@ -8,7 +8,7 @@
 class clsClientListScreen : protected clsScreen {
    private:
     static void PrintClientRecordLine(clsBankClient& Client) {
-        std::cout << "| " << std::left << std::setw(15) << Client.AccountNumber() << " | "
+        std::cout << "| " << std::left << std::setw(6) << Client.AccountNumber() << " | "
                   << std::setw(20) << Client.FullName() << " | " << std::setw(35) << Client.Email()
                   << " | " << std::setw(20) << Client.Phone() << " | " << std::setw(10)
                   << Client.GetPinCode() << " | " << std::setw(12) << std::fixed
@@ -17,15 +17,15 @@ class clsClientListScreen : protected clsScreen {
 
     static void PrintTableHeader() {
         std::cout << "\n\t\t\t\t\tClient List\n";
-        std::cout << std::setw(8) << "" << clsUtility::RepeatChar('-', 130) << "\n";
-        std::cout << std::setw(8) << "" << "| " << std::left << std::setw(15) << "Account Number"
+        std::cout << std::setw(8) << "" << clsUtility::RepeatChar('-', 124) << "\n";
+        std::cout << std::setw(8) << "" << "| " << std::left << std::setw(6) << "Acc #"
                   << " | " << std::setw(20) << "Client Name"
                   << " | " << std::setw(35) << "Email"
                   << " | " << std::setw(20) << "Phone"
                   << " | " << std::setw(10) << "Pin Code"
                   << " | " << std::setw(12) << "Balance"
                   << " |\n";
-        std::cout << std::setw(8) << "" << clsUtility::RepeatChar('-', 130) << "\n";
+        std::cout << std::setw(8) << "" << clsUtility::RepeatChar('-', 124) << "\n";
     }
 
    public:
@@ -48,6 +48,6 @@ class clsClientListScreen : protected clsScreen {
             }
         }
 
-        std::cout << std::setw(8) << "" << clsUtility::RepeatChar('-', 130) << "\n";
+        std::cout << std::setw(8) << "" << clsUtility::RepeatChar('-', 124) << "\n";
     }
 };

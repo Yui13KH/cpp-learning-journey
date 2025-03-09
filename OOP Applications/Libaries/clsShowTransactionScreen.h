@@ -42,21 +42,21 @@ class clsTransactionsScreen : protected clsScreen {
         enTransactionsMenueOptions TransactionsMenueOption) {
         switch (TransactionsMenueOption) {
             case enTransactionsMenueOptions::eDeposit: {
-                system("cls");
+                clsUtility::clearScreen();
                 _ShowDepositScreen();
                 _GoBackToTransactionsMenue();
                 break;
             }
 
             case enTransactionsMenueOptions::eWithdraw: {
-                system("cls");
+                clsUtility::clearScreen();
                 _ShowWithdrawScreen();
                 _GoBackToTransactionsMenue();
                 break;
             }
 
             case enTransactionsMenueOptions::eShowTotalBalance: {
-                system("cls");
+                clsUtility::clearScreen();
                 _ShowTotalBalancesScreen();
                 _GoBackToTransactionsMenue();
                 break;
@@ -70,7 +70,7 @@ class clsTransactionsScreen : protected clsScreen {
 
    public:
     static void ShowTransactionsMenue() {
-        system("cls");
+        clsUtility::clearScreen();
         _DrawScreenHeader("\t  Transactions Screen");
 
         std::cout << setw(37) << left << "" << "===========================================\n";
