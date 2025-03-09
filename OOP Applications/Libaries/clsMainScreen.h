@@ -9,6 +9,7 @@
 #include "clsUpdateClientScreen.h"
 #include "clsFindClientScreen.h"
 #include "clsShowTransactionScreen.h"
+#include "clsManageUsersScreen.h"
 #include <iostream>
 #include <iomanip>
 
@@ -53,7 +54,7 @@ class clsMainScreen : protected clsScreen {
 
     static void _ShowTransactionsMenue() { clsTransactionsScreen::ShowTransactionsMenue(); }
 
-    static void _ShowManageUsersMenue() { cout << "\nUsers Menue Will be here...\n"; }
+    static void _ShowManageUsersMenue() { clsManageUsersScreen::ShowManageUsersMenue(); }
 
     static void _ShowEndScreen() { cout << "\nEnd Screen Will be here...\n"; }
 
@@ -98,6 +99,7 @@ class clsMainScreen : protected clsScreen {
             case enMainMenueOptions::eManageUsers:
                 clsUtility::clearScreen();
                 _ShowManageUsersMenue();
+                _GoBackToMainMenue();
                 break;
 
             case enMainMenueOptions::eExit:
