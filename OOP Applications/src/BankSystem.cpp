@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../Libaries/clsMainScreen.h"
+#include "../Libraries/Ui/clsMainScreen.h"
 
 int main() {
     

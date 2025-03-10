@@ -1,9 +1,9 @@
 #pragma once
 #include <iostream>
-#include "clsScreen.h"
+#include "../Ui/clsScreen.h"
 #include "clsBankClient.h"
 #include <iomanip>
-#include "clsUtility.h"
+#include "../Core/clsUtility.h"
 
 class clsTotalBalancesScreen : protected clsScreen {
    private:

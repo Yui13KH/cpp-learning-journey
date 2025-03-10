@@ -1,11 +1,12 @@
 #pragma once
+
 #include <iostream>
 #include "clsScreen.h"
-#include "clsPerson.h"
-#include "clsBankClient.h"
-#include "clsInputValidate.h"
+#include "../Core/clsPerson.h"
+#include "../Bank/clsBankClient.h"
+#include "../Core/clsInputValidate.h"
 
-class clsFindClientScreen : protected clsScreen {
+class clsDeleteClientScreen : protected clsScreen {
    private:
     static void _PrintClient(clsBankClient Client) {
         std::cout << "\nClient Card:";
@@ -22,10 +23,11 @@ class clsFindClientScreen : protected clsScreen {
     }
 
    public:
-    static void ShowFindClientScreen() {
-        _DrawScreenHeader("\tFind Client Screen");
+    static void ShowDeleteClientScreen() {
+        _DrawScreenHeader("\tDelete Client Screen");
 
-        std::string AccountNumber;
+        std::string AccountNumber = "";
+
         std::cout << "\nPlease Enter Account Number: ";
         AccountNumber = clsInputValidate::ReadString();
         while (!clsBankClient::IsClientExist(AccountNumber)) {
@@ -34,13 +36,20 @@ class clsFindClientScreen : protected clsScreen {
         }
 
         clsBankClient Client1 = clsBankClient::Find(AccountNumber);
-
-        if (!Client1.IsEmpty()) {
-            std::cout << "\nClient Found :-)\n";
-        } else {
-            std::cout << "\nClient Was not Found :-(\n";
-        }
-
         _PrintClient(Client1);
+
+        std::cout << "\nAre you sure you want to delete this client y/n? ";
+
+        char Answer = 'n';
+        std::cin >> Answer;
+
+        if (Answer == 'y' || Answer == 'Y') {
+            if (Client1.Delete()) {
+                std::cout << "\nClient Deleted Successfully :-)\n";
+                _PrintClient(Client1);
+            } else {
+                std::cout << "\nError Client Was not Deleted\n";
+            }
+        }
     }
 };

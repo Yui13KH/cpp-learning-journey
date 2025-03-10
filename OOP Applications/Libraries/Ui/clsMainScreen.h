@@ -1,14 +1,14 @@
 #pragma once
 
-#include "clsUtility.h"
-#include "clsInputValidate.h"
+#include "../Core/clsUtility.h"
+#include "../Core/clsInputValidate.h"
 #include "clsScreen.h"
 #include "clsClientListScreen.h"
 #include "clsAddNewClientScreen.h"
 #include "clsDeleteClientScreen.h"
 #include "clsUpdateClientScreen.h"
 #include "clsFindClientScreen.h"
-#include "clsShowTransactionScreen.h"
+#include "../Bank/clsShowTransactionScreen.h"
 #include "clsManageUsersScreen.h"
 #include <iostream>
 #include <iomanip>

@@ -1,13 +1,12 @@
 #pragma once
 #include <iostream>
-#include "clsScreen.h"
-#include "clsInputValidate.h"
-#include "clsUtility.h"
-
+#include <iomanip>
+#include "../Ui/clsScreen.h"
+#include "../Core/clsInputValidate.h"
+#include "../Core/clsUtility.h"
 #include "clsDepositScreen.h"
 #include "clsWithdrawScreen.h"
 #include "clsTotalBalancesScreen.h"
-#include <iomanip>
 
 class clsTransactionsScreen : protected clsScreen {
    private:

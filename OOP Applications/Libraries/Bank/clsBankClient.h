@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include "../Libaries/clsString.h"
-#include "../Libaries/clsPerson.h"
-#include "../Libaries/clsUtility.h"
+#include "../Core/clsString.h"
+#include "../Core/clsPerson.h"
+#include "../Core/clsUtility.h"
 
 class clsBankClient : public clsPerson {
    private:
