@@ -109,6 +109,16 @@ class clsUser : public clsPerson {
     }
 
    public:
+    enum enPermissions {
+        eAll = -1,
+        pListClients = 1,
+        pAddNewClient = 2,
+        pDeleteClient = 4,
+        pUpdateClients = 8,
+        pFindClient = 16,
+        pTranactions = 32,
+        pManageUsers = 64
+    };
     clsUser(enMode Mode, std::string FirstName, std::string LastName, std::string Email,
             std::string Phone, std::string UserName, std::string Password, int Permissions)
         : clsPerson(FirstName, LastName, Email, Phone)
@@ -175,7 +185,7 @@ class clsUser : public clsPerson {
         return _GetEmptyUserObject();
     }
 
-    enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFaildUserExists = 2 };
+    enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFaildUserExists = 2 , svFailedUnknownMode = 3};
 
     enSaveResults Save() {
         switch (_Mode) {
@@ -205,7 +215,11 @@ class clsUser : public clsPerson {
 
                 break;
             }
+
+            return enSaveResults::svFailedUnknownMode;
         }
+
+        return enSaveResults::svFailedUnknownMode;
     }
 
     static bool IsUserExist(std::string UserName) {

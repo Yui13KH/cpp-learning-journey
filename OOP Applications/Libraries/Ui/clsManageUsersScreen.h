@@ -3,6 +3,11 @@
 #include "clsScreen.h"
 #include "../Core/clsInputValidate.h"
 #include "../Core/clsUtility.h"
+#include "clsUsersListScreen.h"
+#include "clsAddNewUserScreen.h"
+#include "clsDeleteUserScreen.h"
+#include "clsUpdateUserScreen.h"
+#include "clsFindUserScreen.h"
 #include <iomanip>
 
 class clsManageUsersScreen : protected clsScreen {
@@ -29,15 +34,15 @@ class clsManageUsersScreen : protected clsScreen {
         ShowManageUsersMenue();
     }
 
-    static void _ShowListUsersScreen() { std::cout << "\nList Users Screen Will Be Here.\n"; }
+    static void _ShowListUsersScreen() { clsListUsersScreen::ShowUsersList(); }
 
-    static void _ShowAddNewUserScreen() { std::cout << "\nAdd New User Screen Will Be Here.\n"; }
+    static void _ShowAddNewUserScreen() { clsAddNewUserScreen::ShowAddNewUserScreen(); }
 
-    static void _ShowDeleteUserScreen() { std::cout << "\nDelete User Screen Will Be Here.\n"; }
+    static void _ShowDeleteUserScreen() { clsDeleteUserScreen::ShowDeleteUserScreen(); }
 
-    static void _ShowUpdateUserScreen() { std::cout << "\nUpdate User Screen Will Be Here.\n"; }
+    static void _ShowUpdateUserScreen() { clsUpdateUserScreen::ShowUpdateUserScreen(); }
 
-    static void _ShowFindUserScreen() { std::cout << "\nFind User Screen Will Be Here.\n"; }
+    static void _ShowFindUserScreen() { clsFindUserScreen::ShowFindUserScreen(); }
 
     static void _PerformManageUsersMenueOption(enManageUsersMenueOptions ManageUsersMenueOption) {
         switch (ManageUsersMenueOption) {
