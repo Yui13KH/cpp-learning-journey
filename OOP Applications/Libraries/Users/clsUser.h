@@ -168,7 +168,7 @@ class clsUser : public clsPerson {
 
     static clsUser Find(std::string UserName, std::string Password) {
         fstream MyFile;
-        MyFile.open("Users.txt", std::ios::in);  // read Mode
+        MyFile.open("../Users.txt", std::ios::in);  // read Mode
 
         if (MyFile.is_open()) {
             std::string Line;
@@ -185,7 +185,12 @@ class clsUser : public clsPerson {
         return _GetEmptyUserObject();
     }
 
-    enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFaildUserExists = 2 , svFailedUnknownMode = 3};
+    enum enSaveResults {
+        svFaildEmptyObject = 0,
+        svSucceeded = 1,
+        svFaildUserExists = 2,
+        svFailedUnknownMode = 3
+    };
 
     enSaveResults Save() {
         switch (_Mode) {
@@ -216,7 +221,7 @@ class clsUser : public clsPerson {
                 break;
             }
 
-            return enSaveResults::svFailedUnknownMode;
+                return enSaveResults::svFailedUnknownMode;
         }
 
         return enSaveResults::svFailedUnknownMode;
@@ -250,4 +255,13 @@ class clsUser : public clsPerson {
     }
 
     static std::vector<clsUser> GetUsersList() { return _LoadUsersDataFromFile(); }
+
+    bool CheckAccessPermission(enPermissions Permission) {
+        if (this->_Permissions == enPermissions::eAll) return true;
+
+        if ((Permission & this->_Permissions) == Permission)
+            return true;
+        else
+            return false;
+    }
 };

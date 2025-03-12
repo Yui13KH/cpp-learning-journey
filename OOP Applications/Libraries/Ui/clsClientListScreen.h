@@ -30,6 +30,11 @@ class clsClientListScreen : protected clsScreen {
 
    public:
     static void ShowClientsList() {
+
+        if (!CheckAccessRights(clsUser::enPermissions::pListClients)) {
+            return;
+        }
+
         std::vector<clsBankClient> vClients = clsBankClient::GetClientList();
 
         std::string Title = "\t  Client List Screen";

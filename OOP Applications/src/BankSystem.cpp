@@ -1,11 +1,11 @@
 #include <iostream>
-#include "../Libraries/Ui/clsMainScreen.h"
+#include "../Libraries/Ui/clsLoginScreen.h"
+#include "../Libraries/Core/clsUtility.h"
 
 int main() {
-    
+    while (true) {
+        clsLoginScreen::ShowLoginScreen();
+    }
 
-     clsMainScreen::ShowMainMenu();
-
-     return 0; 
-     
-     }
+    return 0;
+}

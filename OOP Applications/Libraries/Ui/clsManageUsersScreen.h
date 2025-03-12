@@ -90,6 +90,12 @@ class clsManageUsersScreen : protected clsScreen {
 
    public:
     static void ShowManageUsersMenue() {
+
+        if (!CheckAccessRights(clsUser::enPermissions::pManageUsers)) {
+            return;
+        }
+
+
         clsUtility::clearScreen();
         _DrawScreenHeader("\t Manage Users Screen");
 

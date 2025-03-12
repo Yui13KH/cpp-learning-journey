@@ -45,6 +45,10 @@ class clsUpdateClientScreen : protected clsScreen
 
    public:
     static void ShowUpdateClientScreen() {
+        if (!CheckAccessRights(clsUser::enPermissions::pUpdateClients)) {
+            return;
+        }
+
         _DrawScreenHeader("\tUpdate Client Screen");
 
         std::string AccountNumber = "";

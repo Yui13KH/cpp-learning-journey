@@ -10,6 +10,7 @@
 #include "clsFindClientScreen.h"
 #include "../Bank/clsShowTransactionScreen.h"
 #include "clsManageUsersScreen.h"
+#include "../Core/Global.h"
 #include <iostream>
 #include <iomanip>
 
@@ -56,7 +57,7 @@ class clsMainScreen : protected clsScreen {
 
     static void _ShowManageUsersMenue() { clsManageUsersScreen::ShowManageUsersMenue(); }
 
-    static void _ShowEndScreen() { cout << "\nEnd Screen Will be here...\n"; }
+    static void _Logout() { CurrentUser = clsUser::Find("", ""); }
 
     static void _PerfromMainMenueOption(enMainMenueOptions MainMenueOption) {
         switch (MainMenueOption) {
@@ -104,8 +105,7 @@ class clsMainScreen : protected clsScreen {
 
             case enMainMenueOptions::eExit:
                 clsUtility::clearScreen();
-                _ShowEndScreen();
-                // Login();
+                _Logout();
 
                 break;
         }
