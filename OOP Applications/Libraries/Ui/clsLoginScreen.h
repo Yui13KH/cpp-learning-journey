@@ -4,36 +4,46 @@
 #include <iomanip>
 #include "clsMainScreen.h"
 #include "../Core/Global.h"
+#include <cstdlib> // for exit 
 
 class clsLoginScreen : protected clsScreen {
    private:
-    static void _Login() {
+    static bool _Login() {
         bool LoginFailed = false;
+        short LoginCountTries = 2;
 
         std::string Username, Password;
         do {
             if (LoginFailed) {
                 std::cout << "\nInvalid Username or Password please try again\n";
+                LoginCountTries--;
+                std::cout << std::to_string(LoginCountTries + 1) << ": Tries Left";
             }
 
             std::cout << "\nPlease Enter Username: ";
             Username = clsInputValidate::ReadString();
 
-            std::cout << "\nPlease Enter Password: ";
+            std::cout << "Please Enter Password: ";
             Password = clsInputValidate::ReadString();
 
             CurrentUser = clsUser::Find(Username, Password);
 
             LoginFailed = CurrentUser.IsEmpty();
+
+            if (LoginCountTries < 1) {
+                std::cout << "\nToo Many failed attempts , Locked out of the system \n";
+                return false;
+            };
         } while (LoginFailed);
 
         clsMainScreen::ShowMainMenu();
+        return true;
     }
 
    public:
-    static void ShowLoginScreen() {
+    static bool ShowLoginScreen() {
         clsUtility::clearScreen();
         _DrawScreenHeader("\t Login Screen");
-        _Login();
+        return _Login();
     }
 };
