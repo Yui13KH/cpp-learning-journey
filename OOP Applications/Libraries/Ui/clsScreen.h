@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "../Core/Global.h"
+#include "../Core/clsDate.h"
 
 class clsScreen {
    protected:
@@ -11,6 +12,8 @@ class clsScreen {
             std::cout << "\n\t\t\t\t\t  " << SubTitle;
         }
         std::cout << "\n\t\t\t\t\t______________________________________\n\n";
+        std::cout << "\n\t\t\t\t\t Current Date: " << clsDate::DateToString(clsDate()) << "\n";
+        std::cout << "\t\t\t\t\t Current User:" << CurrentUser.GetUserName() << "\n\n";
     }
 
     static bool CheckAccessRights(clsUser::enPermissions Permission) {
