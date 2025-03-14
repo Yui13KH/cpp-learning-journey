@@ -97,6 +97,12 @@ class clsUpdateUserScreen : protected clsScreen
             Permissions += clsUser::enPermissions::pManageUsers;
         }
 
+        std::cout << "\nLogins Log Register? y/n? ";
+        std::cin >> Answer;
+        if (Answer == 'y' || Answer == 'Y') {
+            Permissions += clsUser::enPermissions::pLoginsLog;
+        }
+
         return Permissions;
     }
 

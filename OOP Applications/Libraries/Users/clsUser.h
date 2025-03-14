@@ -145,7 +145,9 @@ class clsUser : public clsPerson {
         pUpdateClients = 8,
         pFindClient = 16,
         pTranactions = 32,
-        pManageUsers = 64
+        pManageUsers = 64,
+        pLoginsLog = 128
+
     };
 
     clsUser(enMode Mode, std::string FirstName, std::string LastName, std::string Email,

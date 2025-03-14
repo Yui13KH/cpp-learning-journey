@@ -16,6 +16,10 @@ class clsLoginRegisterScreen : protected clsScreen {
 
    public:
     static void ShowLoginRegisterScreen() {
+        if (!CheckAccessRights(clsUser::enPermissions::pLoginsLog)) {
+            return;
+        }
+
         std::vector<clsUser::stLoginRegisterRecord> vLoginRegisterRecord =
             clsUser::GetLoginRegisterList();
 
