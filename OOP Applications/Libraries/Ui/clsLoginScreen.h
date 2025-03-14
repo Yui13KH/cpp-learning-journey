@@ -4,7 +4,8 @@
 #include <iomanip>
 #include "clsMainScreen.h"
 #include "../Core/Global.h"
-#include <cstdlib> // for exit 
+#include "../Core/clsDate.h"
+#include <fstream>
 
 class clsLoginScreen : protected clsScreen {
    private:
@@ -36,6 +37,7 @@ class clsLoginScreen : protected clsScreen {
             };
         } while (LoginFailed);
 
+        CurrentUser.RegisterLogIn();
         clsMainScreen::ShowMainMenu();
         return true;
     }
