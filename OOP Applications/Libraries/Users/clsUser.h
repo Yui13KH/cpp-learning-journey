@@ -8,6 +8,14 @@
 #include <fstream>
 
 class clsUser : public clsPerson {
+   public:
+    struct stLoginRegisterRecord {
+        std::string DateTime = "";
+        std::string UserName = "";
+        std::string Password = "";
+        int Permissions = 0;
+    };
+
    private:
     enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
     enMode _Mode;
@@ -16,6 +24,16 @@ class clsUser : public clsPerson {
     int _Permissions;
 
     bool _MarkedForDelete = false;
+
+    static stLoginRegisterRecord _ConvertLinetoLoginRegisterRecord(std::string Line) {
+        stLoginRegisterRecord LoginRegisterRecord;
+        std::vector<string> vLoginRegisterDataLine = clsString::Split(Line, "#//#");
+        LoginRegisterRecord.DateTime = vLoginRegisterDataLine[0];
+        LoginRegisterRecord.UserName = vLoginRegisterDataLine[1];
+        LoginRegisterRecord.Password = vLoginRegisterDataLine[2];
+        LoginRegisterRecord.Permissions = stoi(vLoginRegisterDataLine[3]);
+        return LoginRegisterRecord;
+    }
 
     string _PrepareLogInRecord(string Seperator = "#//#") {
         string LoginRecord = "";
@@ -129,6 +147,7 @@ class clsUser : public clsPerson {
         pTranactions = 32,
         pManageUsers = 64
     };
+
     clsUser(enMode Mode, std::string FirstName, std::string LastName, std::string Email,
             std::string Phone, std::string UserName, std::string Password, int Permissions)
         : clsPerson(FirstName, LastName, Email, Phone)
@@ -286,5 +305,28 @@ class clsUser : public clsPerson {
 
             MyFile.close();
         }
+    };
+
+    static vector<stLoginRegisterRecord> GetLoginRegisterList() {
+        vector<stLoginRegisterRecord> vLoginRegisterRecord;
+
+        fstream MyFile;
+        MyFile.open("../Logs/LoginsLog.txt", ios::in);  // read Mode
+
+        if (MyFile.is_open()) {
+            string Line;
+
+            stLoginRegisterRecord LoginRegisterRecord;
+
+            while (getline(MyFile, Line)) {
+                LoginRegisterRecord = _ConvertLinetoLoginRegisterRecord(Line);
+
+                vLoginRegisterRecord.push_back(LoginRegisterRecord);
+            }
+
+            MyFile.close();
+        }
+
+        return vLoginRegisterRecord;
     }
 };
