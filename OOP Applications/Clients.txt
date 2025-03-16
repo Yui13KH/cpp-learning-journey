@@ -1,7 +1,7 @@
-Mio#//#Akiyama#//#test.email#//#987658326#//#A101#//#45785#//#93765.500000
+Mio#//#Akiyama#//#test.email#//#987658326#//#A101#//#45785#//#78531.500000
 Kato#//#Hirasawa#//#Kato.email#//#123456789#//#A#//#7760#//#7760.000000
 Izuku#//#Midoriya#//#izuku.midoriya@example.com#//#+81 90 1234 5678#//#A103#//#1250#//#450.123444
-Rintarou#//#Okabe#//#rintarou.okabe@labmail.jp#//# +81 80 2345 6789#//#B202#//#7200#//#6584.987793
+Rintarou#//#Okabe#//#rintarou.okabe@labmail.jp#//# +81 80 2345 6789#//#B202#//#7200#//#21818.988281
 Haruhi#//#Fujioka#//#haruhi.fujioka@ouranacademy.edu#//# +81 70 3456 7890#//#C303#//#5400#//#470.654327
 Eren#//#Yeager#//#eren.yeager@paradise-mail.com#//# +49 171 2345678#//#D404#//#5600#//#500.321991
 Saitama#//#Genos#//#saitama.genos@heroassociation.org#//# +1 202 555 1234#//#E505#//#6600#//#620.567871
