@@ -304,4 +304,13 @@ class clsBankClient : public clsPerson {
             return true;
         }
     }
+
+    bool Transfer(clsBankClient& Receiver, float Amount) {
+        if (Withdraw(Amount)) {
+            Receiver.Deposit(Amount);
+            return true;
+        } else {
+            return false;
+        }
+    }
 };
