@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "../Libraries/InterfaceCommunication.h"
+#include "../InterfaceCommunication.h"
 
 class clsPerson : public InterfaceCommunication {
    private:
