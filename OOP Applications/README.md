@@ -61,3 +61,5 @@ Feel free to browse through the code, and don't hesitate to leave feedback or co
 
 Uhhhhh I don't know lmao :3 its open source so you can do whatever you want with it.
 
+Added a basic Caesar cipher for password storage—just a simple layer of security for now. Might improve it later as I learn more about security, Accounts password is 1234 
+

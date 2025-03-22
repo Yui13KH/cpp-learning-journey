@@ -4,6 +4,7 @@
 #include "../Core/clsPerson.h"
 #include "../Core/clsString.h"
 #include "../Core/clsDate.h"
+#include "../Core/clsUtility.h"
 #include <vector>
 #include <fstream>
 
@@ -30,7 +31,7 @@ class clsUser : public clsPerson {
         std::vector<string> vLoginRegisterDataLine = clsString::Split(Line, "#//#");
         LoginRegisterRecord.DateTime = vLoginRegisterDataLine[0];
         LoginRegisterRecord.UserName = vLoginRegisterDataLine[1];
-        LoginRegisterRecord.Password = vLoginRegisterDataLine[2];
+        LoginRegisterRecord.Password = clsUtility::DecryptText(vLoginRegisterDataLine[2], 10);
         LoginRegisterRecord.Permissions = stoi(vLoginRegisterDataLine[3]);
         return LoginRegisterRecord;
     }
@@ -39,7 +40,7 @@ class clsUser : public clsPerson {
         string LoginRecord = "";
         LoginRecord += clsDate::GetSystemDateTimeString() + Seperator;
         LoginRecord += _UserName + Seperator;
-        LoginRecord += _Password + Seperator;
+        LoginRecord += clsUtility::EncryptText(_Password, 10) + Seperator;
         LoginRecord += to_string(_Permissions);
         return LoginRecord;
     }
@@ -49,7 +50,7 @@ class clsUser : public clsPerson {
         vUserData = clsString::Split(Line, Seperator);
 
         return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2], vUserData[3],
-                       vUserData[4], vUserData[5], stoi(vUserData[6]));
+                       vUserData[4], clsUtility::DecryptText(vUserData[5], 10), stoi(vUserData[6]));
     }
 
     static string _ConverUserObjectToLine(clsUser User, string Seperator = "#//#") {
@@ -59,7 +60,7 @@ class clsUser : public clsPerson {
         UserRecord += User.Email() + Seperator;
         UserRecord += User.Phone() + Seperator;
         UserRecord += User.GetUserName() + Seperator;
-        UserRecord += User.GetPassword() + Seperator;
+        UserRecord += clsUtility::EncryptText(User.GetPassword(), 10) + Seperator;
         UserRecord += to_string(User.GetPermissions());
 
         return UserRecord;
