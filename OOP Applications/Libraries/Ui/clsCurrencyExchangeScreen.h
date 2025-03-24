@@ -2,6 +2,10 @@
 #include "clsScreen.h"
 #include "../Core/clsUtility.h"
 #include "../Core/clsInputValidate.h"
+#include "clsCurrenciesListScreen.h"
+#include "clsFindCurrencyScreen.h"
+#include "clsUpdateCurrencyRateScreen.h"
+#include "clsCurrencyCalculatorScreen.h"
 #include <iomanip>
 #include <iostream>
 
@@ -28,16 +32,16 @@ class clsCurrencyExhcnageScreen : protected clsScreen {
         ShowCurrenciesMenu();
     }
 
-    static void _ShowCurrenciesListScreen() { cout << "\nCurriencies List Screen Will Be Here.\n"; }
+    static void _ShowCurrenciesListScreen() { clsCurrenciesListScreen::ShowCurrenciesListScreen(); }
 
-    static void _ShowFindCurrencyScreen() { cout << "\nFind Currency Screen Will Be Here.\n"; }
+    static void _ShowFindCurrencyScreen() { clsCurrencyFindScreen::ShowFindCurrencyScreen(); }
 
     static void _ShowUpdateCurrencyRateScreen() {
-        cout << "\nUpdate Currency Rate Screen Will Be Here.\n";
+        clsUpdateCurrencyRateScreen::ShowUpdateCurrencyRateScreen();
     }
 
     static void _ShowCurrencyCalculatorScreen() {
-        cout << "\nCurrency Calculator Screen Will Be Here.\n";
+        clsCurrencyCalculatorScreen::ShowCurrencyCalculatorScreen();
     }
 
     static void _PerformCurrenciesMainMenueOptions(

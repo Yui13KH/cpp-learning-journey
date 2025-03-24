@@ -164,4 +164,18 @@ class clsCurrency {
     }
 
     static vector<clsCurrency> GetCurrenciesList() { return _LoadCurrencysDataFromFile(); }
+
+    float ConvertToUSD(float Amount) {
+        // placeoholder
+        return (float)(Amount / _ExchangeRate);
+    }
+
+    float ConvertToOtherCurrency(float Amount, clsCurrency Currency2) {
+        float AmountInUSD = ConvertToUSD(Amount);
+
+        if (Currency2.getCurrencyCode() == "USD")
+            return AmountInUSD;
+        else
+            return (float)(AmountInUSD * Currency2.getExchangeRate());
+    }
 };
