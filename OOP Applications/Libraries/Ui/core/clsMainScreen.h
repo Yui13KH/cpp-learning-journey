@@ -1,18 +1,18 @@
 #pragma once
 
-#include "../Core/clsUtility.h"
-#include "../Core/clsInputValidate.h"
+#include "../../Core/clsUtility.h"
+#include "../../Core/clsInputValidate.h"
 #include "clsScreen.h"
-#include "clsClientListScreen.h"
-#include "clsAddNewClientScreen.h"
-#include "clsDeleteClientScreen.h"
-#include "clsUpdateClientScreen.h"
-#include "clsFindClientScreen.h"
-#include "../Bank/clsShowTransactionScreen.h"
-#include "clsManageUsersScreen.h"
-#include "clsLoginRegisterScreen.h"
-#include "clsCurrencyExchangeScreen.h"
-#include "../Core/Global.h"
+#include "../clients/clsClientListScreen.h"
+#include "../clients/clsAddNewClientScreen.h"
+#include "../clients/clsDeleteClientScreen.h"
+#include "../clients/clsUpdateClientScreen.h"
+#include "../clients/clsFindClientScreen.h"
+#include "../../Bank/clsShowTransactionScreen.h"
+#include "../users/clsManageUsersScreen.h"
+#include "../auth/clsLoginRegisterScreen.h"
+#include "../currencies/clsCurrencyExchangeScreen.h"
+#include "../../Core/Global.h"
 #include <iostream>
 #include <iomanip>
 

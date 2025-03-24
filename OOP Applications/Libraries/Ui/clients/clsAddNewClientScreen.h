@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Core/clsInputValidate.h"
-#include "../Bank/clsBankClient.h"
-#include "clsScreen.h"
+#include "../../Core/clsInputValidate.h"
+#include "../../Bank/clsBankClient.h"
+#include "../core/clsScreen.h"
 #include <iostream>
 #include <iomanip>
 

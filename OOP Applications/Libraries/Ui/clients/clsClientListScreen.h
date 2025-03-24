@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Bank/clsBankClient.h"
-#include "clsScreen.h"
+#include "../../Bank/clsBankClient.h"
+#include "../core/clsScreen.h"
 #include <iostream>
 #include <iomanip>
 
@@ -30,7 +30,6 @@ class clsClientListScreen : protected clsScreen {
 
    public:
     static void ShowClientsList() {
-
         if (!CheckAccessRights(clsUser::enPermissions::pListClients)) {
             return;
         }

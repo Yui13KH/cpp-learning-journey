@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../Libraries/Ui/clsLoginScreen.h"
+#include "../Libraries/Ui/auth/clsLoginScreen.h"
 #include "../Libraries/Core/clsUtility.h"
 
 int main() {

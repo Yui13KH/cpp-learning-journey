@@ -1,8 +1,8 @@
 #pragma once
 
 #include <iostream>
-#include "clsScreen.h"
-#include "../Users/clsUser.h"
+#include "../core/clsScreen.h"
+#include "../../Users/clsUser.h"
 #include <iomanip>
 
 class clsListUsersScreen : protected clsScreen {

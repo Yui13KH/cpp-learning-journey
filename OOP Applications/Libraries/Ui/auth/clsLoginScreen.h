@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../Users/clsUser.h"
+#include "../../Users/clsUser.h"
 #include <iomanip>
-#include "clsMainScreen.h"
-#include "../Core/Global.h"
-#include "../Core/clsDate.h"
+#include "../core/clsMainScreen.h"
+#include "../../Core/Global.h"
+#include "../../Core/clsDate.h"
 #include <fstream>
 
 class clsLoginScreen : protected clsScreen {

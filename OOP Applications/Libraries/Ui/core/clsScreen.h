@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
-#include "../Core/Global.h"
-#include "../Core/clsDate.h"
+#include "../../Core/Global.h"
+#include "../../Core/clsDate.h"
 
 class clsScreen {
    protected:

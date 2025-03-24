@@ -1,12 +1,13 @@
 #pragma once
-
 #include <iostream>
-#include "clsScreen.h"
-#include "../Users/clsUser.h"
-#include "../Core/clsInputValidate.h"
-#include <iomanip>
+#include "../core/clsScreen.h"
+#include "../../Core/clsPerson.h"
+#include "../../Users/clsUser.h"
+#include "../../Core/clsInputValidate.h"
 
-class clsAddNewUserScreen : protected clsScreen {
+class clsUpdateUserScreen : protected clsScreen
+
+{
    private:
     static void _ReadUserInfo(clsUser& User) {
         std::cout << "\nEnter FirstName: ";
@@ -106,39 +107,49 @@ class clsAddNewUserScreen : protected clsScreen {
     }
 
    public:
-    static void ShowAddNewUserScreen() {
-        _DrawScreenHeader("\t  Add New User Screen");
+    static void ShowUpdateUserScreen() {
+        _DrawScreenHeader("\tUpdate User Screen");
 
-        std::string UserName = "";
+        string UserName = "";
 
-        std::cout << "\nPlease Enter UserName: ";
+        std::cout << "\nPlease Enter User UserName: ";
         UserName = clsInputValidate::ReadString();
-        while (clsUser::IsUserExist(UserName)) {
-            std::cout << "\nUserName Is Already Used, Choose another one: ";
+
+        while (!clsUser::IsUserExist(UserName)) {
+            std::cout << "\nAccount number is not found, choose another one: ";
             UserName = clsInputValidate::ReadString();
         }
 
-        clsUser NewUser = clsUser::GetAddNewUserObject(UserName);
+        clsUser User1 = clsUser::Find(UserName);
 
-        _ReadUserInfo(NewUser);
+        _PrintUser(User1);
 
-        clsUser::enSaveResults SaveResult;
+        std::cout << "\nAre you sure you want to update this User y/n? ";
 
-        SaveResult = NewUser.Save();
+        char Answer = 'n';
+        std::cin >> Answer;
 
-        switch (SaveResult) {
-            case clsUser::enSaveResults::svSucceeded: {
-                std::cout << "\nUser Addeded Successfully :-)\n";
-                _PrintUser(NewUser);
-                break;
-            }
-            case clsUser::enSaveResults::svFaildEmptyObject: {
-                std::cout << "\nError User was not saved because it's Empty";
-                break;
-            }
-            case clsUser::enSaveResults::svFaildUserExists: {
-                std::cout << "\nError User was not saved because UserName is used!\n";
-                break;
+        if (Answer == 'y' || Answer == 'Y') {
+            std::cout << "\n\nUpdate User Info:";
+            std::cout << "\n____________________\n";
+
+            _ReadUserInfo(User1);
+
+            clsUser::enSaveResults SaveResult;
+
+            SaveResult = User1.Save();
+
+            switch (SaveResult) {
+                case clsUser::enSaveResults::svSucceeded: {
+                    std::cout << "\nUser Updated Successfully :-)\n";
+
+                    _PrintUser(User1);
+                    break;
+                }
+                case clsUser::enSaveResults::svFaildEmptyObject: {
+                    std::cout << "\nError User was not saved because it's Empty";
+                    break;
+                }
             }
         }
     }

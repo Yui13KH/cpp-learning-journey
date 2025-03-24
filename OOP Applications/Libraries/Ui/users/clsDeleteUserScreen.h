@@ -1,9 +1,9 @@
 #pragma once
 #include <iostream>
-#include "clsScreen.h"
-#include "../Core/clsPerson.h"
-#include "../Users/clsUser.h"
-#include "../Core/clsInputValidate.h"
+#include "../core/clsScreen.h"
+#include "../../Core/clsPerson.h"
+#include "../../Users/clsUser.h"
+#include "../../Core/clsInputValidate.h"
 
 class clsDeleteUserScreen : protected clsScreen {
    private:
