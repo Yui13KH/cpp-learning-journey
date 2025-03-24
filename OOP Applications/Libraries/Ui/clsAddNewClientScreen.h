@@ -25,7 +25,7 @@ class clsAddNewClientScreen : protected clsScreen {
         Client.SetPinCode(clsInputValidate::ReadString());
 
         std::cout << "\nEnter Account Balance: ";
-        Client.SetAccountBalance(clsInputValidate::ReadFloatNumber());
+        Client.SetAccountBalance(clsInputValidate::ReadNumber<float>());
     }
 
     static void _PrintClient(clsBankClient Client) {

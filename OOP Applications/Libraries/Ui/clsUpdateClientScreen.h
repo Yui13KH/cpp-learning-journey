@@ -40,7 +40,7 @@ class clsUpdateClientScreen : protected clsScreen
         Client.SetPinCode(clsInputValidate::ReadString());
 
         cout << "\nEnter Account Balance: ";
-        Client.SetAccountBalance(clsInputValidate::ReadFloatNumber());
+        Client.SetAccountBalance(clsInputValidate::ReadNumber<float>());
     }
 
    public:

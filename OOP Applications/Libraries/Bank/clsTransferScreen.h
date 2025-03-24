@@ -33,11 +33,11 @@ class clsTransferScreen : protected clsScreen {
 
         std::cout << "\nEnter Transfer Amount? ";
 
-        Amount = clsInputValidate::ReadFloatNumber();
+        Amount = clsInputValidate::ReadNumber<float>();
 
         while (Amount > SourceClient.GetAccountBalance()) {
             std::cout << "\nAmount Exceeds the available Balance, Enter another Amount ? ";
-            Amount = clsInputValidate::ReadDblNumber();
+            Amount = clsInputValidate::ReadNumber<double>();
         }
         return Amount;
     }

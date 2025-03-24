@@ -10,7 +10,7 @@ class clsCurrencyCalculatorScreen : protected clsScreen {
     static float _ReadAmount() {
         std::cout << "\nEnter Amound To Convert: ";
         float Amount = 0;
-        Amount = clsInputValidate::ReadFloatNumber();
+        Amount = clsInputValidate::ReadNumber<float>();
         return Amount;
     }
 
