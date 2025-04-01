@@ -2,18 +2,32 @@
 #include "Libraries/clsQueue.h"
 #include "Libraries/clsStack.h"
 #include "Libraries/clsDynamicArray.h"
+#include "Libraries/clsMyQueueArr.h"
+#include "Libraries/clsMyStackArr.h"
 #include <iostream>
 int main() {
-    clsDynamicArray<int> myArray(10);
-    for (int i = 1; i <= 10; i++) {
-        myArray.SetItem(i, i + 1);
-    }
-    myArray.PrintList();
+    clsMyStackArr<int> myStack;
 
-    myArray.InsertBefore(myArray.Size() , 159);
+    std::cout << "Stack created. Is it empty? " << (myStack.IsEmpty() ? "Yes" : "No") << "\n";
 
-    myArray.PrintList();
-;
+    std::cout << "Pushing 10, 20, 30 onto the stack...\n";
+    myStack.push(10);
+    myStack.push(20);
+    myStack.push(30);
 
-    std::cout << myArray.Size() << std::endl;
+    std::cout << "Stack contents: ";
+    myStack.Print();
+
+    std::cout << "Top element: " << myStack.top() << "\n";
+    std::cout << "Bottom element: " << myStack.bottom() << "\n";
+
+    std::cout << "Popping an element...\n";
+    myStack.pop();
+    myStack.Print();
+
+    std::cout << "Clearing stack...\n";
+    myStack.clear();
+    std::cout << "Stack cleared. Is it empty? " << (myStack.IsEmpty() ? "Yes" : "No") << "\n";
+
+    return 0;
 }
