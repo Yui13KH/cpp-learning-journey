@@ -4,15 +4,16 @@
 #include "Libraries/clsDynamicArray.h"
 #include <iostream>
 int main() {
-    clsDynamicArray<int> myArray(5);
-    for (int i = 0; i < 5; i++) {
+    clsDynamicArray<int> myArray(10);
+    for (int i = 1; i <= 10; i++) {
         myArray.SetItem(i, i + 1);
     }
     myArray.PrintList();
 
-    myArray.Resize(3);
-    myArray.PrintList();
+    myArray.InsertBefore(myArray.Size() , 159);
 
-    myArray.Resize(10);
     myArray.PrintList();
+;
+
+    std::cout << myArray.Size() << std::endl;
 }
