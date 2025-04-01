@@ -1,21 +1,19 @@
 #include "Libraries/clsDblLinkedList.h"
 #include "Libraries/clsQueue.h"
+#include "Libraries/clsStack.h"
 #include <iostream>
 int main() {
-    clsMyQueue<int> MyQueue;
+    clsMyStack<int> MyStack;
 
-    MyQueue.push(1);
-    MyQueue.push(2);
-    MyQueue.push(3);
-    MyQueue.push(4);
-    MyQueue.push(5);
-    MyQueue.Print();
+    for (int i = 1; i <= 5; i++) {
+        MyStack.push(i);
+    }
+    MyStack.Print();
 
-    MyQueue.updateItem(2, 10);
-    MyQueue.Print();
+    MyStack.pop();
+    MyStack.Print();
 
-    MyQueue.clear();
-    MyQueue.Print();
+    std::cout << MyStack.top() << std::endl;
+    std::cout << MyStack.Size() << std::endl;
 
-    return 0;
 }
