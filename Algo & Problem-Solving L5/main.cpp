@@ -1,19 +1,18 @@
 #include "Libraries/clsDblLinkedList.h"
 #include "Libraries/clsQueue.h"
 #include "Libraries/clsStack.h"
+#include "Libraries/clsDynamicArray.h"
 #include <iostream>
 int main() {
-    clsMyStack<int> MyStack;
-
-    for (int i = 1; i <= 5; i++) {
-        MyStack.push(i);
+    clsDynamicArray<int> myArray(5);
+    for (int i = 0; i < 5; i++) {
+        myArray.SetItem(i, i + 1);
     }
-    MyStack.Print();
+    myArray.PrintList();
 
-    MyStack.pop();
-    MyStack.Print();
+    myArray.Resize(3);
+    myArray.PrintList();
 
-    std::cout << MyStack.top() << std::endl;
-    std::cout << MyStack.Size() << std::endl;
-
+    myArray.Resize(10);
+    myArray.PrintList();
 }
